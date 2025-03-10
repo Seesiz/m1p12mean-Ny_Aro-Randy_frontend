@@ -1,1 +1,6 @@
-<router-outlet></router-outlet>
+<section class="flex">
+  <app-side-bar [options]="options" class="w-2/12 border-r h-screen" />
+  <div class="flex-1 relative">
+    <router-outlet class="h-screen w-full"></router-outlet>
+  </div>
+</section>
