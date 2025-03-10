@@ -1,7 +1,7 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FrontOfficeRoutingModule } from './front-office-routing.module';
-import { FrontOffcieComponent } from './front-offcie.component';
+import { FrontOfficeComponent } from './front-office.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import {
@@ -16,7 +16,7 @@ import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
 import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
 
 @NgModule({
-  declarations: [FrontOffcieComponent, HomePageComponent],
+  declarations: [FrontOfficeComponent, HomePageComponent],
   imports: [
     CommonModule,
     FrontOfficeRoutingModule,
