@@ -28,6 +28,8 @@ export const backOfficeRoutes: Routes = [
         canActivate: [AccessGuard],
         data: {
           role: [Role.client, Role.manager, Role.mechanic],
+          label: 'statistics',
+          icon: 'chart-bar',
         },
         children: [
           {
@@ -55,6 +57,8 @@ export const backOfficeRoutes: Routes = [
         canActivate: [AccessGuard],
         data: {
           role: [Role.manager],
+          label: 'users',
+          icon: 'users',
         },
       },
     ],
