@@ -16,7 +16,7 @@
     "target": "ES2022",
     "module": "ES2022",
     "paths": {
-      "@components/*": ["./src/components/*"],
+      "@/*": ["./src/*"],
       "@spartan-ng/ui-accordion-helm": [
         "./libs/ui/ui-accordion-helm/src/index.ts"
       ],
