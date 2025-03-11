@@ -1,10 +1,17 @@
 {
   "menu": {
     "statistics": "Statistics",
-    "users": "Users"
+    "users": "Users",
+    "rendez-vous": "Rendez-vous",
+    "planning": "Planning"
   },
   "common": {
     "my-account": "My account",
-    "logout": "Logout"
+    "logout": "Logout",
+    "save_change": "Save changes"
+  },
+  "user_detail": {
+    "edit_profile": "Edit profile",
+    "add_user": "Add user"
   }
 }

@@ -61,6 +61,28 @@ export const backOfficeRoutes: Routes = [
           icon: 'users',
         },
       },
+      {
+        path: 'rendez-vous',
+        loadChildren: () =>
+          import('./user/user.module').then((m) => m.UserModule),
+        canActivate: [AccessGuard],
+        data: {
+          role: [Role.manager],
+          label: 'rendez-vous',
+          icon: 'rendez-vous',
+        },
+      },
+      {
+        path: 'planning',
+        loadChildren: () =>
+          import('./user/user.module').then((m) => m.UserModule),
+        canActivate: [AccessGuard],
+        data: {
+          role: [Role.manager, Role.mechanic],
+          label: 'planning',
+          icon: 'calendar',
+        },
+      },
     ],
   },
   {

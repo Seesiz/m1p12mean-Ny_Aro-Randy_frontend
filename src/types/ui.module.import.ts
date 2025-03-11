@@ -28,7 +28,26 @@ import {
 } from '@spartan-ng/ui-menu-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
-import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
+import {
+  BrnDialogContentDirective,
+  BrnDialogTriggerDirective,
+} from '@spartan-ng/brain/dialog';
+import {
+  HlmDialogComponent,
+  HlmDialogContentComponent,
+  HlmDialogDescriptionDirective,
+  HlmDialogFooterComponent,
+  HlmDialogHeaderComponent,
+  HlmDialogTitleDirective,
+} from '@spartan-ng/ui-dialog-helm';
+import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
+import {
+  HlmCaptionComponent,
+  HlmTableComponent,
+  HlmTdComponent,
+  HlmThComponent,
+  HlmTrowComponent,
+} from '@spartan-ng/ui-table-helm';
 
 export const UI_MODULE_IMPORTS = [
   HlmButtonDirective,
@@ -55,6 +74,21 @@ export const UI_MODULE_IMPORTS = [
   HlmSubMenuComponent,
   BrnMenuTriggerDirective,
   HlmLabelDirective,
+  BrnDialogContentDirective,
+  BrnDialogTriggerDirective,
+  HlmDialogComponent,
+  HlmDialogContentComponent,
+  HlmDialogDescriptionDirective,
+  HlmDialogFooterComponent,
+  HlmDialogHeaderComponent,
+  HlmDialogTitleDirective,
+  HlmInputDirective,
+  HlmSelectDirective,
+  HlmCaptionComponent,
+  HlmTableComponent,
+  HlmTdComponent,
+  HlmThComponent,
+  HlmTrowComponent,
 ];
 
 import {
@@ -65,6 +99,7 @@ import {
   lucideCheck,
   lucideLanguages,
 } from '@ng-icons/lucide';
+import { HlmSelectDirective } from '@spartan-ng/ui-select-helm';
 
 export const UI_MODULE_PROVIDERS = [
   provideIcons({
