@@ -9,6 +9,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -22,18 +23,32 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
   private routerEventsSubscription!: Subscription;
   private resizeTimeout!: any;
 
+  langueValue: 'fr' | 'en' = 'fr';
   isDarkMode: boolean = false;
 
   constructor(
     private renderer: Renderer2,
     private el: ElementRef,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('theme')) {
       this.setTheme(localStorage.getItem('theme') === 'dark');
     }
+    if (localStorage.getItem('langue')) {
+      this.setLangue(localStorage.getItem('langue') === 'fr' ? 'fr' : 'en');
+    }
+  }
+
+  setLangue(langue: 'fr' | 'en') {
+    this.langueValue = langue;
+    localStorage.setItem('langue', langue);
+    this.translate.use(langue);
+    setTimeout(() => {
+      this.updateActiveButtonPosition();
+    }, 100);
   }
 
   setTheme(value: boolean) {
@@ -45,6 +60,24 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
       document.documentElement.classList.remove('dark');
     }
   }
+
+  protected notifications = [
+    {
+      id: 1,
+      title: 'Your call has been confirmed.',
+      description: '1 hour ago',
+    },
+    {
+      id: 2,
+      title: 'You have a new message!',
+      description: '1 hour ago',
+    },
+    {
+      id: 3,
+      title: 'Your subscription is expiring soon!',
+      description: '2 hours ago',
+    },
+  ];
 
   ngAfterViewInit() {
     this.routerEventsSubscription = this.router.events.subscribe((event) => {

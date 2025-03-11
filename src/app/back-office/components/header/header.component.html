@@ -31,9 +31,16 @@
         [checked]="isDarkMode"
         (checkedChange)="setTheme($event)"
       />
-      <ng-icon hlm [name]="isDarkMode ? 'lucideSunDim' : 'lucideMoonStar'" />
+      <ng-icon hlm [name]="isDarkMode ? 'lucideSunDim' : 'lucideMoon'" />
     </label>
-    <ng-icon hlm name="lucideBell" />
+    <button
+      hlmBtn
+      [brnMenuTriggerFor]="notification"
+      variant="ghost"
+      class="rounded-4xl"
+    >
+      <ng-icon hlm name="lucideBell" class="cursor-pointer" />
+    </button>
     <hlm-avatar
       variant="medium"
       [brnMenuTriggerFor]="menu"
@@ -44,14 +51,62 @@
     </hlm-avatar>
   </div>
 </section>
+
 <ng-template #menu>
   <hlm-menu class="w-56">
     <hlm-menu-label>{{ "common.my-account" | translate }}</hlm-menu-label>
     <hlm-menu-separator />
+    <button hlmMenuItem [brnMenuTriggerFor]="langue">
+      <ng-icon hlm name="lucideLanguages" hlmMenuIcon />
+      Langue
+      <hlm-menu-item-sub-indicator />
+    </button>
     <button hlmMenuItem class="cursor-pointer">
       <ng-icon hlm name="lucideLogOut" hlmMenuIcon />
       <span>{{ "common.logout" | translate }}</span>
       <hlm-menu-shortcut>⇧⌘Q</hlm-menu-shortcut>
     </button>
   </hlm-menu>
+</ng-template>
+
+<ng-template #notification>
+  <hlm-menu class="w-80">
+    <hlm-menu-label>Notifications</hlm-menu-label>
+    <hlm-menu-separator />
+    @for (notification of notifications; track notification.id) {
+    <div
+      class="grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0 p-2"
+    >
+      <span class="flex w-2 h-2 rounded-full translate-y-1 bg-sky-500"></span>
+      <div class="space-y-1">
+        <p class="text-sm font-medium leading-none">{{ notification.title }}</p>
+        <p class="text-sm text-muted-foreground">
+          {{ notification.description }}
+        </p>
+      </div>
+    </div>
+    }
+  </hlm-menu>
+</ng-template>
+<ng-template #langue>
+  <hlm-sub-menu>
+    <button hlmMenuItem (click)="setLangue('fr')">
+      <ng-icon
+        hlm
+        name="lucideCheck"
+        hlmMenuIcon
+        *ngIf="langueValue === 'fr'"
+      />
+      Fr
+    </button>
+    <button hlmMenuItem (click)="setLangue('en')">
+      <ng-icon
+        hlm
+        name="lucideCheck"
+        hlmMenuIcon
+        *ngIf="langueValue === 'en'"
+      />
+      En
+    </button>
+  </hlm-sub-menu>
 </ng-template>
