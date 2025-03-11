@@ -14,7 +14,7 @@
 
 :root {
   --background: 229 100% 98%;
-  --foreground: 224 71.4% 4.1%;
+  --foreground: 224 71.4% 5%;
   --muted: 220 14.3% 95.9%;
   --muted-foreground: 220 8.9% 46.1%;
   --popover: 0 0% 100%;
@@ -37,7 +37,7 @@
 }
 
 .dark {
-  --background: 224 71.4% 4.1%;
+  --background: 224 71.4% 5%;
   --foreground: 210 20% 98%;
   --muted: 215 27.9% 16.9%;
   --muted-foreground: 217.9 10.6% 64.9%;

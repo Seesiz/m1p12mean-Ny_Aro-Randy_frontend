@@ -1,10 +1,17 @@
 {
   "menu": {
     "statistics": "Statistiques",
-    "users": "Utilisateurs"
+    "users": "Utilisateurs",
+    "rendez-vous": "Rendez-vous",
+    "planning": "Planning"
   },
   "common": {
     "my-account": "Mon compte",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "save_change": "Sauvegarder les modifications"
+  },
+  "user_detail": {
+    "edit_profile": "Editer le profil",
+    "add_user": "Ajouter un utilisateur"
   }
 }
