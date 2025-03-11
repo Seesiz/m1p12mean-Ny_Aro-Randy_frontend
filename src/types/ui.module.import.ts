@@ -28,6 +28,7 @@ import {
 } from '@spartan-ng/ui-menu-helm';
 import { BrnMenuTriggerDirective } from '@spartan-ng/brain/menu';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
+import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 
 export const UI_MODULE_IMPORTS = [
   HlmButtonDirective,
@@ -59,10 +60,19 @@ export const UI_MODULE_IMPORTS = [
 import {
   lucideBell,
   lucideLogOut,
-  lucideMoonStar,
+  lucideMoon,
   lucideSunDim,
+  lucideCheck,
+  lucideLanguages,
 } from '@ng-icons/lucide';
 
 export const UI_MODULE_PROVIDERS = [
-  provideIcons({ lucideBell, lucideLogOut, lucideMoonStar, lucideSunDim }),
+  provideIcons({
+    lucideBell,
+    lucideLogOut,
+    lucideMoon,
+    lucideSunDim,
+    lucideCheck,
+    lucideLanguages,
+  }),
 ];
