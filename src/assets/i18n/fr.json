@@ -2,5 +2,9 @@
   "menu": {
     "statistics": "Statistiques",
     "users": "Utilisateurs"
+  },
+  "common": {
+    "my-account": "Mon compte",
+    "logout": "Déconnexion"
   }
 }

@@ -2,5 +2,9 @@
   "menu": {
     "statistics": "Statistics",
     "users": "Users"
+  },
+  "common": {
+    "my-account": "My account",
+    "logout": "Logout"
   }
 }
