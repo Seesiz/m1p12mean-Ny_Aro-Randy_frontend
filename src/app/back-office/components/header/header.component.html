@@ -1,0 +1,57 @@
+<section
+  class="header flex flex-row items-center justify-between bg-card rounded-3xl fixed z-10 m-2 h-14 p-2 px-4"
+  style="width: calc(100% - 1rem)"
+>
+  <div class="header__logo flex items-center gap-1 w-2/12">
+    <img src="assets/img/engrenages.gif" alt="Engrenages" width="40px" />
+    <b class="uppercase text-primary">mecanet</b>
+  </div>
+  <div class="flex items-center gap-2 bg-background rounded-4xl">
+    <button
+      hlmBtn
+      *ngFor="let option of options"
+      [routerLink]="option.path"
+      routerLinkActive="is-active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="w-full h-full cursor-pointer rounded-4xl header-option text-primary bg-transparent hover:bg-transparent"
+      style="z-index: 11"
+      [attr.aria-label]="'menu.' + option.label | translate"
+    >
+      {{ `menu.${option.label}` | translate }}
+    </button>
+    <div
+      class="active-button absolute bg-primary rounded-4xl bottom-0 h-1 w-10"
+      style="z-index: 10"
+    ></div>
+  </div>
+  <div class="flex items-center gap-4 w-2/12 justify-end">
+    <label class="flex items-center" hlmLabel>
+      <hlm-switch
+        class="mr-2"
+        [checked]="isDarkMode"
+        (checkedChange)="setTheme($event)"
+      />
+      <ng-icon hlm [name]="isDarkMode ? 'lucideSunDim' : 'lucideMoonStar'" />
+    </label>
+    <ng-icon hlm name="lucideBell" />
+    <hlm-avatar
+      variant="medium"
+      [brnMenuTriggerFor]="menu"
+      class="cursor-pointer"
+    >
+      <img src="/assets/img/avatar.png" hlmAvatarImage />
+      <span class="bg-bg text-primary" hlmAvatarFallback>IV</span>
+    </hlm-avatar>
+  </div>
+</section>
+<ng-template #menu>
+  <hlm-menu class="w-56">
+    <hlm-menu-label>{{ "common.my-account" | translate }}</hlm-menu-label>
+    <hlm-menu-separator />
+    <button hlmMenuItem class="cursor-pointer">
+      <ng-icon hlm name="lucideLogOut" hlmMenuIcon />
+      <span>{{ "common.logout" | translate }}</span>
+      <hlm-menu-shortcut>⇧⌘Q</hlm-menu-shortcut>
+    </button>
+  </hlm-menu>
+</ng-template>
