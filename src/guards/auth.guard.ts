@@ -20,6 +20,11 @@ export class AuthGuard implements CanActivate {
   ): boolean | Observable<boolean> {
     const type = route.paramMap.get('type');
     //Mila asiana vérification backend eto
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.router.navigate([`dashboard/${type}/login`]);
+      return false;
+    }
     const userRole = localStorage.getItem('role') as Role;
     if (!userRole || !type) {
       this.router.navigate([`dashboard/${type}/login`]);

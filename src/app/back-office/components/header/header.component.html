@@ -61,7 +61,7 @@
       Langue
       <hlm-menu-item-sub-indicator />
     </button>
-    <button hlmMenuItem class="cursor-pointer">
+    <button (click)="logout()" hlmMenuItem class="cursor-pointer">
       <ng-icon hlm name="lucideLogOut" hlmMenuIcon />
       <span>{{ "common.logout" | translate }}</span>
       <hlm-menu-shortcut>⇧⌘Q</hlm-menu-shortcut>

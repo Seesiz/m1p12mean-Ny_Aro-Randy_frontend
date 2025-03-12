@@ -11,6 +11,7 @@ import {
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from '@/app/back-office/services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -30,7 +31,8 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
     private renderer: Renderer2,
     private el: ElementRef,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +44,10 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
     }
   }
 
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['login']);
+  }
   setLangue(langue: 'fr' | 'en') {
     this.langueValue = langue;
     localStorage.setItem('langue', langue);
