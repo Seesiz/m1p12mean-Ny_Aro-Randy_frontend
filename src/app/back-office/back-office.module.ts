@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BackOfficeRoutingModule } from './back-office-routing.module';
 import { BackOfficeComponent } from './back-office.component';
 import { StatistiqueClientComponent } from './statistique-client/statistique-client.component';
@@ -24,6 +25,7 @@ import {
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     BackOfficeRoutingModule,
     TranslateModule,
     ...UI_MODULE_IMPORTS,

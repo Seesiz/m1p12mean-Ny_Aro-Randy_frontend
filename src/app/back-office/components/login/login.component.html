@@ -1,1 +1,58 @@
-<p>login works!</p>
+<section
+  class="w-screen h-screen flex flex-col items-center justify-center bg-background"
+>
+  <div hlmCard class="md:w-3/12 w-8/12">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div hlmCardHeader>
+        <h3 hlmCardTitle>{{ "common.connection" | translate }}</h3>
+        <p hlmCardDescription>{{ "common.enter_login" | translate }}</p>
+      </div>
+      <div hlmCardContent>
+        <label class="block" hlmLabel>
+          {{ "common.email" | translate }}
+          <input
+            class="mt-1.5 w-full"
+            placeholder="{{ 'common.email' | translate }}"
+            hlmInput
+            type="email"
+            formControlName="email"
+          />
+        </label>
+        <label class="block" hlmLabel>
+          {{ "common.password" | translate }}
+          <input
+            class="mt-1.5 w-full"
+            placeholder="{{ 'common.password' | translate }}"
+            hlmInput
+            type="password"
+            formControlName="password"
+          />
+        </label>
+      </div>
+      <div hlmCardFooter class="justify-end">
+        <button hlmBtn type="submit">{{ "common.login" | translate }}</button>
+      </div>
+    </form>
+    <div></div>
+  </div>
+  <div class="flex">
+    <button
+      hlmBtn
+      type="button"
+      class="cursor-pointer"
+      variant="link"
+      (click)="setTranslation('fr')"
+    >
+      Français
+    </button>
+    <button
+      hlmBtn
+      type="button"
+      class="cursor-pointer"
+      variant="link"
+      (click)="setTranslation('en')"
+    >
+      English
+    </button>
+  </div>
+</section>
