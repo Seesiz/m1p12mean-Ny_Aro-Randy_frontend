@@ -24,6 +24,7 @@
     "@ngx-translate/http-loader": "^16.0.1",
     "@spartan-ng/brain": "0.0.1-alpha.420",
     "@tailwindcss/postcss": "^4.0.12",
+    "axios": "^1.8.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "embla-carousel-angular": "18.0.0",
