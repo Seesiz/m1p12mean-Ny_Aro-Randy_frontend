@@ -8,7 +8,12 @@
   "common": {
     "my-account": "My account",
     "logout": "Logout",
-    "save_change": "Save changes"
+    "save_change": "Save changes",
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "enter_login": "Please enter your username and password",
+    "connection": "Connection"
   },
   "user_detail": {
     "edit_profile": "Edit profile",
