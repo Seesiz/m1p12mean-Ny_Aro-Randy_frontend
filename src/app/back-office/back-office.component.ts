@@ -34,6 +34,14 @@ export class BackOfficeComponent {
           label: route.data?.['label'],
           icon: route.data?.['icon'],
           path: route.path || '',
+          hasDropDown: route.data?.['hasDropDown'] || false,
+          subOptions: route.data?.['dropDown']?.map(
+            (menu: SideBarMenuOption) => ({
+              label: menu.label,
+              path: menu.path,
+              hasDropDown: false,
+            })
+          ),
         });
     });
   }

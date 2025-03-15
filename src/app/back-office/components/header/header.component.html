@@ -6,10 +6,11 @@
     <img src="assets/img/engrenages.gif" alt="Engrenages" width="40px" />
     <b class="uppercase text-primary">mecanet</b>
   </div>
-  <div class="flex items-center gap-2 bg-background rounded-4xl">
+  <nav class="flex items-center gap-2 bg-background rounded-4xl">
+    @for (option of options; track option.path) {
     <button
       hlmBtn
-      *ngFor="let option of options"
+      *ngIf="!option.hasDropDown"
       [routerLink]="option.path"
       routerLinkActive="is-active"
       [routerLinkActiveOptions]="{ exact: true }"
@@ -19,11 +20,46 @@
     >
       {{ `menu.${option.label}` | translate }}
     </button>
+    <brn-hover-card *ngIf="option.hasDropDown">
+      <button
+        hlmBtn
+        [class]="
+          'cursor-pointer rounded-4xl header-option text-primary bg-transparent hover:bg-transparent ' +
+          (routerLinkActive.includes(option.path.split('/')[0])
+            ? 'is-active'
+            : '')
+        "
+        brnHoverCardTrigger
+        style="z-index: 11"
+        [attr.aria-label]="'menu.' + option.label | translate"
+      >
+        {{ `menu.${option.label}` | translate }}
+      </button>
+      <hlm-hover-card-content *brnHoverCardContent class="w-48">
+        <div class="flex flex-col p-2">
+          @for (subOption of option.subOptions; track subOption.path) {
+          <button
+            hlmBtn
+            variant="ghost"
+            class="w-full justify-start"
+            [routerLink]="subOption.path"
+            routerLinkActive="is-active"
+            variant="link"
+            [routerLinkActiveOptions]="{ exact: true }"
+            [attr.aria-label]="'common.' + subOption.label | translate"
+          >
+            {{ `common.${subOption.label}` | translate }}
+          </button>
+          }
+        </div>
+      </hlm-hover-card-content>
+    </brn-hover-card>
+    }
     <div
       class="active-button absolute bg-primary rounded-4xl bottom-0 h-1 w-10"
       style="z-index: 10"
     ></div>
-  </div>
+  </nav>
   <div class="flex items-center gap-4 w-2/12 justify-end">
     <label class="flex items-center" hlmLabel>
       <hlm-switch
@@ -90,23 +126,19 @@
 </ng-template>
 <ng-template #langue>
   <hlm-sub-menu>
-    <button hlmMenuItem (click)="setLangue('fr')">
-      <ng-icon
-        hlm
-        name="lucideCheck"
-        hlmMenuIcon
-        *ngIf="langueValue === 'fr'"
-      />
-      Fr
+    <button
+      hlmMenuItem
+      (click)="setLangue('fr')"
+      [class]="langueValue === 'fr' ? 'font-bold' : ''"
+    >
+      Français
     </button>
-    <button hlmMenuItem (click)="setLangue('en')">
-      <ng-icon
-        hlm
-        name="lucideCheck"
-        hlmMenuIcon
-        *ngIf="langueValue === 'en'"
-      />
-      En
+    <button
+      hlmMenuItem
+      (click)="setLangue('en')"
+      [class]="langueValue === 'en' ? 'font-bold' : ''"
+    >
+      English
     </button>
   </hlm-sub-menu>
 </ng-template>

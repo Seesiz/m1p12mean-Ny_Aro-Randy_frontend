@@ -26,6 +26,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
 
   langueValue: 'fr' | 'en' = 'fr';
   isDarkMode: boolean = false;
+  routerLinkActive: string = '';
 
   constructor(
     private renderer: Renderer2,
@@ -42,6 +43,30 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
     if (localStorage.getItem('langue')) {
       this.setLangue(localStorage.getItem('langue') === 'fr' ? 'fr' : 'en');
     }
+
+    this.routerEventsSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.routerLinkActive = event.url;
+
+        const activeOption = this.options.find((option) =>
+          option.subOptions?.some(
+            (subOption) => subOption.path === this.routerLinkActive
+          )
+        );
+
+        if (activeOption) {
+          this.routerLinkActive = activeOption.path;
+        }
+
+        setTimeout(() => {
+          this.updateActiveButtonPosition();
+        }, 100);
+      }
+    });
+
+    setTimeout(() => {
+      this.updateActiveButtonPosition();
+    }, 1000);
   }
 
   logout() {
@@ -86,18 +111,6 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
   ];
 
   ngAfterViewInit() {
-    this.routerEventsSubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        setTimeout(() => {
-          this.updateActiveButtonPosition();
-        }, 100);
-      }
-    });
-
-    setTimeout(() => {
-      this.updateActiveButtonPosition();
-    }, 100);
-
     window.addEventListener('resize', this.onResize);
   }
 
