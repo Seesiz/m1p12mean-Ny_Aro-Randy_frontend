@@ -51,7 +51,7 @@ export const backOfficeRoutes: Routes = [
         ],
       },
       {
-        path: 'user',
+        path: 'user/:role',
         loadChildren: () =>
           import('./user/user.module').then((m) => m.UserModule),
         canActivate: [AccessGuard],
@@ -59,6 +59,21 @@ export const backOfficeRoutes: Routes = [
           role: [Role.manager],
           label: 'users',
           icon: 'users',
+          hasDropDown: true,
+          dropDown: [
+            {
+              label: 'client',
+              path: 'user/client',
+            },
+            {
+              label: 'manager',
+              path: 'user/manager',
+            },
+            {
+              label: 'mechanic',
+              path: 'user/mechanic',
+            },
+          ],
         },
       },
       {

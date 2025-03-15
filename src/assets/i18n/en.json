@@ -13,10 +13,18 @@
     "email": "Email",
     "password": "Password",
     "enter_login": "Please enter your username and password",
-    "connection": "Connection"
+    "connection": "Connection",
+    "client": "Client",
+    "manager": "Manager",
+    "mechanic": "Mechanic"
   },
   "user_detail": {
     "edit_profile": "Edit profile",
-    "add_user": "Add user"
+    "add_user": "Add user",
+    "lastname": "Lastname",
+    "firstname": "Firstname",
+    "email_adress": "Email adress",
+    "pass": "Password",
+    "role": "Role"
   }
 }

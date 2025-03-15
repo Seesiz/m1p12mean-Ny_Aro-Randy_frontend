@@ -5,6 +5,7 @@ import { UI_MODULE_IMPORTS } from '@/types/ui.module.import';
 import { ListComponent } from './list/list.component';
 import { ModalComponent } from './modal/modal.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ListComponent, ModalComponent],
@@ -12,6 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     UserRoutingModule,
     TranslateModule,
+    ReactiveFormsModule,
     ...UI_MODULE_IMPORTS,
   ],
 })

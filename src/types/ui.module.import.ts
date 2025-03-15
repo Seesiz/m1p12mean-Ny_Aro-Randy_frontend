@@ -48,9 +48,18 @@ import {
   HlmThComponent,
   HlmTrowComponent,
 } from '@spartan-ng/ui-table-helm';
+import {
+  BrnHoverCardComponent,
+  BrnHoverCardContentDirective,
+  BrnHoverCardTriggerDirective,
+} from '@spartan-ng/brain/hover-card';
+import { HlmHoverCardContentComponent } from '@spartan-ng/ui-hovercard-helm';
+import { CdkMenuModule } from '@angular/cdk/menu';
 
 export const UI_MODULE_IMPORTS = [
   HlmButtonDirective,
+  HlmInputDirective,
+  HlmLabelDirective,
   HlmCardContentDirective,
   HlmCardDescriptionDirective,
   HlmCardDirective,
@@ -73,7 +82,6 @@ export const UI_MODULE_IMPORTS = [
   HlmMenuShortcutComponent,
   HlmSubMenuComponent,
   BrnMenuTriggerDirective,
-  HlmLabelDirective,
   BrnDialogContentDirective,
   BrnDialogTriggerDirective,
   HlmDialogComponent,
@@ -82,13 +90,18 @@ export const UI_MODULE_IMPORTS = [
   HlmDialogFooterComponent,
   HlmDialogHeaderComponent,
   HlmDialogTitleDirective,
-  HlmInputDirective,
   HlmSelectDirective,
   HlmCaptionComponent,
   HlmTableComponent,
   HlmTdComponent,
   HlmThComponent,
   HlmTrowComponent,
+  BrnHoverCardComponent,
+  BrnHoverCardContentDirective,
+  BrnHoverCardTriggerDirective,
+  HlmHoverCardContentComponent,
+  CdkMenuModule,
+  HlmMenuItemDirective,
 ];
 
 import {

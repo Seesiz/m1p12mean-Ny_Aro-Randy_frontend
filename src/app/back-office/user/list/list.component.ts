@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+//import { UserService } from '@/back-office/services/user/user.service';
+//import { UserResponse } from '@/types/output';
+import { UserService } from '../../services/user/user.service';
+import { IUser } from '../../../../types/output';
 
 @Component({
   selector: 'app-list',
@@ -7,6 +11,16 @@ import { Component } from '@angular/core';
   styleUrl: './list.component.css',
 })
 export class ListComponent {
+  constructor(private userService: UserService) {}
+  users: IUser[] = [];
+
+  ngOnInit(): void {
+    this.userService.getAllUsers().then((users) => {
+      console.log(users);
+      this.users = users;
+    });
+  }
+
   protected _invoices = [
     {
       invoice: 'INV001',

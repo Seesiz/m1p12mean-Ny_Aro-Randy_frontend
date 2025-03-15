@@ -1,8 +1,8 @@
 type IUser = {
   _id: string;
   roles: IRole[];
-  nom: string;
-  prenom: string;
+  lastname: string;
+  firstname: string;
   email: string;
 };
 
