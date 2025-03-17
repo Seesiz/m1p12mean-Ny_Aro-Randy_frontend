@@ -20,7 +20,7 @@
     >
       {{ `menu.${option.label}` | translate }}
     </button>
-    <brn-hover-card class="group" *ngIf="option.hasDropDown">
+    <brn-hover-card *ngIf="option.hasDropDown">
       <button
         hlmBtn
         [class]="
@@ -34,12 +34,6 @@
         [attr.aria-label]="'menu.' + option.label | translate"
       >
         {{ `menu.${option.label}` | translate }}
-        <ng-icon
-          hlm
-          name="lucideChevronDown"
-          class="transition-all group-hover:rotate-180"
-          size="sm"
-        />
       </button>
       <hlm-hover-card-content *brnHoverCardContent class="w-48">
         <div class="flex flex-col p-2">

@@ -27,6 +27,8 @@
     "email_adress": "Email adress",
     "pass": "Password",
     "role": "Role",
-    "edit_info": "Edit info"
+    "create_user": "Create user",
+    "edit_info": "Edit info",
+    "make_changes": "Make changes to your profile here. Click save when you're done."
   }
 }
