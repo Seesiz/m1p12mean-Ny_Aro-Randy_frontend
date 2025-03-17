@@ -13,10 +13,23 @@ interface UserResponse {
 export class UserService {
   constructor() {}
 
-  async getAllUsers(): Promise<IUser[]> {
+  async getUserById(id: string): Promise<IUser> {
+    try {
+      const response: AxiosResponse<IUser> = await axios.get(
+        `${environment.apiUrl}/users/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
+
+  async getAllUsers(type: string): Promise<IUser[]> {
     try {
       const response: AxiosResponse<IUser[]> = await axios.get(
-        `${environment.apiUrl}/users`
+        `${environment.apiUrl}/users?role=${type}`
       );
       return response.data;
     } catch (error) {
@@ -30,7 +43,8 @@ export class UserService {
     lastname: string,
     firstname: string,
     email: string,
-    pass: string
+    pass: string,
+    roles: string[]
   ): Promise<UserResponse> {
     try {
       const response: AxiosResponse<UserResponse> = await axios.post(
@@ -40,10 +54,38 @@ export class UserService {
           firstname,
           email,
           pass,
-          roles: ['67ce96d2dd77ba0a7c340eb4'],
+          roles,
         }
       );
 
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
+
+  async updateUser(
+    _id: string,
+    lastname: string,
+    firstname: string,
+    email: string,
+    pass: string,
+    roles: string[]
+  ): Promise<UserResponse> {
+    try {
+      const response: AxiosResponse<UserResponse> = await axios.put(
+        `${environment.apiUrl}/users/${_id}`,
+        {
+          _id,
+          lastname,
+          firstname,
+          email,
+          pass,
+          roles,
+        }
+      );
       return response.data;
     } catch (error) {
       const err = error as AxiosError;

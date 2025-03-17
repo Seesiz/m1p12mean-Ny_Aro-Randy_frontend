@@ -1,68 +1,52 @@
-import { Component } from '@angular/core';
-//import { UserService } from '@/back-office/services/user/user.service';
-//import { UserResponse } from '@/types/output';
-import { UserService } from '../../services/user/user.service';
-import { IUser } from '../../../../types/output';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '@/app/back-office/services/user/user.service';
+import { IUser } from '@/types/output';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-list',
   standalone: false,
   templateUrl: './list.component.html',
-  styleUrl: './list.component.css',
+  styleUrls: ['./list.component.css'],
 })
-export class ListComponent {
-  constructor(private userService: UserService) {}
+export class ListComponent implements OnInit {
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private translateService: TranslateService
+  ) {}
+
   users: IUser[] = [];
+  currentRole: string = '';
+  type!: 'MANAGER' | 'CLIENT' | 'MECANIC';
+  selectedUser: IUser | null = null;
 
   ngOnInit(): void {
-    this.userService.getAllUsers().then((users) => {
-      console.log(users);
-      this.users = users;
+    this.route.paramMap.subscribe((params) => {
+      this.type = params.get('role') as 'MANAGER' | 'CLIENT' | 'MECANIC';
+      this.currentRole = this.type;
+      this.loadUsers();
     });
   }
 
-  protected _invoices = [
-    {
-      invoice: 'INV001',
-      paymentStatus: 'Paid',
-      totalAmount: '$250.00',
-      paymentMethod: 'Credit Card',
-    },
-    {
-      invoice: 'INV002',
-      paymentStatus: 'Pending',
-      totalAmount: '$150.00',
-      paymentMethod: 'PayPal',
-    },
-    {
-      invoice: 'INV003',
-      paymentStatus: 'Unpaid',
-      totalAmount: '$350.00',
-      paymentMethod: 'Bank Transfer',
-    },
-    {
-      invoice: 'INV004',
-      paymentStatus: 'Paid',
-      totalAmount: '$450.00',
-      paymentMethod: 'Credit Card',
-    },
-    {
-      invoice: 'INV005',
-      paymentStatus: 'Paid',
-      totalAmount: '$550.00',
-      paymentMethod: 'PayPal',
-    },
-    {
-      invoice: 'INV006',
-      paymentStatus: 'Pending',
-      totalAmount: '$200.00',
-      paymentMethod: 'Bank Transfer',
-    },
-    {
-      invoice: 'INV007',
-      paymentStatus: 'Unpaid',
-      totalAmount: '$300.00',
-      paymentMethod: 'Credit Card',
-    },
-  ];
+  trackById(index: number, user: IUser): string {
+    return user._id;
+  }
+
+  selectUserForUpdate(user: IUser): void {
+    this.selectedUser = user;
+    console.log('User selected for update:', user);
+  }
+
+  private loadUsers(): void {
+    this.userService
+      .getAllUsers(this.type)
+      .then((users) => {
+        this.users = users;
+      })
+      .catch((error) => {
+        console.error('Error loading users:', error);
+      });
+  }
 }

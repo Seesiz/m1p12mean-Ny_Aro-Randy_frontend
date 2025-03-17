@@ -9,14 +9,16 @@
     </hlm-dialog>
   </div>
   <hlm-table class="w-full min-w-[400px]">
-    <hlm-caption>A list of your recent invoices.</hlm-caption>
+    <hlm-caption
+      >{{ "user_detail.list" | translate }} - {{ currentRole }}</hlm-caption
+    >
     <hlm-trow>
       <hlm-th class="w-52">{{ "user_detail.lastname" | translate }}</hlm-th>
       <hlm-th class="w-60">{{ "user_detail.firstname" | translate }}</hlm-th>
       <hlm-th class="flex-1">{{
         "user_detail.email_adress" | translate
       }}</hlm-th>
-      <hlm-th class="justify-end w-40">Amount</hlm-th>
+      <hlm-th class="justify-end">Action</hlm-th>
     </hlm-trow>
     @for (user of users; track user._id) {
     <hlm-trow>
@@ -25,14 +27,24 @@
       }}</hlm-td>
       <hlm-td class="w-60">{{ user.firstname }}</hlm-td>
       <hlm-td class="flex-1">{{ user.email }}</hlm-td>
-      <hlm-td class="justify-end w-40">{{ user.roles }}</hlm-td>
+      <hlm-td class="justify-end">
+        <hlm-dialog>
+          <button (click)="selectUserForUpdate(user)" brnDialogTrigger hlmBtn>
+            {{ "user_detail.edit_info" | translate }}
+          </button>
+          <app-update
+            *ngIf="selectedUser?._id === user._id"
+            [selectedUser]="selectedUser"
+          ></app-update>
+        </hlm-dialog>
+      </hlm-td>
     </hlm-trow>
     }
-    <hlm-trow class="bg-muted/50 hover:bg-muted">
+    <!-- <hlm-trow class="bg-muted/50 hover:bg-muted">
       <hlm-td truncate class="w-[100px] font-semibold">Total</hlm-td>
       <hlm-td class="w-40"></hlm-td>
       <hlm-td class="flex-1"></hlm-td>
       <hlm-td class="justify-end w-40">$2,500.00</hlm-td>
-    </hlm-trow>
+    </hlm-trow> -->
   </hlm-table>
 </section>

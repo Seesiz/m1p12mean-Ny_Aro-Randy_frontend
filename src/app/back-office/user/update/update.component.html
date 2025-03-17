@@ -1,11 +1,9 @@
 <hlm-dialog-content class="sm:max-w-[425px]" *brnDialogContent="let ctx">
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
     <hlm-dialog-header>
       <h3 hlmDialogTitle>{{ "user_detail.edit_profile" | translate }}</h3>
       <p hlmDialogDescription>
-        Make changes to your profile here. Click save when you're done.{{
-          currentRole
-        }}
+        Make changes to your profile here. Click save when you're done.
       </p>
     </hlm-dialog-header>
     <div class="py-4 grid gap-4">
@@ -18,6 +16,7 @@
           id="lastname"
           formControlName="lastname"
           class="col-span-3"
+          [value]="selectedUser?.lastname"
         />
       </div>
       <div class="items-center grid grid-cols-4 gap-4">
@@ -29,6 +28,7 @@
           id="firstname"
           formControlName="firstname"
           class="col-span-3"
+          [value]="selectedUser?.firstname"
         />
       </div>
       <div class="items-center grid grid-cols-4 gap-4">
@@ -41,6 +41,7 @@
           formControlName="email"
           type="email"
           class="col-span-3"
+          [value]="selectedUser?.email"
         />
       </div>
       <div class="items-center grid grid-cols-4 gap-4">
@@ -53,11 +54,27 @@
           formControlName="pass"
           type="password"
           class="col-span-3"
+          [value]="selectedUser?.pass"
         />
+      </div>
+      <div class="items-center grid grid-cols-4 gap-4">
+        <ng-container *ngFor="let role of roles; trackBy: trackRoleById">
+          <label hlmLabel class="text-right">{{ role.name }}</label>
+          <div class="col-span-3">
+            <input
+              type="checkbox"
+              name="role"
+              [id]="role._id"
+              [value]="role._id"
+              (change)="onRoleChange($event, role._id)"
+              [checked]="isRoleSelected(role._id)"
+            />
+          </div>
+        </ng-container>
       </div>
     </div>
     <hlm-dialog-footer>
-      <button hlmBtn type="submit" [disabled]="!userForm.valid">
+      <button hlmBtn type="submit">
         {{ "common.save_change" | translate }}
       </button>
     </hlm-dialog-footer>

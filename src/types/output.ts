@@ -4,12 +4,13 @@ type IUser = {
   lastname: string;
   firstname: string;
   email: string;
+  pass: string;
 };
 
 type IRole = {
   _id: string;
-  nom: string;
+  name: string;
   description?: string;
 };
 
-export type { IUser };
+export type { IUser, IRole };
