@@ -19,12 +19,14 @@
     "mechanic": "Mechanic"
   },
   "user_detail": {
+    "list": "List of users",
     "edit_profile": "Edit profile",
     "add_user": "Add user",
     "lastname": "Lastname",
     "firstname": "Firstname",
     "email_adress": "Email adress",
     "pass": "Password",
-    "role": "Role"
+    "role": "Role",
+    "edit_info": "Edit info"
   }
 }

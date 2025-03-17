@@ -19,12 +19,14 @@
     "mechanic": "Mécanicien"
   },
   "user_detail": {
+    "list": "Liste des utilisateurs",
     "edit_profile": "Editer le profil",
     "add_user": "Ajouter un utilisateur",
     "lastname": "Nom",
     "firstname": "Prénom",
     "email_adress": "Adresse email",
     "pass": "Mot de passe",
-    "role": "Rôle"
+    "role": "Rôle",
+    "edit_info": "Modifier les informations"
   }
 }

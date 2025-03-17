@@ -6,9 +6,10 @@ import { ListComponent } from './list/list.component';
 import { ModalComponent } from './modal/modal.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UpdateComponent } from './update/update.component';
 
 @NgModule({
-  declarations: [ListComponent, ModalComponent],
+  declarations: [ListComponent, ModalComponent, UpdateComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
