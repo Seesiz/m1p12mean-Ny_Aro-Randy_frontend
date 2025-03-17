@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, viewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '@/app/back-office/services/user/user.service';
 import { IUser } from '@/types/output';
-import { TranslateService } from '@ngx-translate/core';
+import { BrnDialogComponent } from '@spartan-ng/brain/dialog';
 
 @Component({
   selector: 'app-list',
@@ -11,16 +11,17 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./list.component.css'],
 })
 export class ListComponent implements OnInit {
+  public viewchildDialogRef = viewChild(BrnDialogComponent);
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute,
-    private translateService: TranslateService
+    private route: ActivatedRoute
   ) {}
 
   users: IUser[] = [];
   currentRole: string = '';
   type!: 'MANAGER' | 'CLIENT' | 'MECANIC';
   selectedUser: IUser | null = null;
+  loading: boolean = false;
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -38,7 +39,8 @@ export class ListComponent implements OnInit {
     this.selectedUser = user;
   }
 
-  private loadUsers(): void {
+  loadUsers(): void {
+    this.loading = true;
     this.userService
       .getAllUsers(this.type)
       .then((users) => {
@@ -46,6 +48,10 @@ export class ListComponent implements OnInit {
       })
       .catch((error) => {
         console.error('Error loading users:', error);
+      })
+      .finally(() => {
+        this.loading = false;
+        this.viewchildDialogRef()?.close({});
       });
   }
 }
