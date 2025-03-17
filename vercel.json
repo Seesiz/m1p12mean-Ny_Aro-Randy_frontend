@@ -1,0 +1,4 @@
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "outputDirectory": "dist/m1p12mean-ny-aro-randy-frontend"
+}
