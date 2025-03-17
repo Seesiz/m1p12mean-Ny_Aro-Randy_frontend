@@ -36,7 +36,6 @@ export class ListComponent implements OnInit {
 
   selectUserForUpdate(user: IUser): void {
     this.selectedUser = user;
-    console.log('User selected for update:', user);
   }
 
   private loadUsers(): void {

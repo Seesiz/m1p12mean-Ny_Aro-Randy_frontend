@@ -37,12 +37,17 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
   ) {}
 
   ngOnInit(): void {
+    setInterval(() => {
+      this.updateActiveButtonPosition();
+    }, 100);
     if (localStorage.getItem('theme')) {
       this.setTheme(localStorage.getItem('theme') === 'dark');
     }
     if (localStorage.getItem('langue')) {
       this.setLangue(localStorage.getItem('langue') === 'fr' ? 'fr' : 'en');
     }
+
+    this.routerLinkActive = this.router.url;
 
     this.routerEventsSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -57,16 +62,9 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
         if (activeOption) {
           this.routerLinkActive = activeOption.path;
         }
-
-        setTimeout(() => {
-          this.updateActiveButtonPosition();
-        }, 100);
+        this.updateActiveButtonPosition();
       }
     });
-
-    setTimeout(() => {
-      this.updateActiveButtonPosition();
-    }, 1000);
   }
 
   logout() {

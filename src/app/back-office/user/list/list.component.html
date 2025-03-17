@@ -10,7 +10,8 @@
   </div>
   <hlm-table class="w-full min-w-[400px]">
     <hlm-caption
-      >{{ "user_detail.list" | translate }} - {{ currentRole }}</hlm-caption
+      >{{ "user_detail.list" | translate }} -
+      {{ `common.${currentRole}` | translate }}</hlm-caption
     >
     <hlm-trow>
       <hlm-th class="w-52">{{ "user_detail.lastname" | translate }}</hlm-th>
@@ -29,13 +30,15 @@
       <hlm-td class="flex-1">{{ user.email }}</hlm-td>
       <hlm-td class="justify-end">
         <hlm-dialog>
-          <button (click)="selectUserForUpdate(user)" brnDialogTrigger hlmBtn>
-            {{ "user_detail.edit_info" | translate }}
+          <button
+            (click)="selectUserForUpdate(user)"
+            brnDialogTrigger
+            hlmBtn
+            variant="ghost"
+          >
+            <ng-icon name="lucidePencil" />
           </button>
-          <app-update
-            *ngIf="selectedUser?._id === user._id"
-            [selectedUser]="selectedUser"
-          ></app-update>
+          <app-update [selectedUser]="selectedUser"></app-update>
         </hlm-dialog>
       </hlm-td>
     </hlm-trow>
