@@ -112,6 +112,7 @@ import {
   lucideCheck,
   lucideLanguages,
   lucideChevronDown,
+  lucideMenu,
 } from '@ng-icons/lucide';
 import { HlmSelectDirective } from '@spartan-ng/ui-select-helm';
 
@@ -124,5 +125,6 @@ export const UI_MODULE_PROVIDERS = [
     lucideCheck,
     lucideLanguages,
     lucideChevronDown,
+    lucideMenu,
   }),
 ];

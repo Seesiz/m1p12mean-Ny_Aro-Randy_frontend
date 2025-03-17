@@ -79,7 +79,9 @@ export const backOfficeRoutes: Routes = [
       {
         path: 'rendez-vous',
         loadChildren: () =>
-          import('./user/user.module').then((m) => m.UserModule),
+          import('./rendez-vous/rendez-vous.module').then(
+            (m) => m.RendezVousModule
+          ),
         canActivate: [AccessGuard],
         data: {
           role: [Role.manager],
@@ -90,7 +92,7 @@ export const backOfficeRoutes: Routes = [
       {
         path: 'planning',
         loadChildren: () =>
-          import('./user/user.module').then((m) => m.UserModule),
+          import('./planning/planning.module').then((m) => m.PlanningModule),
         canActivate: [AccessGuard],
         data: {
           role: [Role.manager, Role.mechanic],
