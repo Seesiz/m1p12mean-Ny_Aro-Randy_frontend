@@ -1,0 +1,147 @@
+<section
+  class="header flex flex-row items-center justify-between bg-card rounded-3xl fixed z-10 m-2 h-14 p-2 px-4"
+  style="width: calc(100% - 1rem)"
+>
+  <div class="header__logo flex items-center gap-1 w-2/12">
+    <img src="assets/img/engrenages.gif" alt="Engrenages" width="40px" />
+    <b class="uppercase text-primary">mecanet</b>
+  </div>
+  <nav class="md:lg:flex hidden items-center gap-2 bg-background rounded-4xl">
+    @for (option of options; track option.path) {
+    <button
+      hlmBtn
+      *ngIf="!option.hasDropDown"
+      [routerLink]="option.path"
+      routerLinkActive="is-active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="cursor-pointer rounded-4xl header-option text-primary bg-transparent hover:bg-transparent"
+      style="z-index: 11"
+      [attr.aria-label]="'menu.' + option.label | translate"
+    >
+      {{ `menu.${option.label}` | translate }}
+    </button>
+    <brn-hover-card *ngIf="option.hasDropDown">
+      <button
+        hlmBtn
+        [class]="
+          'flex items-center gap-2 cursor-pointer rounded-4xl header-option text-primary bg-transparent hover:bg-transparent ' +
+          (routerLinkActive.includes(option.path.split('/')[0])
+            ? 'is-active'
+            : '')
+        "
+        brnHoverCardTrigger
+        style="z-index: 11"
+        [attr.aria-label]="'menu.' + option.label | translate"
+      >
+        {{ `menu.${option.label}` | translate }}
+      </button>
+      <hlm-hover-card-content *brnHoverCardContent class="w-48">
+        <div class="flex flex-col p-2">
+          @for (subOption of option.subOptions; track subOption.path) {
+          <button
+            hlmBtn
+            variant="ghost"
+            class="w-full justify-start"
+            [routerLink]="subOption.path"
+            routerLinkActive="is-active"
+            variant="link"
+            [routerLinkActiveOptions]="{ exact: true }"
+            [attr.aria-label]="'common.' + subOption.label | translate"
+          >
+            {{ `common.${subOption.label}` | translate }}
+          </button>
+          }
+        </div>
+      </hlm-hover-card-content>
+    </brn-hover-card>
+    }
+    <div
+      class="active-button absolute bg-primary rounded-4xl bottom-0 h-1 w-10"
+      style="z-index: 10"
+    ></div>
+  </nav>
+  <div class="flex items-center gap-4 w-2/12 justify-end">
+    <label class="flex items-center" hlmLabel>
+      <hlm-switch
+        class="mr-2"
+        [checked]="isDarkMode"
+        (checkedChange)="setTheme($event)"
+      />
+      <ng-icon hlm [name]="isDarkMode ? 'lucideSunDim' : 'lucideMoon'" />
+    </label>
+    <button
+      hlmBtn
+      [brnMenuTriggerFor]="notification"
+      variant="ghost"
+      class="rounded-4xl"
+    >
+      <ng-icon hlm name="lucideBell" class="cursor-pointer" />
+    </button>
+    <hlm-avatar
+      variant="medium"
+      [brnMenuTriggerFor]="menu"
+      class="cursor-pointer"
+    >
+      <img src="/assets/img/avatar.png" hlmAvatarImage />
+      <span class="bg-bg text-primary" hlmAvatarFallback>IV</span>
+    </hlm-avatar>
+    <button hlmBtn variant="ghost" class="rounded-4xl md:hidden">
+      <ng-icon hlm name="lucideMenu" class="cursor-pointer" />
+    </button>
+  </div>
+</section>
+
+<ng-template #menu>
+  <hlm-menu class="w-56">
+    <hlm-menu-label>{{ "common.my-account" | translate }}</hlm-menu-label>
+    <hlm-menu-separator />
+    <button hlmMenuItem [brnMenuTriggerFor]="langue">
+      <ng-icon hlm name="lucideLanguages" hlmMenuIcon />
+      Langue
+      <hlm-menu-item-sub-indicator />
+    </button>
+    <button (click)="logout()" hlmMenuItem class="cursor-pointer">
+      <ng-icon hlm name="lucideLogOut" hlmMenuIcon />
+      <span>{{ "common.logout" | translate }}</span>
+      <hlm-menu-shortcut>⇧⌘Q</hlm-menu-shortcut>
+    </button>
+  </hlm-menu>
+</ng-template>
+
+<ng-template #notification>
+  <hlm-menu class="w-80">
+    <hlm-menu-label>Notifications</hlm-menu-label>
+    <hlm-menu-separator />
+    @for (notification of notifications; track notification.id) {
+    <div
+      class="grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0 p-2"
+    >
+      <span class="flex w-2 h-2 rounded-full translate-y-1 bg-sky-500"></span>
+      <div class="space-y-1">
+        <p class="text-sm font-medium leading-none">{{ notification.title }}</p>
+        <p class="text-sm text-muted-foreground">
+          {{ notification.description }}
+        </p>
+      </div>
+    </div>
+    }
+  </hlm-menu>
+</ng-template>
+<ng-template #langue>
+  <hlm-sub-menu>
+    <button
+      hlmMenuItem
+      (click)="setLangue('fr')"
+      [class]="langueValue === 'fr' ? 'font-bold' : ''"
+    >
+      Français
+    </button>
+    <button
+      hlmMenuItem
+      (click)="setLangue('en')"
+      [class]="langueValue === 'en' ? 'font-bold' : ''"
+    >
+      English
+    </button>
+  </hlm-sub-menu>
+</ng-template>

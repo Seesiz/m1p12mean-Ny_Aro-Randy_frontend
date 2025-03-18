@@ -3,32 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FrontOfficeRoutingModule } from './front-office-routing.module';
 import { FrontOfficeComponent } from './front-office.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-import {
-  HlmCardContentDirective,
-  HlmCardDescriptionDirective,
-  HlmCardDirective,
-  HlmCardFooterDirective,
-  HlmCardHeaderDirective,
-  HlmCardTitleDirective,
-} from '@spartan-ng/ui-card-helm';
-import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
-import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
+import { UI_MODULE_IMPORTS } from '@/types/ui.module.import';
 
 @NgModule({
   declarations: [FrontOfficeComponent, HomePageComponent],
-  imports: [
-    CommonModule,
-    FrontOfficeRoutingModule,
-    HlmButtonDirective,
-    HlmCardContentDirective,
-    HlmCardDescriptionDirective,
-    HlmCardDirective,
-    HlmCardFooterDirective,
-    HlmCardHeaderDirective,
-    HlmCardTitleDirective,
-    HlmIconDirective,
-    HlmSwitchComponent,
-  ],
+  imports: [CommonModule, FrontOfficeRoutingModule, ...UI_MODULE_IMPORTS],
 })
 export class FrontOfficeModule {}

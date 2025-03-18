@@ -1,0 +1,82 @@
+<hlm-dialog-content class="sm:max-w-[425px]" *brnDialogContent="let ctx">
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <hlm-dialog-header>
+      <h3 hlmDialogTitle>{{ "user_detail.edit_profile" | translate }}</h3>
+      <p hlmDialogDescription>
+        {{ "user_detail.make_changes" | translate }}
+      </p>
+    </hlm-dialog-header>
+    <div class="py-4 grid gap-4">
+      <div class="items-center grid grid-cols-4 gap-4">
+        <label hlmLabel for="lastname" class="text-right">{{
+          "user_detail.lastname" | translate
+        }}</label>
+        <input
+          hlmInput
+          id="lastname"
+          formControlName="lastname"
+          class="col-span-3"
+          [value]="selectedUser?.lastname"
+        />
+      </div>
+      <div class="items-center grid grid-cols-4 gap-4">
+        <label hlmLabel for="firstname" class="text-right">{{
+          "user_detail.firstname" | translate
+        }}</label>
+        <input
+          hlmInput
+          id="firstname"
+          formControlName="firstname"
+          class="col-span-3"
+          [value]="selectedUser?.firstname"
+        />
+      </div>
+      <div class="items-center grid grid-cols-4 gap-4">
+        <label hlmLabel for="email" class="text-right">{{
+          "user_detail.email_adress" | translate
+        }}</label>
+        <input
+          hlmInput
+          id="email"
+          formControlName="email"
+          type="email"
+          class="col-span-3"
+          [value]="selectedUser?.email"
+        />
+      </div>
+      <div class="items-center grid grid-cols-4 gap-4">
+        <label hlmLabel for="pass" class="text-right">{{
+          "user_detail.pass" | translate
+        }}</label>
+        <input
+          hlmInput
+          id="pass"
+          formControlName="pass"
+          type="password"
+          class="col-span-3"
+          [value]="selectedUser?.pass"
+        />
+      </div>
+      <div class="items-center grid grid-cols-4 gap-4">
+        <ng-container *ngFor="let role of roles; trackBy: trackRoleById">
+          <label hlmLabel class="text-right">{{ role.name }}</label>
+          <div class="col-span-3">
+            <input
+              type="checkbox"
+              name="role"
+              [id]="role._id"
+              [value]="role._id"
+              (change)="onRoleChange($event, role._id)"
+              [checked]="isRoleSelected(role._id)"
+            />
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <hlm-dialog-footer>
+      <button hlmBtn type="submit">
+        {{ "common.save_change" | translate }}
+      </button>
+    </hlm-dialog-footer>
+  </form>
+</hlm-dialog-content>

@@ -1,0 +1,34 @@
+{
+  "menu": {
+    "statistics": "Statistiques",
+    "users": "Utilisateurs",
+    "rendez-vous": "Rendez-vous",
+    "planning": "Planning"
+  },
+  "common": {
+    "my-account": "Mon compte",
+    "logout": "Déconnexion",
+    "save_change": "Sauvegarder les modifications",
+    "login": "Se connecter",
+    "email": "Email",
+    "password": "Mot de passe",
+    "enter_login": "Veuillez entrez votre identifiant et votre mot de passe",
+    "connection": "Connexion",
+    "client": "Client",
+    "manager": "Manager",
+    "mechanic": "Mécanicien"
+  },
+  "user_detail": {
+    "list": "Liste des utilisateurs",
+    "edit_profile": "Editer le profil",
+    "add_user": "Ajouter un utilisateur",
+    "lastname": "Nom",
+    "firstname": "Prénom",
+    "email_adress": "Adresse email",
+    "pass": "Mot de passe",
+    "role": "Rôle",
+    "create_user": "Créer un utilisateur",
+    "edit_info": "Modifier les informations",
+    "make_changes": "Faire des modifications sur votre profil. Cliquez sur sauvegarder quand vous avez fini."
+  }
+}
