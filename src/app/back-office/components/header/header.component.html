@@ -6,7 +6,7 @@
     <img src="assets/img/engrenages.gif" alt="Engrenages" width="40px" />
     <b class="uppercase text-primary">mecanet</b>
   </div>
-  <nav class="flex items-center gap-2 bg-background rounded-4xl">
+  <nav class="md:lg:flex hidden items-center gap-2 bg-background rounded-4xl">
     @for (option of options; track option.path) {
     <button
       hlmBtn
@@ -24,7 +24,7 @@
       <button
         hlmBtn
         [class]="
-          'cursor-pointer rounded-4xl header-option text-primary bg-transparent hover:bg-transparent ' +
+          'flex items-center gap-2 cursor-pointer rounded-4xl header-option text-primary bg-transparent hover:bg-transparent ' +
           (routerLinkActive.includes(option.path.split('/')[0])
             ? 'is-active'
             : '')
@@ -85,6 +85,9 @@
       <img src="/assets/img/avatar.png" hlmAvatarImage />
       <span class="bg-bg text-primary" hlmAvatarFallback>IV</span>
     </hlm-avatar>
+    <button hlmBtn variant="ghost" class="rounded-4xl md:hidden">
+      <ng-icon hlm name="lucideMenu" class="cursor-pointer" />
+    </button>
   </div>
 </section>
 

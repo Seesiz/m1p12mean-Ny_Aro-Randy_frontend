@@ -4,6 +4,8 @@ import {
   OnInit,
   OnChanges,
   SimpleChanges,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { IUser, IRole } from '@/types/output';
@@ -18,6 +20,7 @@ import { RoleService } from '@/app/back-office/services/role/role.service';
 })
 export class UpdateComponent implements OnInit, OnChanges {
   @Input() selectedUser: IUser | null = null;
+  @Output() loadUsers = new EventEmitter<void>();
   type!: 'MANAGER' | 'CLIENT' | 'MECANIC';
 
   updateForm: FormGroup;
@@ -33,6 +36,7 @@ export class UpdateComponent implements OnInit, OnChanges {
       firstname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       pass: ['', [Validators.required, Validators.minLength(6)]],
+      roles: this.fb.array([]),
     });
   }
 
@@ -67,8 +71,6 @@ export class UpdateComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selectedUser'] && this.selectedUser) {
-      console.log(`Faire appelle à l'user avec l'id ${this.selectedUser?._id}`);
-
       this.findUserById(this.selectedUser._id);
       this.updateForm.patchValue({
         lastname: this.selectedUser.lastname,
@@ -118,8 +120,7 @@ export class UpdateComponent implements OnInit, OnChanges {
         )
         .then(
           () => {
-            window.location.reload();
-            console.log('User updated successfully');
+            this.loadUsers.emit();
           },
           (error) => {
             console.error('Error updating user:', error);

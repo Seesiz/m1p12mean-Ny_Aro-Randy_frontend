@@ -7,6 +7,8 @@ import { ModalComponent } from './modal/modal.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateComponent } from './update/update.component';
+import { provideIcons } from '@ng-icons/core';
+import { lucideLoaderCircle, lucidePencil } from '@ng-icons/lucide';
 
 @NgModule({
   declarations: [ListComponent, ModalComponent, UpdateComponent],
@@ -16,6 +18,12 @@ import { UpdateComponent } from './update/update.component';
     TranslateModule,
     ReactiveFormsModule,
     ...UI_MODULE_IMPORTS,
+  ],
+  providers: [
+    provideIcons({
+      lucidePencil,
+      lucideLoaderCircle,
+    }),
   ],
 })
 export class UserModule {}
