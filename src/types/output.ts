@@ -4,7 +4,7 @@ type IUser = {
   lastname: string;
   firstname: string;
   email: string;
-  pass: string;
+  pass?: string;
 };
 
 type IRole = {
@@ -13,4 +13,19 @@ type IRole = {
   description?: string;
 };
 
-export type { IUser, IRole };
+type IRendez_vous = {
+  _id: string;
+  status: string;
+  date: Date;
+  manager?: IUser;
+  info: {
+    email: string;
+    fullname: string;
+    contact: string;
+  };
+  duree?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+
+export type { IUser, IRole, IRendez_vous };

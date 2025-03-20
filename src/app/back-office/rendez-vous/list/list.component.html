@@ -1,0 +1,59 @@
+<section class="p-2">
+  <div class="flex justify-between">
+    <input class="w-80" hlmInput placeholder="Search" type="search" />
+    <brn-select
+      class="inline-block"
+      [formControl]="selectedStatus"
+      (valueChange)="onStatusChange($event)"
+    >
+      <hlm-select-trigger class="w-56">
+        {{ "rdv_detail." + selectedStatus.value | translate }}
+      </hlm-select-trigger>
+      <hlm-select-content>
+        <hlm-option value="pending">{{
+          "rdv_detail.pending" | translate
+        }}</hlm-option>
+        <hlm-option value="confirmed">{{
+          "rdv_detail.confirmed" | translate
+        }}</hlm-option>
+        <hlm-option value="cancelled">{{
+          "rdv_detail.cancelled" | translate
+        }}</hlm-option>
+      </hlm-select-content>
+    </brn-select>
+  </div>
+  <hlm-table class="w-full min-w-[400px]">
+    <hlm-trow>
+      <hlm-th class="w-52">{{ "rdv_detail.date_demande" | translate }}</hlm-th>
+      <hlm-th class="w-52">{{ "rdv_detail.full_name" | translate }}</hlm-th>
+      <hlm-th class="w-60">{{ "rdv_detail.date_proposee" | translate }}</hlm-th>
+      <hlm-th class="flex-1">{{ "rdv_detail.contact" | translate }}</hlm-th>
+      <hlm-th class="justify-center">Action</hlm-th>
+    </hlm-trow>
+
+    @for (rendez_vous of rendez_vous; track rendez_vous._id) {
+    <hlm-trow>
+      <hlm-td class="w-52">{{
+        rendez_vous.createdAt | date : "d-MM-yyyy"
+      }}</hlm-td>
+      <hlm-td truncate class="font-medium w-52">{{
+        rendez_vous.info.fullname
+      }}</hlm-td>
+      <hlm-td class="w-60">{{
+        rendez_vous.date | date : "Le d-MM-yyyy à HH:mm"
+      }}</hlm-td>
+      <hlm-td class="flex-1">{{ rendez_vous.info.contact }}</hlm-td>
+      <hlm-td class="justify-end">
+        <hlm-dialog>
+          <button brnDialogTrigger hlmBtn (click)="viewRDV(rendez_vous._id)">
+            voir
+          </button>
+          <app-info></app-info>
+        </hlm-dialog>
+        <button brnDialogTrigger hlmBtn variant="destructive">refuser</button>
+        <button brnDialogTrigger hlmBtn>valider</button>
+      </hlm-td>
+    </hlm-trow>
+    }
+  </hlm-table>
+</section>

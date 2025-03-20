@@ -70,3 +70,7 @@ body {
   @apply bg-background;
   @apply text-foreground;
 }
+
+button {
+  cursor: pointer;
+}
