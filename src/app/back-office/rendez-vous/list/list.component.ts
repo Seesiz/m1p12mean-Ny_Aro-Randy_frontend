@@ -12,8 +12,7 @@ import { FormControl } from '@angular/forms';
 export class ListComponent {
   rendez_vous: IRendez_vous[] = [];
   selectedStatus = new FormControl('pending');
-  selectedRDV?: IRendez_vous;
-
+  selectedRDV: IRendez_vous | null = null;
   constructor(private rendezVousService: RendezVousService) {}
 
   ngOnInit(): void {
@@ -90,5 +89,10 @@ export class ListComponent {
     this.rendezVousService.findById(_id).then((rendez_vous) => {
       this.selectedRDV = rendez_vous;
     });
+  }
+
+  selectRDVForView(rendez_vous: IRendez_vous): void {
+    this.selectedRDV = rendez_vous;
+    this.viewRDV(rendez_vous._id);
   }
 }

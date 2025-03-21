@@ -22,6 +22,7 @@ type IRendez_vous = {
     email: string;
     fullname: string;
     contact: string;
+    message: string;
   };
   duree?: number;
   createdAt?: Date;

@@ -9,23 +9,27 @@
   <div class="py-4 flex flex-col gap-4">
     <div class="flex gap-4 flex-col">
       <label hlmLabel for="lastname">Date de demande</label>
-      <span class="pl-2 col-span-3"> {{ "Ito misy daty" }}</span>
+      <span class="pl-2 col-span-3">
+        {{ selectedRDV?.date | date : "d-MM-yyyy" }}</span
+      >
     </div>
     <div class="flex gap-4 flex-col">
       <label hlmLabel for="lastname">Nom du client</label>
-      <span class="pl-2 col-span-3"> {{ "Ito misy daty" }}</span>
+      <span class="pl-2 col-span-3"> {{ selectedRDV?.info?.fullname }}</span>
     </div>
     <div class="flex gap-4 flex-col">
       <label hlmLabel for="lastname">Date proposée</label>
-      <span class="pl-2 col-span-3"> {{ "Ito misy daty" }}</span>
+      <span class="pl-2 col-span-3">
+        {{ selectedRDV?.date | date : "d-MM-yyyy" }}</span
+      >
     </div>
     <div class="flex gap-4 flex-col">
       <label hlmLabel for="lastname">Contact</label>
-      <span class="pl-2 col-span-3"> {{ "Ito misy daty" }}</span>
+      <span class="pl-2 col-span-3"> {{ selectedRDV?.info?.contact }}</span>
     </div>
     <div class="flex gap-4 flex-col">
       <label hlmLabel for="lastname">Message</label>
-      <span class="pl-2 col-span-3"> {{ "Ito misy daty" }}</span>
+      <span class="pl-2 col-span-3"> {{ selectedRDV?.info?.message }}</span>
     </div>
     <div class="flex gap-4 flex-col">
       <button brnDialogTrigger hlmBtn variant="default">
