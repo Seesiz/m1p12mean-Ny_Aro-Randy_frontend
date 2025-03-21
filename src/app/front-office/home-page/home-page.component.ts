@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   selector: 'app-home-page',
@@ -7,21 +11,51 @@ import { Component } from '@angular/core';
   styleUrl: './home-page.component.css',
 })
 export class HomePageComponent {
-  protected notifications = [
-    {
-      id: 1,
-      title: 'Your call has been confirmed.',
-      description: '1 hour ago',
-    },
-    {
-      id: 2,
-      title: 'You have a new message!',
-      description: '1 hour ago',
-    },
-    {
-      id: 3,
-      title: 'Your subscription is expiring soon!',
-      description: '2 hours ago',
-    },
-  ];
+  @ViewChild('heroSection', { static: true }) heroSection!: ElementRef;
+  @ViewChild('heroText', { static: true }) heroText!: ElementRef;
+
+  ngAfterViewInit() {
+    const cursorFollow = document.getElementById('cursor-follow')!;
+    const hero = document.getElementById('hero')!;
+
+    hero.addEventListener('mousemove', (e) => {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      gsap.to(cursorFollow, {
+        duration: 0.2,
+        x: mouseX - 20,
+        y: mouseY - 20,
+        opacity: 1,
+      });
+    });
+
+    hero.addEventListener('mouseout', () => {
+      gsap.to(cursorFollow, {
+        duration: 0.2,
+        opacity: 0,
+      });
+    });
+    //Text animation
+    const letters = this.heroText.nativeElement.querySelectorAll('span');
+    letters.forEach((letter: any, index: number) => {
+      gsap.fromTo(
+        letter,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          delay: index * 0.1,
+          duration: 1,
+          ease: 'power3.out',
+        }
+      );
+    });
+    //Line
+    gsap.fromTo(
+      '#animated-line',
+      { width: '0' },
+      { width: '33%', duration: 2 }
+    );
+  }
 }
