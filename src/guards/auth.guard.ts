@@ -42,8 +42,6 @@ export class AuthGuard implements CanActivate {
             (role) => role.name === Role[type as keyof typeof Role]
           )
         ) {
-          console.log('tsy nahita roles');
-
           this.redirectToLogin(type);
           return false;
         }
