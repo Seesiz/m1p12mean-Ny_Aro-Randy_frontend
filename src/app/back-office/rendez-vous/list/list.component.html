@@ -45,13 +45,27 @@
       <hlm-td class="flex-1">{{ rendez_vous.info.contact }}</hlm-td>
       <hlm-td class="justify-end">
         <hlm-dialog>
-          <button brnDialogTrigger hlmBtn (click)="viewRDV(rendez_vous._id)">
+          <button
+            variant="outline"
+            brnDialogTrigger
+            hlmBtn
+            (click)="viewRDV(rendez_vous._id)"
+          >
             voir
           </button>
           <app-info></app-info>
         </hlm-dialog>
-        <button brnDialogTrigger hlmBtn variant="destructive">refuser</button>
-        <button brnDialogTrigger hlmBtn>valider</button>
+        <button
+          brnDialogTrigger
+          hlmBtn
+          variant="destructive"
+          (click)="onRefuse(rendez_vous._id)"
+        >
+          {{ "common.refuser" | translate }}
+        </button>
+        <button brnDialogTrigger hlmBtn (click)="onConfirm(rendez_vous._id)">
+          {{ "common.valider" | translate }}
+        </button>
       </hlm-td>
     </hlm-trow>
     }

@@ -27,5 +27,13 @@
       <label hlmLabel for="lastname">Message</label>
       <span class="pl-2 col-span-3"> {{ "Ito misy daty" }}</span>
     </div>
+    <div class="flex gap-4 flex-col">
+      <button brnDialogTrigger hlmBtn variant="default">
+        {{ "common.valider" | translate }}
+      </button>
+      <button brnDialogTrigger hlmBtn variant="destructive">
+        {{ "common.refuser" | translate }}
+      </button>
+    </div>
   </div>
 </hlm-dialog-content>

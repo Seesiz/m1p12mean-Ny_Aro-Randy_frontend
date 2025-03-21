@@ -16,7 +16,9 @@
     "connection": "Connection",
     "client": "Client",
     "manager": "Manager",
-    "mechanic": "Mechanic"
+    "mechanic": "Mechanic",
+    "refuser": "Refuse",
+    "valider": "Confirme"
   },
   "user_detail": {
     "list": "List of users",

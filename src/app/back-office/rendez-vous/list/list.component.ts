@@ -28,6 +28,64 @@ export class ListComponent {
     });
   }
 
+  onConfirm(_id: string) {
+    const rendezVous: IRendez_vous | undefined = this.rendez_vous.find(
+      (rdv) => rdv._id === _id
+    );
+
+    if (!rendezVous) {
+      return;
+    }
+
+    rendezVous.status = 'confirmed';
+    //TO DO : mba reccupérena automatique amin'ny alalany leh connecté
+    // asina formulaire de validation ny date proposé + durée
+    rendezVous.manager = {
+      _id: '67d1d37241db8519351a22d1',
+      lastname: 'ANDRIAMPARANY',
+      firstname: 'Ny Aro',
+      email: 'nyarodina@gmail.com',
+      roles: [{ _id: '67ce96aedd77ba0a7c340eb0', name: 'MANAGER' }],
+    };
+
+    this.rendezVousService.updateRendezVous(_id, rendezVous).then(() => {
+      this.rendezVousService
+        .getAllStatus(this.selectedStatus.value || 'pending')
+        .then((rendez_vous) => {
+          this.rendez_vous = rendez_vous;
+        });
+    });
+  }
+
+  onRefuse(_id: string) {
+    const rendezVous: IRendez_vous | undefined = this.rendez_vous.find(
+      (rdv) => rdv._id === _id
+    );
+
+    if (!rendezVous) {
+      return;
+    }
+
+    rendezVous.status = 'cancelled';
+    //TO DO : mba reccupérena automatique amin'ny alalany leh connecté
+    // asina formulaire de validation ny date proposé + durée
+    rendezVous.manager = {
+      _id: '67d1d37241db8519351a22d1',
+      lastname: 'ANDRIAMPARANY',
+      firstname: 'Ny Aro',
+      email: 'nyarodina@gmail.com',
+      roles: [{ _id: '67ce96aedd77ba0a7c340eb0', name: 'MANAGER' }],
+    };
+
+    this.rendezVousService.updateRendezVous(_id, rendezVous).then(() => {
+      this.rendezVousService
+        .getAllStatus(this.selectedStatus.value || 'pending')
+        .then((rendez_vous) => {
+          this.rendez_vous = rendez_vous;
+        });
+    });
+  }
+
   viewRDV(_id: string) {
     this.rendezVousService.findById(_id).then((rendez_vous) => {
       this.selectedRDV = rendez_vous;
