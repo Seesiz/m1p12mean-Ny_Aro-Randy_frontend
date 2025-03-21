@@ -1,0 +1,27 @@
+<section class="p-2">
+  <div class="flex justify-between">
+    <input class="w-80" hlmInput placeholder="Search" type="search" />
+  </div>
+  <hlm-table class="w-full min-w-[400px]">
+    <hlm-caption>{{ "prestation_detail.list" | translate }}</hlm-caption>
+    <hlm-trow>
+      <hlm-th class="w-52">{{ "prestation_detail.label" | translate }}</hlm-th>
+      <hlm-th class="w-60">{{ "prestation_detail.price" | translate }}</hlm-th>
+      <hlm-th class="flex-1">{{
+        "prestation_detail.description" | translate
+      }}</hlm-th>
+      <hlm-th class="justify-end">Action</hlm-th>
+    </hlm-trow>
+    @for (prestation of prestations; track prestation._id) {
+    <hlm-trow>
+      <hlm-td class="font-medium w-52">{{ prestation.label }}</hlm-td>
+      <hlm-td class="w-60">{{ prestation.price | number : "1.0-2" }}</hlm-td>
+      <hlm-td class="flex-1">{{ prestation.description }}</hlm-td>
+      <hlm-td class="justify-end">
+        <button hlmBtn variant="outline">Modifier</button>
+        <button hlmBtn variant="destructive">Supprimer</button>
+      </hlm-td>
+    </hlm-trow>
+    }
+  </hlm-table>
+</section>

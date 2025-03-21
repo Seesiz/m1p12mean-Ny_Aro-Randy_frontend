@@ -51,6 +51,30 @@ export const backOfficeRoutes: Routes = [
         ],
       },
       {
+        path: 'rendez-vous',
+        loadChildren: () =>
+          import('./rendez-vous/rendez-vous.module').then(
+            (m) => m.RendezVousModule
+          ),
+        canActivate: [AccessGuard],
+        data: {
+          role: [Role.manager],
+          label: 'rendez-vous',
+          icon: 'rendez-vous',
+        },
+      },
+      {
+        path: 'planning',
+        loadChildren: () =>
+          import('./planning/planning.module').then((m) => m.PlanningModule),
+        canActivate: [AccessGuard],
+        data: {
+          role: [Role.manager, Role.mechanic],
+          label: 'planning',
+          icon: 'calendar',
+        },
+      },
+      {
         path: 'user/:role',
         loadChildren: () =>
           import('./user/user.module').then((m) => m.UserModule),
@@ -77,28 +101,29 @@ export const backOfficeRoutes: Routes = [
         },
       },
       {
-        path: 'rendez-vous',
-        loadChildren: () =>
-          import('./rendez-vous/rendez-vous.module').then(
-            (m) => m.RendezVousModule
-          ),
+        path: 'config',
         canActivate: [AccessGuard],
         data: {
           role: [Role.manager],
-          label: 'rendez-vous',
-          icon: 'rendez-vous',
+          label: 'config',
+          icon: 'config',
+          hasDropDown: true,
+          dropDown: [
+            {
+              label: 'service',
+              path: 'config/service',
+            },
+          ],
         },
-      },
-      {
-        path: 'planning',
-        loadChildren: () =>
-          import('./planning/planning.module').then((m) => m.PlanningModule),
-        canActivate: [AccessGuard],
-        data: {
-          role: [Role.manager, Role.mechanic],
-          label: 'planning',
-          icon: 'calendar',
-        },
+        children: [
+          {
+            path: 'service',
+            loadChildren: () =>
+              import('./prestation/prestation.module').then(
+                (m) => m.PrestationModule
+              ),
+          },
+        ],
       },
     ],
   },

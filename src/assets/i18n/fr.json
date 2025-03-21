@@ -3,7 +3,8 @@
     "statistics": "Statistiques",
     "users": "Utilisateurs",
     "rendez-vous": "Rendez-vous",
-    "planning": "Planning"
+    "planning": "Planning",
+    "config": "Configuration"
   },
   "common": {
     "my-account": "Mon compte",
@@ -16,7 +17,10 @@
     "connection": "Connexion",
     "client": "Client",
     "manager": "Manager",
-    "mechanic": "Mécanicien"
+    "mechanic": "Mécanicien",
+    "refuser": "Refuser",
+    "valider": "Confirmer",
+    "service": "Service"
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
@@ -30,5 +34,25 @@
     "create_user": "Créer un utilisateur",
     "edit_info": "Modifier les informations",
     "make_changes": "Faire des modifications sur votre profil. Cliquez sur sauvegarder quand vous avez fini."
+  },
+  "rdv_detail": {
+    "list": "Liste des rendez-vous",
+    "full_name": "Nom complet",
+    "contact": "Contact",
+    "date_demande": "Date de la demande",
+    "date_proposee": "Date proposée",
+    "pending": "En attente",
+    "confirmed": "Validé",
+    "cancelled": "Refusé"
+  },
+  "prestation_detail": {
+    "list": "Liste des prestations actifs",
+    "label": "Libellé",
+    "description": "Description",
+    "price": "Prix"
+  },
+  "dateFormats": {
+    "fullDateTime": "Le d-MM-yyyy à HH:mm",
+    "fullDateWithLetters": "EEEE d MMMM yyyy à HH:mm"
   }
 }

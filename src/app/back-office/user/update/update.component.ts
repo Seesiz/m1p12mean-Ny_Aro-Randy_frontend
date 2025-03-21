@@ -91,17 +91,6 @@ export class UpdateComponent implements OnInit, OnChanges {
     }
   }
 
-  /*ngOnChanges(changes: SimpleChanges): void {
-    // Mettre à jour le formulaire quand l'utilisateur sélectionné change
-    if (changes['selectedUser'] && this.selectedUser) {
-      this.updateForm.patchValue({
-        lastname: this.selectedUser.lastname,
-        firstname: this.selectedUser.firstname,
-        email: this.selectedUser.email,
-      });
-    }
-  }*/
-
   onSubmit(): void {
     if (this.updateForm.valid && this.selectedUser) {
       const updatedUser = {

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '@/app/back-office/services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LocaleService } from '@/app/services/locale.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent {
     private translate: TranslateService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private localeService: LocaleService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -55,6 +57,7 @@ export class LoginComponent {
 
   setTranslation(lang: string) {
     this.translate.use(lang);
+    this.localeService.setLocale(lang);
   }
 
   async onSubmit() {

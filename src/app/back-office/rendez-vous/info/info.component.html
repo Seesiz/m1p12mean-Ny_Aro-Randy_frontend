@@ -1,0 +1,57 @@
+<hlm-dialog-content class="sm:max-w-[425px]" *brnDialogContent="let ctx">
+  <hlm-dialog-header>
+    <h3 hlmDialogTitle>Information du rendez-vous</h3>
+    <p hlmDialogDescription>
+      Voici les informations d'un rendez-vous pour une meilleure prise de
+      décision
+    </p>
+  </hlm-dialog-header>
+  <div class="py-4 flex flex-col gap-4">
+    <div class="flex gap-4 flex-col">
+      <label hlmLabel for="lastname">{{
+        "rdv_detail.date_demande" | translate
+      }}</label>
+      <span class="pl-2 col-span-3 first-letter:capitalize">
+        {{
+          selectedRDV?.date
+            | localizedDate : ("dateFormats.fullDateWithLetters" | translate)
+        }}</span
+      >
+    </div>
+    <div class="flex gap-4 flex-col">
+      <label hlmLabel for="lastname">{{
+        "rdv_detail.full_name" | translate
+      }}</label>
+      <span class="pl-2 col-span-3"> {{ selectedRDV?.info?.fullname }}</span>
+    </div>
+    <div class="flex gap-4 flex-col">
+      <label hlmLabel for="lastname">{{
+        "rdv_detail.date_proposee" | translate
+      }}</label>
+      <span class="pl-2 col-span-3 first-letter:capitalize">
+        {{
+          selectedRDV?.date
+            | localizedDate : ("dateFormats.fullDateWithLetters" | translate)
+        }}</span
+      >
+    </div>
+    <div class="flex gap-4 flex-col">
+      <label hlmLabel for="lastname">{{
+        "rdv_detail.contact" | translate
+      }}</label>
+      <span class="pl-2 col-span-3"> {{ selectedRDV?.info?.contact }}</span>
+    </div>
+    <div class="flex gap-4 flex-col">
+      <label hlmLabel for="lastname">Message</label>
+      <span class="pl-2 col-span-3"> {{ selectedRDV?.info?.message }}</span>
+    </div>
+    <div class="flex gap-1 flex-col">
+      <button hlmBtn variant="default" (click)="onConfirm()">
+        {{ "common.valider" | translate }}
+      </button>
+      <button hlmBtn variant="ghost" (click)="onRefuse()">
+        {{ "common.refuser" | translate }}
+      </button>
+    </div>
+  </div>
+</hlm-dialog-content>
