@@ -34,6 +34,7 @@
     "make_changes": "Faire des modifications sur votre profil. Cliquez sur sauvegarder quand vous avez fini."
   },
   "rdv_detail": {
+    "list": "Liste des rendez-vous",
     "full_name": "Nom complet",
     "contact": "Contact",
     "date_demande": "Date de la demande",
@@ -41,5 +42,11 @@
     "pending": "En attente",
     "confirmed": "Validé",
     "cancelled": "Refusé"
+  },
+  "prestation_detail": {
+    "list": "Liste des prestations actifs",
+    "label": "Libellé",
+    "description": "Description",
+    "price": "Prix"
   }
 }

@@ -3,10 +3,6 @@ import { IPrestation } from '@/types/output';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { environment } from '@/environments/environments';
 
-interface PrestationResponse {
-  prestations: IPrestation[];
-}
-
 @Injectable({
   providedIn: 'root',
 })
@@ -15,10 +11,10 @@ export class PrestationService {
 
   async getAllPrestations(): Promise<IPrestation[]> {
     try {
-      const response: AxiosResponse<PrestationResponse> = await axios.get(
+      const response: AxiosResponse<IPrestation[]> = await axios.get(
         `${environment.apiUrl}/services`
       );
-      return response.data.prestations;
+      return response.data;
     } catch (error) {
       const err = error as AxiosError;
       console.error('Erreur de connexion:', err.message);
