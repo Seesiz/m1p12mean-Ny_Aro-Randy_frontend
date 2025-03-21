@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IRendez_vous } from '@/types/output';
-import { RendezVousService } from '@/app/back-office/services/rendez_vous/rendez-vous.service';
 @Component({
   selector: 'app-info',
   standalone: false,
@@ -8,16 +7,15 @@ import { RendezVousService } from '@/app/back-office/services/rendez_vous/rendez
   styleUrl: './info.component.css',
 })
 export class InfoComponent {
-  selectedRDV: IRendez_vous | null = null;
-  constructor(private rendezVousService: RendezVousService) {}
+  @Input() selectedRDV: IRendez_vous | null = null;
+  @Output() confirm = new EventEmitter<string>();
+  @Output() refuse = new EventEmitter<string>();
 
-  ngOnInit(): void {
-    this.findRendezVousById(this.selectedRDV?._id || '');
+  onConfirm() {
+    if (this.selectedRDV) this.confirm.emit(this.selectedRDV._id);
   }
 
-  findRendezVousById(_id: string): void {
-    this.rendezVousService.findById(_id).then((rendez_vous) => {
-      this.selectedRDV = rendez_vous;
-    });
+  onRefuse() {
+    if (this.selectedRDV) this.refuse.emit(this.selectedRDV._id);
   }
 }

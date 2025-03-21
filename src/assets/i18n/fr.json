@@ -41,5 +41,9 @@
     "pending": "En attente",
     "confirmed": "Validé",
     "cancelled": "Refusé"
+  },
+  "dateFormats": {
+    "fullDateTime": "Le d-MM-yyyy à HH:mm",
+    "fullDateWithLetters": "EEEE d MMMM yyyy à HH:mm"
   }
 }

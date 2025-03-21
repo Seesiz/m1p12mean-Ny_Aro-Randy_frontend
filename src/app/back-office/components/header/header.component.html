@@ -34,18 +34,22 @@
         [attr.aria-label]="'menu.' + option.label | translate"
       >
         {{ `menu.${option.label}` | translate }}
+        <ng-icon
+          hlm
+          name="lucideChevronDown"
+          size="sm"
+          class="cursor-pointer"
+        />
       </button>
-      <hlm-hover-card-content *brnHoverCardContent class="w-48">
-        <div class="flex flex-col p-2">
+      <hlm-hover-card-content *brnHoverCardContent class="w-60">
+        <div class="flex flex-col p-2 border-l pl-4 rounded-t-none">
           @for (subOption of option.subOptions; track subOption.path) {
           <button
             hlmBtn
             variant="ghost"
             class="w-full justify-start"
             [routerLink]="subOption.path"
-            routerLinkActive="is-active"
             variant="link"
-            [routerLinkActiveOptions]="{ exact: true }"
             [attr.aria-label]="'common.' + subOption.label | translate"
           >
             {{ `common.${subOption.label}` | translate }}

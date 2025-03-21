@@ -22,7 +22,7 @@ export class RendezVousService {
     }
   }
 
-  async getAllStatus(status: string): Promise<IRendez_vous[]> {
+  async getAllWithStatus(status: string): Promise<IRendez_vous[]> {
     try {
       const response: AxiosResponse<IRendez_vous[]> = await axios.get(
         `${environment.apiUrl}/rdv/status/${status}`

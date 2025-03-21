@@ -42,4 +42,9 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
   }
+
+  getUserConnected(): IUser | null {
+    const user = localStorage.getItem('user');
+    return user ? (JSON.parse(user) as IUser) : null;
+  }
 }

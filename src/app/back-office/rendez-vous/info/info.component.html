@@ -8,34 +8,48 @@
   </hlm-dialog-header>
   <div class="py-4 flex flex-col gap-4">
     <div class="flex gap-4 flex-col">
-      <label hlmLabel for="lastname">Date de demande</label>
-      <span class="pl-2 col-span-3">
-        {{ selectedRDV?.date | date : "d-MM-yyyy" }}</span
+      <label hlmLabel for="lastname">{{
+        "rdv_detail.date_demande" | translate
+      }}</label>
+      <span class="pl-2 col-span-3 first-letter:capitalize">
+        {{
+          selectedRDV?.date
+            | localizedDate : ("dateFormats.fullDateWithLetters" | translate)
+        }}</span
       >
     </div>
     <div class="flex gap-4 flex-col">
-      <label hlmLabel for="lastname">Nom du client</label>
+      <label hlmLabel for="lastname">{{
+        "rdv_detail.full_name" | translate
+      }}</label>
       <span class="pl-2 col-span-3"> {{ selectedRDV?.info?.fullname }}</span>
     </div>
     <div class="flex gap-4 flex-col">
-      <label hlmLabel for="lastname">Date proposée</label>
-      <span class="pl-2 col-span-3">
-        {{ selectedRDV?.date | date : "d-MM-yyyy" }}</span
+      <label hlmLabel for="lastname">{{
+        "rdv_detail.date_proposee" | translate
+      }}</label>
+      <span class="pl-2 col-span-3 first-letter:capitalize">
+        {{
+          selectedRDV?.date
+            | localizedDate : ("dateFormats.fullDateWithLetters" | translate)
+        }}</span
       >
     </div>
     <div class="flex gap-4 flex-col">
-      <label hlmLabel for="lastname">Contact</label>
+      <label hlmLabel for="lastname">{{
+        "rdv_detail.contact" | translate
+      }}</label>
       <span class="pl-2 col-span-3"> {{ selectedRDV?.info?.contact }}</span>
     </div>
     <div class="flex gap-4 flex-col">
       <label hlmLabel for="lastname">Message</label>
       <span class="pl-2 col-span-3"> {{ selectedRDV?.info?.message }}</span>
     </div>
-    <div class="flex gap-4 flex-col">
-      <button brnDialogTrigger hlmBtn variant="default">
+    <div class="flex gap-1 flex-col">
+      <button hlmBtn variant="default" (click)="onConfirm()">
         {{ "common.valider" | translate }}
       </button>
-      <button brnDialogTrigger hlmBtn variant="destructive">
+      <button hlmBtn variant="ghost" (click)="onRefuse()">
         {{ "common.refuser" | translate }}
       </button>
     </div>
