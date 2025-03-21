@@ -3,7 +3,8 @@
     "statistics": "Statistics",
     "users": "Users",
     "rendez-vous": "Appointments",
-    "planning": "Planning"
+    "planning": "Planning",
+    "config": "Configuration"
   },
   "common": {
     "my-account": "My account",
@@ -18,7 +19,8 @@
     "manager": "Manager",
     "mechanic": "Mechanic",
     "refuser": "Refuse",
-    "valider": "Confirm"
+    "valider": "Confirm",
+    "service": "Service"
   },
   "user_detail": {
     "list": "Users list",

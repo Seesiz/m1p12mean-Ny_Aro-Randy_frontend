@@ -42,14 +42,14 @@
         />
       </button>
       <hlm-hover-card-content *brnHoverCardContent class="w-60">
-        <div class="flex flex-col p-2 border-l pl-4 rounded-t-none">
+        <div class="flex flex-col border-l pl-4 rounded-t-none">
           @for (subOption of option.subOptions; track subOption.path) {
           <button
             hlmBtn
             variant="ghost"
             class="w-full justify-start"
             [routerLink]="subOption.path"
-            variant="link"
+            variant="ghost"
             [attr.aria-label]="'common.' + subOption.label | translate"
           >
             {{ `common.${subOption.label}` | translate }}
