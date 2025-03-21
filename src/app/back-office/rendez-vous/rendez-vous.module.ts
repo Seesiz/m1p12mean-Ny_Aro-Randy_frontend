@@ -9,6 +9,9 @@ import { InfoComponent } from './info/info.component';
 
 import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
+import { LocalizedDatePipe } from '@/pipe/localized-date.pipe';
+import { provideIcons } from '@ng-icons/core';
+import { lucideEye, lucideLoaderCircle } from '@ng-icons/lucide';
 
 @NgModule({
   declarations: [ListComponent, InfoComponent],
@@ -20,6 +23,13 @@ import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
     [...BrnSelectImports],
     [...HlmSelectImports],
     ...UI_MODULE_IMPORTS,
+    LocalizedDatePipe,
+  ],
+  providers: [
+    provideIcons({
+      lucideLoaderCircle,
+      lucideEye,
+    }),
   ],
 })
 export class RendezVousModule {}

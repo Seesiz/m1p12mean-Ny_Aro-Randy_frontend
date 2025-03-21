@@ -7,11 +7,14 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  Inject,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '@/app/back-office/services/auth/auth.service';
+import { DOCUMENT } from '@angular/common';
+import { LocaleService } from '@/app/services/locale.service';
 
 @Component({
   selector: 'app-header',
@@ -33,7 +36,9 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
     private el: ElementRef,
     private router: Router,
     private translate: TranslateService,
-    private authService: AuthService
+    private authService: AuthService,
+    @Inject(DOCUMENT) private document: Document,
+    private localeService: LocaleService
   ) {}
 
   ngOnInit(): void {
@@ -73,8 +78,9 @@ export class HeaderComponent implements AfterViewInit, OnDestroy, OnInit {
   }
   setLangue(langue: 'fr' | 'en') {
     this.langueValue = langue;
-    localStorage.setItem('langue', langue);
+    this.localeService.setLocale(langue);
     this.translate.use(langue);
+
     setTimeout(() => {
       this.updateActiveButtonPosition();
     }, 100);

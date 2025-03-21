@@ -2,8 +2,9 @@
   "menu": {
     "statistics": "Statistics",
     "users": "Users",
-    "rendez-vous": "Rendez-vous",
-    "planning": "Planning"
+    "rendez-vous": "Appointments",
+    "planning": "Planning",
+    "config": "Configuration"
   },
   "common": {
     "my-account": "My account",
@@ -18,27 +19,28 @@
     "manager": "Manager",
     "mechanic": "Mechanic",
     "refuser": "Refuse",
-    "valider": "Confirme"
+    "valider": "Confirm",
+    "service": "Service"
   },
   "user_detail": {
-    "list": "List of users",
+    "list": "Users list",
     "edit_profile": "Edit profile",
     "add_user": "Add user",
-    "lastname": "Lastname",
-    "firstname": "Firstname",
-    "email_adress": "Email adress",
+    "lastname": "Last name",
+    "firstname": "First name",
+    "email_adress": "Email address",
     "pass": "Password",
     "role": "Role",
     "create_user": "Create user",
-    "edit_info": "Edit info",
-    "make_changes": "Make changes to your profile here. Click save when you're done."
+    "edit_info": "Edit information",
+    "make_changes": "Make changes to your profile. Click save when you're done."
   },
   "rdv_detail": {
     "list": "List of appointments",
     "full_name": "Full name",
     "contact": "Contact",
-    "date_demande": "Date",
-    "date_proposee": "Date proposed",
+    "date_demande": "Request date",
+    "date_proposee": "Proposed date",
     "pending": "Pending",
     "confirmed": "Confirmed",
     "cancelled": "Cancelled"
@@ -48,5 +50,9 @@
     "label": "Label",
     "price": "Price",
     "description": "Description"
+  },
+  "dateFormats": {
+    "fullDateTime": "d-MM-yyyy 'at' HH:mm",
+    "fullDateWithLetters": "EEEE MMMM d yyyy 'at' HH:mm"
   }
 }

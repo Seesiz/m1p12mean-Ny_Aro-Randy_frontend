@@ -3,7 +3,8 @@
     "statistics": "Statistiques",
     "users": "Utilisateurs",
     "rendez-vous": "Rendez-vous",
-    "planning": "Planning"
+    "planning": "Planning",
+    "config": "Configuration"
   },
   "common": {
     "my-account": "Mon compte",
@@ -18,7 +19,8 @@
     "manager": "Manager",
     "mechanic": "Mécanicien",
     "refuser": "Refuser",
-    "valider": "Confirmer"
+    "valider": "Confirmer",
+    "service": "Service"
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
@@ -48,5 +50,9 @@
     "label": "Libellé",
     "description": "Description",
     "price": "Prix"
+  },
+  "dateFormats": {
+    "fullDateTime": "Le d-MM-yyyy à HH:mm",
+    "fullDateWithLetters": "EEEE d MMMM yyyy à HH:mm"
   }
 }

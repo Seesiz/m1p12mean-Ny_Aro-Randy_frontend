@@ -1,0 +1,36 @@
+footer {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.footer-content {
+  gap: 2rem;
+  width: max-content;
+  animation: scroll 20s linear infinite;
+}
+
+.scrolling-text {
+  display: flex;
+  gap: 2rem;
+  white-space: nowrap;
+  animation: scrollX 20s linear infinite;
+}
+
+@keyframes scrollX {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

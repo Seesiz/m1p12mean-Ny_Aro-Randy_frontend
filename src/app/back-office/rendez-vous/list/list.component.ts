@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IRendez_vous } from '@/types/output';
+import { IRendez_vous, IUser } from '@/types/output';
 import { RendezVousService } from '@/app/back-office/services/rendez_vous/rendez-vous.service';
 import { FormControl } from '@angular/forms';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-list',
@@ -10,24 +11,39 @@ import { FormControl } from '@angular/forms';
   styleUrl: './list.component.css',
 })
 export class ListComponent {
+  loading: boolean = false;
   rendez_vous: IRendez_vous[] = [];
   selectedStatus = new FormControl('pending');
   selectedRDV: IRendez_vous | null = null;
-  constructor(private rendezVousService: RendezVousService) {}
+  userConnected: IUser | null = null;
+  constructor(
+    private rendezVousService: RendezVousService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.rendezVousService.getAllStatus('pending').then((rendez_vous) => {
-      this.rendez_vous = rendez_vous;
-    });
+    this.loadData(this.selectedStatus.value || 'pending');
+    this.userConnected = this.authService.getUserConnected();
   }
 
   onStatusChange(status: string): void {
-    this.rendezVousService.getAllStatus(status).then((rendez_vous) => {
-      this.rendez_vous = rendez_vous;
-    });
+    this.loadData(status);
+  }
+
+  loadData(status: string) {
+    this.loading = true;
+    this.rendezVousService
+      .getAllWithStatus(status)
+      .then((rendez_vous) => {
+        this.rendez_vous = rendez_vous;
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   }
 
   onConfirm(_id: string) {
+    if (!this.userConnected) return;
     const rendezVous: IRendez_vous | undefined = this.rendez_vous.find(
       (rdv) => rdv._id === _id
     );
@@ -37,26 +53,15 @@ export class ListComponent {
     }
 
     rendezVous.status = 'confirmed';
-    //TO DO : mba reccupérena automatique amin'ny alalany leh connecté
-    // asina formulaire de validation ny date proposé + durée
-    rendezVous.manager = {
-      _id: '67d1d37241db8519351a22d1',
-      lastname: 'ANDRIAMPARANY',
-      firstname: 'Ny Aro',
-      email: 'nyarodina@gmail.com',
-      roles: [{ _id: '67ce96aedd77ba0a7c340eb0', name: 'MANAGER' }],
-    };
+    rendezVous.manager = this.userConnected;
 
     this.rendezVousService.updateRendezVous(_id, rendezVous).then(() => {
-      this.rendezVousService
-        .getAllStatus(this.selectedStatus.value || 'pending')
-        .then((rendez_vous) => {
-          this.rendez_vous = rendez_vous;
-        });
+      this.loadData(this.selectedStatus.value || 'pending');
     });
   }
 
   onRefuse(_id: string) {
+    if (!this.userConnected) return;
     const rendezVous: IRendez_vous | undefined = this.rendez_vous.find(
       (rdv) => rdv._id === _id
     );
@@ -66,33 +71,14 @@ export class ListComponent {
     }
 
     rendezVous.status = 'cancelled';
-    //TO DO : mba reccupérena automatique amin'ny alalany leh connecté
-    // asina formulaire de validation ny date proposé + durée
-    rendezVous.manager = {
-      _id: '67d1d37241db8519351a22d1',
-      lastname: 'ANDRIAMPARANY',
-      firstname: 'Ny Aro',
-      email: 'nyarodina@gmail.com',
-      roles: [{ _id: '67ce96aedd77ba0a7c340eb0', name: 'MANAGER' }],
-    };
+    rendezVous.manager = this.userConnected;
 
     this.rendezVousService.updateRendezVous(_id, rendezVous).then(() => {
-      this.rendezVousService
-        .getAllStatus(this.selectedStatus.value || 'pending')
-        .then((rendez_vous) => {
-          this.rendez_vous = rendez_vous;
-        });
-    });
-  }
-
-  viewRDV(_id: string) {
-    this.rendezVousService.findById(_id).then((rendez_vous) => {
-      this.selectedRDV = rendez_vous;
+      this.loadData(this.selectedStatus.value || 'pending');
     });
   }
 
   selectRDVForView(rendez_vous: IRendez_vous): void {
     this.selectedRDV = rendez_vous;
-    this.viewRDV(rendez_vous._id);
   }
 }
