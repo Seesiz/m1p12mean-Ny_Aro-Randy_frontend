@@ -29,4 +29,12 @@ type IRendez_vous = {
   updatedAt?: Date;
 };
 
-export type { IUser, IRole, IRendez_vous };
+type IPrestation = {
+  _id: string;
+  price: number;
+  label: string;
+  description: string;
+  type: { status: number; reduction: 0 };
+};
+
+export type { IUser, IRole, IRendez_vous, IPrestation };

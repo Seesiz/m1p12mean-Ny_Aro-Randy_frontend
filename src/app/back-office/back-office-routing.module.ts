@@ -100,6 +100,19 @@ export const backOfficeRoutes: Routes = [
           icon: 'calendar',
         },
       },
+      {
+        path: 'services',
+        loadChildren: () =>
+          import('./prestation/prestation.module').then(
+            (m) => m.PrestationModule
+          ),
+        canActivate: [AccessGuard],
+        data: {
+          role: [Role.manager],
+          label: 'parametrage',
+          icon: 'parametrage',
+        },
+      },
     ],
   },
   {
