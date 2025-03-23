@@ -1,6 +1,12 @@
 <section class="p-2">
   <div class="flex justify-between">
     <input class="w-80" hlmInput placeholder="Search" type="search" />
+    <hlm-dialog>
+      <button brnDialogTrigger hlmBtn>
+        {{ "prestation_detail.add_prestation" | translate }}
+      </button>
+      <app-modal></app-modal>
+    </hlm-dialog>
   </div>
   <hlm-table class="w-full min-w-[400px]">
     <hlm-caption>{{ "prestation_detail.list" | translate }}</hlm-caption>
@@ -17,7 +23,7 @@
       <hlm-td class="font-medium w-52">{{ prestation.label }}</hlm-td>
       <hlm-td class="w-60">{{ prestation.price | number : "1.0-2" }}</hlm-td>
       <hlm-td class="flex-1">{{ prestation.description }}</hlm-td>
-      <hlm-td class="justify-end">
+      <hlm-td class="justify-end gap-2">
         <button hlmBtn variant="outline">Modifier</button>
         <button hlmBtn variant="destructive">Supprimer</button>
       </hlm-td>

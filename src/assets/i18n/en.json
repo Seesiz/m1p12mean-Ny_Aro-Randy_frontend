@@ -20,7 +20,13 @@
     "mechanic": "Mechanic",
     "refuser": "Refuse",
     "valider": "Confirm",
-    "service": "Service"
+    "service": "Service",
+    "search": "Search...",
+    "items_per_page": "Items per page",
+    "page": "Page",
+    "of": "of",
+    "next": "Next",
+    "previous": "Previous"
   },
   "user_detail": {
     "list": "Users list",
@@ -36,20 +42,25 @@
     "make_changes": "Make changes to your profile. Click save when you're done."
   },
   "rdv_detail": {
+    "modal_info": "Appointment information",
+    "description_modal": "Here are the appointment details for a better decision",
     "list": "List of appointments",
     "full_name": "Full name",
     "contact": "Contact",
-    "date_demande": "Request date",
-    "date_proposee": "Proposed date",
+    "demande_date": "Request date",
+    "proposed_date": "Proposed date",
     "pending": "Pending",
     "confirmed": "Confirmed",
-    "cancelled": "Cancelled"
+    "cancelled": "Cancelled",
+    "search_placeholder": "Search by name or contact..."
   },
   "prestation_detail": {
     "list": "List of prestations",
     "label": "Label",
     "price": "Price",
-    "description": "Description"
+    "description": "Description",
+    "add_prestation": "Add prestation",
+    "add_prestation_text": "Add services to your list"
   },
   "dateFormats": {
     "fullDateTime": "d-MM-yyyy 'at' HH:mm",
