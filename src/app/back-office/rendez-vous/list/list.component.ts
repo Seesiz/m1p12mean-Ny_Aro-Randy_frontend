@@ -1,21 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IRendez_vous, IUser } from '@/types/output';
 import { RendezVousService } from '@/app/back-office/services/rendez_vous/rendez-vous.service';
 import { FormControl } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
+import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-list',
   standalone: false,
   templateUrl: './list.component.html',
-  styleUrl: './list.component.css',
+  styleUrls: ['./list.component.css'],
 })
-export class ListComponent {
+export class ListComponent implements OnInit, OnDestroy {
   loading: boolean = false;
   rendez_vous: IRendez_vous[] = [];
+  filteredRendezVous: IRendez_vous[] = [];
   selectedStatus = new FormControl('pending');
+  searchControl = new FormControl('');
   selectedRDV: IRendez_vous | null = null;
   userConnected: IUser | null = null;
+
+  // Pagination
+  currentPage = 1;
+  itemsPerPage = 10;
+  totalItems = 0;
+
+  private destroy$ = new Subject<void>();
+
   constructor(
     private rendezVousService: RendezVousService,
     private authService: AuthService
@@ -24,9 +35,22 @@ export class ListComponent {
   ngOnInit(): void {
     this.loadData(this.selectedStatus.value || 'pending');
     this.userConnected = this.authService.getUserConnected();
+
+    // Setup search with debounce
+    this.searchControl.valueChanges
+      .pipe(takeUntil(this.destroy$), debounceTime(300), distinctUntilChanged())
+      .subscribe((searchTerm) => {
+        this.filterRendezVous(searchTerm || '');
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   onStatusChange(status: string): void {
+    this.currentPage = 1; // Reset to first page when status changes
     this.loadData(status);
   }
 
@@ -36,10 +60,39 @@ export class ListComponent {
       .getAllWithStatus(status)
       .then((rendez_vous) => {
         this.rendez_vous = rendez_vous;
+        this.filterRendezVous(this.searchControl.value || '');
       })
       .finally(() => {
         this.loading = false;
       });
+  }
+
+  filterRendezVous(searchTerm: string) {
+    const term = searchTerm.toLowerCase();
+    this.filteredRendezVous = this.rendez_vous.filter(
+      (rdv) =>
+        rdv.info.fullname.toLowerCase().includes(term) ||
+        rdv.info.contact.toLowerCase().includes(term)
+    );
+    this.totalItems = this.filteredRendezVous.length;
+    this.updateDisplayedItems();
+  }
+
+  updateDisplayedItems() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.filteredRendezVous = this.filteredRendezVous.slice(start, end);
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.updateDisplayedItems();
+  }
+
+  onItemsPerPageChange(items: number) {
+    this.itemsPerPage = items;
+    this.currentPage = 1;
+    this.updateDisplayedItems();
   }
 
   onConfirm(_id: string) {
@@ -80,5 +133,17 @@ export class ListComponent {
 
   selectRDVForView(rendez_vous: IRendez_vous): void {
     this.selectedRDV = rendez_vous;
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.totalItems / this.itemsPerPage);
+  }
+
+  get pageNumbers(): number[] {
+    const pages = [];
+    for (let i = 1; i <= this.totalPages; i++) {
+      pages.push(i);
+    }
+    return pages;
   }
 }

@@ -21,4 +21,18 @@ export class PrestationService {
       throw new Error("Échec de l'authentification");
     }
   }
+
+  async savePrestation(prestation: IPrestation): Promise<IPrestation> {
+    try {
+      const response: AxiosResponse<IPrestation> = await axios.post(
+        `${environment.apiUrl}/services`,
+        prestation
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
 }

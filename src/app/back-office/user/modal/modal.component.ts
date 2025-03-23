@@ -38,10 +38,8 @@ export class ModalComponent {
           this.userForm.value.firstname,
           this.userForm.value.email,
           this.userForm.value.pass,
-          [this.currentRole] // Utiliser le rôle actuel
+          [this.currentRole]
         );
-        // Recharger la liste après l'ajout
-        window.location.reload();
       } catch (error) {
         console.error('Error adding user:', error);
       }

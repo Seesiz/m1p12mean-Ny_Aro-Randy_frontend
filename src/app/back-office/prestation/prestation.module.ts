@@ -5,9 +5,10 @@ import { PrestationRoutingModule } from './prestation.routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UI_MODULE_IMPORTS } from '@/types/ui.module.import';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
-  declarations: [ListComponent],
+  declarations: [ListComponent, ModalComponent],
   imports: [
     CommonModule,
     PrestationRoutingModule,

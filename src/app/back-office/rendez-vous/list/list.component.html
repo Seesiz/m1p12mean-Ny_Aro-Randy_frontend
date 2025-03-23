@@ -25,9 +25,9 @@
   <hlm-table class="w-full min-w-[400px]">
     <hlm-caption>{{ "rdv_detail.list" | translate }}</hlm-caption>
     <hlm-trow>
-      <hlm-th class="w-52">{{ "rdv_detail.date_demande" | translate }}</hlm-th>
+      <hlm-th class="w-52">{{ "rdv_detail.demande_date" | translate }}</hlm-th>
       <hlm-th class="w-52">{{ "rdv_detail.full_name" | translate }}</hlm-th>
-      <hlm-th class="w-60">{{ "rdv_detail.date_proposee" | translate }}</hlm-th>
+      <hlm-th class="w-60">{{ "rdv_detail.proposed_date" | translate }}</hlm-th>
       <hlm-th class="flex-1">{{ "rdv_detail.contact" | translate }}</hlm-th>
       <hlm-th class="justify-center">Action</hlm-th>
     </hlm-trow>
@@ -58,7 +58,7 @@
             [selectedRDV]="rendez_vous"
             (confirm)="onConfirm($event)"
             (refuse)="onRefuse($event)"
-          />
+          ></app-info>
         </hlm-dialog>
       </hlm-td>
     </hlm-trow>
