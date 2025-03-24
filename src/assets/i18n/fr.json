@@ -20,7 +20,8 @@
     "mechanic": "Mécanicien",
     "refuser": "Refuser",
     "valider": "Confirmer",
-    "service": "Service"
+    "service": "Service",
+    "send": "Envoyer"
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
@@ -74,6 +75,17 @@
     "french": "Français",
     "english": "Anglais",
     "copyright": "Copyright  2025 - Tous droits réservés"
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "description": "Veuillez entrer les informations nécessaires pour la prise de rendez-vous"
+  },
+  "contact-form": {
+    "name": "Nom & prénom",
+    "email": "Email",
+    "pick-date": "Choisissez une date",
+    "pick-time": "Choisissez une heure",
+    "message": "Message"
   },
   "dateFormats": {
     "fullDateTime": "Le d-MM-yyyy à HH:mm",

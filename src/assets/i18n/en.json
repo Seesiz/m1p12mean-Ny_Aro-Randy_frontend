@@ -20,7 +20,8 @@
     "mechanic": "Mechanic",
     "refuser": "Refuse",
     "valider": "Confirm",
-    "service": "Service"
+    "service": "Service",
+    "send": "Send"
   },
   "user_detail": {
     "list": "Users list",
@@ -74,6 +75,17 @@
     "french": "French",
     "english": "English",
     "copyright": "Copyright  2025 - All Rights Reserved"
+  },
+  "contact": {
+    "title": "Contact us",
+    "description": "Please enter the necessary information to book an appointment"
+  },
+  "contact-form": {
+    "name": "Full name",
+    "email": "Email",
+    "pick-date": "Pick a date",
+    "pick-time": "Pick a time",
+    "message": "Message"
   },
   "dateFormats": {
     "fullDateTime": "d-MM-yyyy 'at' HH:mm",

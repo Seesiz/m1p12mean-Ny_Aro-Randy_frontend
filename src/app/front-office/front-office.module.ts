@@ -17,6 +17,8 @@ import { PrestationComponent } from './prestation/prestation.component';
 import { ContactComponent } from './contact/contact.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { HomePageComponent } from './home-page/home-page.component';
+import { ContactFormComponent } from './components/contact-form/contact-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,12 +28,15 @@ import { HomePageComponent } from './home-page/home-page.component';
     FooterComponent,
     PrestationComponent,
     ContactComponent,
+    ContactFormComponent,
   ],
   imports: [
     CommonModule,
     FrontOfficeRoutingModule,
     TranslateModule,
     ...UI_MODULE_IMPORTS,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [
     provideIcons({

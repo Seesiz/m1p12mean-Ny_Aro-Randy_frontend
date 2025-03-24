@@ -1,0 +1,50 @@
+<form class="w-10/12 p-6">
+  <div class="flex md:flex-row flex-col gap-4 w-full mb-4">
+    <label hlmLabel class="flex-1">
+      {{ "contact-form.name" | translate }}
+      <input
+        hlmInput
+        class="w-full"
+        type="text"
+        [placeholder]="'contact-form.name' | translate"
+      />
+    </label>
+    <label hlmLabel class="flex-1">
+      {{ "contact-form.email" | translate }}
+      <input
+        hlmInput
+        class="w-full"
+        type="email"
+        [placeholder]="'contact-form.email' | translate"
+      />
+    </label>
+  </div>
+  <div class="flex md:flex-row flex-col gap-4 w-full mb-4">
+    <label hlmLabel class="flex-1 flex flex-col justify-center">
+      {{ "contact-form.pick-date" | translate }}
+      <hlm-date-picker class="w-full">
+        <span>{{ "contact-form.pick-date" | translate }}</span>
+      </hlm-date-picker>
+    </label>
+    <label hlmLabel class="flex-1">
+      {{ "contact-form.pick-time" | translate }}
+      <input
+        hlmInput
+        class="w-full"
+        type="time"
+        [placeholder]="'contact-form.pick-time' | translate"
+      />
+    </label>
+  </div>
+  <label hlmLabel class="w-full mb-4">
+    {{ "contact-form.message" | translate }}
+    <textarea
+      hlmInput
+      class="w-full h-40"
+      [placeholder]="'contact-form.message' | translate"
+    ></textarea>
+  </label>
+  <div class="flex items-center justify-end">
+    <button hlmBtn type="submit">{{ "common.send" | translate }}</button>
+  </div>
+</form>

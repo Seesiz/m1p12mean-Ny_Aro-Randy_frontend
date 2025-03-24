@@ -51,6 +51,7 @@ export const HLM_DATE_PICKER_VALUE_ACCESSOR = {
 					[max]="max()"
 					[disabled]="state().disabled()"
 					(dateChange)="_handleChange($event)"
+					
 				/>
 			</div>
 		</brn-popover>
