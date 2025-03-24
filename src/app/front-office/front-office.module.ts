@@ -2,12 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FrontOfficeRoutingModule } from './front-office-routing.module';
 import { FrontOfficeComponent } from './front-office.component';
-import { HomePageComponent } from './home-page/home-page.component';
 import { UI_MODULE_IMPORTS } from '@/types/ui.module.import';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { provideIcons } from '@ng-icons/core';
-import { lucideArrowUpLeft, lucideSettings } from '@ng-icons/lucide';
+import {
+  lucideArrowUpLeft,
+  lucideMoon,
+  lucideSettings,
+  lucideSunDim,
+} from '@ng-icons/lucide';
+import { PrestationComponent } from './prestation/prestation.component';
+import { ContactComponent } from './contact/contact.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -15,8 +23,22 @@ import { lucideArrowUpLeft, lucideSettings } from '@ng-icons/lucide';
     HomePageComponent,
     HeaderComponent,
     FooterComponent,
+    PrestationComponent,
+    ContactComponent,
   ],
-  imports: [CommonModule, FrontOfficeRoutingModule, ...UI_MODULE_IMPORTS],
-  providers: [provideIcons({ lucideArrowUpLeft, lucideSettings })],
+  imports: [
+    CommonModule,
+    FrontOfficeRoutingModule,
+    TranslateModule,
+    ...UI_MODULE_IMPORTS,
+  ],
+  providers: [
+    provideIcons({
+      lucideArrowUpLeft,
+      lucideSettings,
+      lucideMoon,
+      lucideSunDim,
+    }),
+  ],
 })
 export class FrontOfficeModule {}

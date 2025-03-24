@@ -33,6 +33,7 @@
   --destructive-foreground: 210 20% 98%;
   --ring: 224 71.4% 4.1%;
   --radius: 0.5rem;
+  --header: hsla(0, 0%, 100%, 0.27);
   color-scheme: light;
 }
 
@@ -56,6 +57,7 @@
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 210 20% 98%;
   --ring: 216 12.2% 83.9%;
+  --header: hsla(0, 0%, 36%, 0);
   color-scheme: dark;
 }
 

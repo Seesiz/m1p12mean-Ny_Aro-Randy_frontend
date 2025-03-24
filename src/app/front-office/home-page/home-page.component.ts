@@ -15,27 +15,6 @@ export class HomePageComponent {
   @ViewChild('heroText', { static: true }) heroText!: ElementRef;
 
   ngAfterViewInit() {
-    const cursorFollow = document.getElementById('cursor-follow')!;
-    const hero = document.getElementById('hero')!;
-
-    hero.addEventListener('mousemove', (e) => {
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
-
-      gsap.to(cursorFollow, {
-        duration: 0.2,
-        x: mouseX - 20,
-        y: mouseY - 20,
-        opacity: 1,
-      });
-    });
-
-    hero.addEventListener('mouseout', () => {
-      gsap.to(cursorFollow, {
-        duration: 0.2,
-        opacity: 0,
-      });
-    });
     //Text animation
     const letters = this.heroText.nativeElement.querySelectorAll('span');
     letters.forEach((letter: any, index: number) => {

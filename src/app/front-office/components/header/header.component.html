@@ -6,11 +6,40 @@
     <b class="uppercase text-primary">mecanet</b>
   </div>
   <nav class="flex items-center gap-2">
-    <button hlmBtn variant="link">Accueil</button>
-    <button hlmBtn variant="link">Services</button>
-    <button hlmBtn variant="link">Contact</button>
+    <button
+      hlmBtn
+      variant="link"
+      routerLink="home"
+      routerLinkActive="is-active"
+    >
+      Accueil
+    </button>
+    <button
+      hlmBtn
+      variant="link"
+      routerLink="service"
+      routerLinkActive="is-active"
+    >
+      Services
+    </button>
+    <button
+      hlmBtn
+      variant="link"
+      routerLink="contact"
+      routerLinkActive="is-active"
+    >
+      Contact
+    </button>
   </nav>
-  <div class="w-2/12 flex justify-end">
+  <div class="w-2/12 flex justify-end gap-4">
+    <label class="flex items-center" hlmLabel>
+      <hlm-switch
+        class="mr-2"
+        [checked]="isDarkMode"
+        (checkedChange)="setTheme($event)"
+      />
+      <ng-icon hlm [name]="isDarkMode ? 'lucideSunDim' : 'lucideMoon'" />
+    </label>
     <button
       hlmBtn
       routerLink="/dashboard/client/statistique"

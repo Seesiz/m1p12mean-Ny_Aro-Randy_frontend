@@ -6,9 +6,14 @@
   right: 0;
   bottom: 0;
   backdrop-filter: blur(10px);
+  background-color: var(--header);
   z-index: 1;
 }
 
 .header * {
   z-index: 2;
+}
+
+nav button.is-active {
+  font-weight: bold;
 }

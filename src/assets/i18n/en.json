@@ -51,6 +51,13 @@
     "price": "Price",
     "description": "Description"
   },
+  "home-page": {
+    "see-our-services": "See our services",
+    "slogan": "Your garage, our passion. Service, quality, confidence!",
+    "book-appointment": "Book an appointment",
+    "why-choose-us": "Why choose us ?",
+    "why-choose-us-description": "At MECANET, we prioritize your satisfaction with quality services, recognized expertise, and total transparency."
+  },
   "dateFormats": {
     "fullDateTime": "d-MM-yyyy 'at' HH:mm",
     "fullDateWithLetters": "EEEE MMMM d yyyy 'at' HH:mm"
