@@ -52,7 +52,7 @@
       </div>
     </div>
     <hlm-dialog-footer>
-      <button hlmBtn type="submit">
+      <button hlmBtn type="submit" [disabled]="isSubmit">
         {{ "common.save_change" | translate }}
       </button>
     </hlm-dialog-footer>
