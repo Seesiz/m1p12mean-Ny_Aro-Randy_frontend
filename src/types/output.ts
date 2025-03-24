@@ -34,6 +34,7 @@ type IPrestation = {
   price: number;
   label: string;
   description: string;
+  duree: number | 0;
   type: { status: number; reduction: 0 };
 };
 

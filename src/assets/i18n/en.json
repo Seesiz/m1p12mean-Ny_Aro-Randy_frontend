@@ -61,7 +61,8 @@
     "price": "Price",
     "description": "Description",
     "add_prestation": "Add prestation",
-    "add_prestation_text": "Add services to your list"
+    "add_prestation_text": "Add services to your list",
+    "duree": "Duration"
   },
   "home-page": {
     "see-our-services": "See our services",
