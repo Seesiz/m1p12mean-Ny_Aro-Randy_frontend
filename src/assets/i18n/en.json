@@ -58,6 +58,23 @@
     "why-choose-us": "Why choose us ?",
     "why-choose-us-description": "At MECANET, we prioritize your satisfaction with quality services, recognized expertise, and total transparency."
   },
+  "header": {
+    "home": "Home",
+    "services": "Services",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "french": "French",
+    "english": "English"
+  },
+  "footer": {
+    "home": "Home",
+    "services": "Services",
+    "contact": "Contact",
+    "get-in-touch": "Get in touch with us",
+    "french": "French",
+    "english": "English",
+    "copyright": "Copyright  2025 - All Rights Reserved"
+  },
   "dateFormats": {
     "fullDateTime": "d-MM-yyyy 'at' HH:mm",
     "fullDateWithLetters": "EEEE MMMM d yyyy 'at' HH:mm"

@@ -8,6 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { provideIcons } from '@ng-icons/core';
 import {
   lucideArrowUpLeft,
+  lucideLanguages,
   lucideMoon,
   lucideSettings,
   lucideSunDim,
@@ -38,6 +39,7 @@ import { HomePageComponent } from './home-page/home-page.component';
       lucideSettings,
       lucideMoon,
       lucideSunDim,
+      lucideLanguages,
     }),
   ],
 })

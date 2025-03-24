@@ -12,7 +12,7 @@
       routerLink="home"
       routerLinkActive="is-active"
     >
-      Accueil
+      {{ "header.home" | translate }}
     </button>
     <button
       hlmBtn
@@ -20,7 +20,7 @@
       routerLink="service"
       routerLinkActive="is-active"
     >
-      Services
+      {{ "header.services" | translate }}
     </button>
     <button
       hlmBtn
@@ -28,7 +28,7 @@
       routerLink="contact"
       routerLinkActive="is-active"
     >
-      Contact
+      {{ "header.contact" | translate }}
     </button>
   </nav>
   <div class="w-2/12 flex justify-end gap-4">
@@ -42,10 +42,39 @@
     </label>
     <button
       hlmBtn
+      variant="ghost"
+      class="rounded-2xl"
+      [brnMenuTriggerFor]="language"
+    >
+      <ng-icon hlm name="lucideLanguages" />
+    </button>
+    <button
+      hlmBtn
       routerLink="/dashboard/client/statistique"
       class="rounded-full"
     >
-      Dashboard
+      {{ "header.dashboard" | translate }}
     </button>
   </div>
 </header>
+
+<ng-template #language>
+  <hlm-menu variant="menubar" class="w-48">
+    <hlm-menu-group>
+      <button
+        hlmMenuItem
+        (click)="setLangue('fr')"
+        [class]="`${langueValue === 'fr' ? 'font-bold' : ''}`"
+      >
+        {{ "header.french" | translate }}
+      </button>
+      <button
+        hlmMenuItem
+        (click)="setLangue('en')"
+        [class]="`${langueValue === 'en' ? 'font-bold' : ''}`"
+      >
+        {{ "header.english" | translate }}
+      </button>
+    </hlm-menu-group>
+  </hlm-menu>
+</ng-template>
