@@ -13,6 +13,7 @@ import { Component } from '@angular/core';
 export class ModalComponent {
   addForm: FormGroup;
   public viewchildDialogRef = viewChild(BrnDialogComponent);
+  isSubmit: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -28,6 +29,7 @@ export class ModalComponent {
 
   onSubmit(): void {
     if (this.addForm.valid) {
+      this.isSubmit = true;
       const prestation: IPrestation = {
         ...this.addForm.value,
         type: {
@@ -35,14 +37,19 @@ export class ModalComponent {
           reduction: 0,
         },
       };
-      this.prestationService.savePrestation(prestation).then(
-        () => {
-          this.viewchildDialogRef()?.close({});
-        },
-        (error) => {
-          console.error('Error updating user:', error);
-        }
-      );
+      this.prestationService
+        .savePrestation(prestation)
+        .then(
+          () => {
+            this.viewchildDialogRef()?.close({});
+          },
+          (error) => {
+            console.error('Error updating user:', error);
+          }
+        )
+        .finally(() => {
+          this.isSubmit = false;
+        });
     }
   }
 }

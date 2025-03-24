@@ -6,10 +6,12 @@ import {
   SimpleChanges,
   EventEmitter,
   Output,
+  viewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrestationService } from '../../services/prestation/prestation.service';
 import { IPrestation } from '@/types/output';
+import { BrnDialogComponent } from '@spartan-ng/brain/dialog';
 
 @Component({
   selector: 'app-update',
@@ -19,6 +21,8 @@ import { IPrestation } from '@/types/output';
 })
 export class UpdateComponent implements OnInit, OnChanges {
   updateForm!: FormGroup;
+  public viewchildDialogRef = viewChild(BrnDialogComponent);
+  isSubmit: boolean = false;
   @Input() selectedPrestation: IPrestation | null = null;
   @Output() loadServices = new EventEmitter<void>();
 
@@ -57,6 +61,7 @@ export class UpdateComponent implements OnInit, OnChanges {
 
   onSubmit(): void {
     if (this.updateForm.valid && this.selectedPrestation) {
+      this.isSubmit = true;
       const updatedPrestation = {
         ...this.selectedPrestation,
         label: this.updateForm.value.label,
@@ -72,10 +77,14 @@ export class UpdateComponent implements OnInit, OnChanges {
       this.prestationService
         .updatePrestation(updatedPrestation)
         .then(() => {
+          this.viewchildDialogRef()?.close({});
           this.loadServices.emit();
         })
         .catch((error) => {
           console.error('Error updating prestation:', error);
+        })
+        .finally(() => {
+          this.isSubmit = false;
         });
     }
   }

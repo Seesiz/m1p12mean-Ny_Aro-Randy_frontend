@@ -64,7 +64,12 @@
       </div>
     </div>
     <hlm-dialog-footer>
-      <button hlmBtn type="submit" [disabled]="updateForm.invalid">
+      <button
+        hlmBtn
+        type="submit"
+        [disabled]="updateForm.invalid"
+        [disabled]="isSubmit"
+      >
         {{ "common.save_change" | translate }}
       </button>
     </hlm-dialog-footer>
