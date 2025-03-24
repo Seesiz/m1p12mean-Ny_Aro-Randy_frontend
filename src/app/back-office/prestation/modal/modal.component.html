@@ -1,5 +1,5 @@
 <hlm-dialog-content class="sm:max-w-[425px]" *brnDialogContent="let ctx">
-  <form>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
     <hlm-dialog-header>
       <h3 hlmDialogTitle>
         {{ "prestation_detail.add_prestation" | translate }}
@@ -30,7 +30,25 @@
         <label hlmLabel for="price" class="text-right">{{
           "prestation_detail.price" | translate
         }}</label>
-        <input hlmInput id="price" formControlName="price" class="col-span-3" type="number" />
+        <input
+          hlmInput
+          id="price"
+          formControlName="price"
+          class="col-span-3"
+          type="number"
+        />
+      </div>
+      <div class="items-center grid grid-cols-4 gap-4">
+        <label hlmLabel for="duree" class="text-right">{{
+          "prestation_detail.duree" | translate
+        }}</label>
+        <input
+          hlmInput
+          id="duree"
+          formControlName="duree"
+          class="col-span-3"
+          type="number"
+        />
       </div>
     </div>
     <hlm-dialog-footer>

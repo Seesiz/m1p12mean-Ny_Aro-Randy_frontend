@@ -60,7 +60,8 @@
     "description": "Description",
     "price": "Prix",
     "add_prestation": "Ajouter une prestation",
-    "add_prestation_text": "Ajouter les services à votre liste"
+    "add_prestation_text": "Ajouter les services à votre liste",
+    "duree": "Durée"
   },
   "dateFormats": {
     "fullDateTime": "Le d-MM-yyyy à HH:mm",
