@@ -27,7 +27,10 @@
     "page": "Page",
     "of": "sur",
     "next": "Suivant",
-    "previous": "Précédent"
+    "previous": "Précédent",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "pack": "Pack"
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
@@ -62,7 +65,10 @@
     "price": "Prix",
     "add_prestation": "Ajouter une prestation",
     "add_prestation_text": "Ajouter les services à votre liste",
-    "duree": "Durée"
+    "duree": "Durée",
+    "status": "Status",
+    "update_prestation": "Modifier la prestation",
+    "update_prestation_text": "Mettre à jour les détails d'une prestation"
   },
   "home-page": {
     "see-our-services": "Voir nos services",

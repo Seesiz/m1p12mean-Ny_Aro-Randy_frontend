@@ -27,7 +27,10 @@
     "page": "Page",
     "of": "of",
     "next": "Next",
-    "previous": "Previous"
+    "previous": "Previous",
+    "edit": "Edit",
+    "delete": "Delete",
+    "pack": "Pack"
   },
   "user_detail": {
     "list": "Users list",
@@ -62,7 +65,10 @@
     "description": "Description",
     "add_prestation": "Add prestation",
     "add_prestation_text": "Add services to your list",
-    "duree": "Duration"
+    "duree": "Duration",
+    "status": "Status",
+    "update_prestation": "Update prestation",
+    "update_prestation_text": "Update details of prestation"
   },
   "home-page": {
     "see-our-services": "See our services",
