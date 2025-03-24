@@ -1,10 +1,11 @@
-<form class="w-10/12 p-6">
+<form class="w-10/12 p-6" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="flex md:flex-row flex-col gap-4 w-full mb-4">
     <label hlmLabel class="flex-1">
       {{ "contact-form.name" | translate }}
       <input
         hlmInput
         class="w-full"
+        formControlName="name"
         type="text"
         [placeholder]="'contact-form.name' | translate"
       />
@@ -15,6 +16,7 @@
         hlmInput
         class="w-full"
         type="email"
+        formControlName="email"
         [placeholder]="'contact-form.email' | translate"
       />
     </label>
@@ -22,7 +24,7 @@
   <div class="flex md:flex-row flex-col gap-4 w-full mb-4">
     <label hlmLabel class="flex-1 flex flex-col justify-center">
       {{ "contact-form.pick-date" | translate }}
-      <hlm-date-picker class="w-full">
+      <hlm-date-picker class="w-full" formControlName="date" [min]="minDate">
         <span>{{ "contact-form.pick-date" | translate }}</span>
       </hlm-date-picker>
     </label>
@@ -30,6 +32,7 @@
       {{ "contact-form.pick-time" | translate }}
       <input
         hlmInput
+        formControlName="time"
         class="w-full"
         type="time"
         [placeholder]="'contact-form.pick-time' | translate"
@@ -40,6 +43,7 @@
     {{ "contact-form.message" | translate }}
     <textarea
       hlmInput
+      formControlName="message"
       class="w-full h-40"
       [placeholder]="'contact-form.message' | translate"
     ></textarea>

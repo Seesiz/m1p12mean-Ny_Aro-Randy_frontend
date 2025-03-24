@@ -9,20 +9,25 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ContactFormComponent {
   form: FormGroup;
+  minDate: Date = new Date();
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      date: ['', Validators.required],
-      time: [, Validators.required],
+      date: [new Date(), Validators.required],
+      time: ['', Validators.required],
       message: ['', Validators.required],
     });
   }
 
   onSubmit() {
     if (this.form.valid) {
-      console.log('Form data:', this.form.value);
+      const formData = this.form.value;
+      const splitTime = formData.time.split(':');
+      formData.date.setHours(Number(splitTime[0]), Number(splitTime[1]));
+      const { time, ...dataToSend } = formData;
+      console.log('Form data:', dataToSend);
     }
   }
 }
