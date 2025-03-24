@@ -6,7 +6,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { TuiCalendarComponent } from './tui-calendar/tui-calendar.component';
 
 @NgModule({
-  declarations: [CalendarComponent, TuiCalendarComponent],
-  imports: [CommonModule, PlanningRoutingModule],
+  declarations: [CalendarComponent],
+  imports: [CommonModule, PlanningRoutingModule, TuiCalendarComponent],
 })
 export class PlanningModule {}

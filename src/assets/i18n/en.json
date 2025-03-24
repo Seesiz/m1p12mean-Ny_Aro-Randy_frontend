@@ -88,6 +88,12 @@
     "pick-time": "Pick a time",
     "message": "Message"
   },
+  "calendar": {
+    "today": "Today",
+    "month": "Month",
+    "week": "Week",
+    "day": "Day"
+  },
   "dateFormats": {
     "fullDateTime": "d-MM-yyyy 'at' HH:mm",
     "fullDateWithLetters": "EEEE MMMM d yyyy 'at' HH:mm"

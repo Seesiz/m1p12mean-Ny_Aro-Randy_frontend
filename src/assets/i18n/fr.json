@@ -88,6 +88,12 @@
     "pick-time": "Choisissez une heure",
     "message": "Message"
   },
+  "calendar": {
+    "today": "Aujourd'hui",
+    "month": "Mois",
+    "week": "Semaine",
+    "day": "Jour"
+  },
   "dateFormats": {
     "fullDateTime": "Le d-MM-yyyy à HH:mm",
     "fullDateWithLetters": "EEEE d MMMM yyyy à HH:mm"

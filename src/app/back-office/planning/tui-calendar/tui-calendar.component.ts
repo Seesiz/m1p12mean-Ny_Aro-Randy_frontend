@@ -1,21 +1,40 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  ElementRef,
+  ViewChild,
+  signal,
+  effect,
+} from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 // @ts-ignore
 import Calendar from '@toast-ui/calendar';
+import { BrnSelectImports } from '@spartan-ng/brain/select';
+import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tui-calendar',
   templateUrl: './tui-calendar.component.html',
   styleUrls: ['./tui-calendar.component.css'],
-  standalone: false,
+  imports: [
+    HlmButtonDirective,
+    FormsModule,
+    TranslateModule,
+    BrnSelectImports,
+    HlmSelectImports,
+  ],
 })
 export class TuiCalendarComponent implements AfterViewInit {
   @ViewChild('calendarContainer', { static: false })
   calendarContainer!: ElementRef;
+  viewType: 'month' | 'week' | 'day' = 'month';
   private calendar!: Calendar;
 
   ngAfterViewInit() {
     this.calendar = new Calendar(this.calendarContainer.nativeElement, {
-      defaultView: 'month',
+      defaultView: this.viewType,
       usageStatistics: false,
       isReadOnly: false,
       useDetailPopup: true,
@@ -40,5 +59,10 @@ export class TuiCalendarComponent implements AfterViewInit {
         ).toISOString(),
       },
     ]);
+  }
+
+  setViewType(viewType: 'month' | 'week' | 'day') {
+    this.viewType = viewType;
+    this.calendar.changeView(viewType);
   }
 }
