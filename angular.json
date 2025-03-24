@@ -35,7 +35,10 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.css"],
+            "styles": [
+              "src/styles.css",
+              "node_modules/@toast-ui/calendar/dist/toastui-calendar.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -95,7 +98,10 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.css"],
+            "styles": [
+              "src/styles.css",
+              "node_modules/@toast-ui/calendar/dist/toastui-calendar.css"
+            ],
             "scripts": []
           }
         }
