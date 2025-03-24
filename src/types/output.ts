@@ -35,7 +35,7 @@ type IPrestation = {
   label: string;
   description: string;
   duree: number | 0;
-  type: { status: number; reduction: 0 };
+  type: { status: number; reduction: 0; updatedAt?: Date };
 };
 
 export type { IUser, IRole, IRendez_vous, IPrestation };

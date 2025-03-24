@@ -24,10 +24,33 @@
       <hlm-td class="w-60">{{ prestation.price | number : "1.0-2" }}</hlm-td>
       <hlm-td class="flex-1">{{ prestation.description }}</hlm-td>
       <hlm-td class="justify-end gap-2">
-        <button hlmBtn variant="outline">Modifier</button>
-        <button hlmBtn variant="destructive">Supprimer</button>
+        <hlm-dialog>
+          <button
+            brnDialogTrigger
+            hlmBtn
+            variant="outline"
+            (click)="selectPrestationForUpdate(prestation)"
+          >
+            {{ "common.edit" | translate }}
+          </button>
+          <app-update
+            (loadServices)="loadServices()"
+            [selectedPrestation]="selectedPrestation"
+          ></app-update>
+        </hlm-dialog>
+
+        <button
+          hlmBtn
+          variant="destructive"
+          (click)="deletePrestation(prestation._id)"
+        >
+          {{ "common.delete" | translate }}
+        </button>
       </hlm-td>
     </hlm-trow>
     }
+    <div class="flex items-center justify-center p-20" *ngIf="loading">
+      <ng-icon hlm size="lg" name="lucideLoaderCircle" class="animate-spin" />
+    </div>
   </hlm-table>
 </section>

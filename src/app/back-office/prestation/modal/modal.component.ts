@@ -30,6 +30,10 @@ export class ModalComponent {
     if (this.addForm.valid) {
       const prestation: IPrestation = {
         ...this.addForm.value,
+        type: {
+          status: this.addForm.value.status,
+          reduction: 0,
+        },
       };
       this.prestationService.savePrestation(prestation).then(
         () => {

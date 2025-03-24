@@ -35,4 +35,44 @@ export class PrestationService {
       throw new Error("Échec de l'authentification");
     }
   }
+
+  async updatePrestation(prestation: IPrestation): Promise<IPrestation> {
+    try {
+      const response: AxiosResponse<IPrestation> = await axios.put(
+        `${environment.apiUrl}/services/${prestation._id}`,
+        prestation
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
+
+  async getPrestation(_id: string): Promise<IPrestation> {
+    try {
+      const response: AxiosResponse<IPrestation> = await axios.get(
+        `${environment.apiUrl}/services/${_id}`
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
+
+  async deletePrestation(_id: string): Promise<IPrestation> {
+    try {
+      const response: AxiosResponse<IPrestation> = await axios.delete(
+        `${environment.apiUrl}/services/${_id}`
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
 }
