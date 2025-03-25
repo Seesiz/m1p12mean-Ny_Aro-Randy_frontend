@@ -39,6 +39,16 @@
       />
     </label>
   </div>
+  <label hlmLabel class="flex-1">
+    {{ "contact-form.contact" | translate }}
+    <input
+      hlmInput
+      formControlName="contact"
+      class="w-full"
+      type="text"
+      [placeholder]="'033 ...'"
+    />
+  </label>
   <label hlmLabel class="w-full mb-4">
     {{ "contact-form.message" | translate }}
     <textarea
