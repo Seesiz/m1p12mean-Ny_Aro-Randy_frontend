@@ -5,13 +5,20 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideX } from '@ng-icons/lucide';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
 import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-form-popup',
   standalone: true,
   templateUrl: './form-popup.component.html',
   styleUrl: './form-popup.component.css',
-  imports: [HlmButtonDirective, NgIcon, HlmInputDirective, HlmLabelDirective],
+  imports: [
+    CommonModule,
+    HlmButtonDirective,
+    NgIcon,
+    HlmInputDirective,
+    HlmLabelDirective,
+  ],
   providers: [provideIcons({ lucideX })],
 })
 export class FormPopupComponent {
