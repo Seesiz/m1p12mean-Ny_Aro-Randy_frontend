@@ -1,0 +1,28 @@
+<section class="border-l w-full h-full p-2 pl-4">
+  <header class="flex items-center justify-between">
+    <h1 class="text-primary">Ajouter un événement</h1>
+    <button hlmBtn variant="ghost" (click)="closeData()" class="rounded-full">
+      <ng-icon name="lucideX"></ng-icon>
+    </button>
+  </header>
+  <div class="flex flex-col gap-2">
+    <label hlmLabel
+      >Debut
+      <input
+        class="w-80"
+        hlmInput
+        type="datetime-local"
+        [value]="data?.start"
+      />
+    </label>
+    <label hlmLabel
+      >Fin
+      <input
+        class="w-80"
+        hlmInput
+        type="datetime-local"
+        [value]="data?.start"
+      />
+    </label>
+  </div>
+</section>
