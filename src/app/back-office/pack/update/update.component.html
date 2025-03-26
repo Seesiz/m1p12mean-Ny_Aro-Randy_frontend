@@ -35,7 +35,9 @@
         />
       </div>
       <div class="items-center grid grid-cols-4 gap-4">
-        <ng-container *ngFor="let prestation of prestations">
+        <ng-container
+          *ngFor="let prestation of prestations; trackBy: trackPrestationById"
+        >
           <label hlmLabel class="text-right">{{ prestation.label }}</label>
           <div class="col-span-3">
             <input
@@ -44,6 +46,7 @@
               [id]="prestation._id"
               [value]="prestation._id"
               (change)="onPrestationChange($event, prestation._id)"
+              [checked]="isPrestationSelected(prestation._id)"
             />
           </div>
         </ng-container>

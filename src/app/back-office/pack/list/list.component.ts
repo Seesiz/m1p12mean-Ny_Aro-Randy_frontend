@@ -65,8 +65,10 @@ export class ListComponent {
   }
 
   selectPackForUpdate(pack: IPack) {
-    this.selectedPack = this.packs.find((p) => p._id === pack._id) || null;
+    this.selectedPack = pack;
   }
+
+
 
   deletePack(id: string): void {
     if (confirm('Are you sure you want to delete this pack?')) {

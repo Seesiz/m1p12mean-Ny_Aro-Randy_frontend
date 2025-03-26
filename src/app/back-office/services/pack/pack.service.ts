@@ -45,4 +45,30 @@ export class PackService {
       throw new Error("Échec de l'authentification");
     }
   }
+
+  async updatePack(
+    id: string,
+    label: string,
+    price: number,
+    prestations: string[]
+  ): Promise<IPack> {
+    try {
+      const data = {
+        label,
+        price,
+        services: prestations,
+      };
+      console.log(data);
+
+      const response: AxiosResponse<IPack> = await axios.put(
+        `${environment.apiUrl}/packs/${id}`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
 }
