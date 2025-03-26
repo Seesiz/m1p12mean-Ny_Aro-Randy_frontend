@@ -1,15 +1,21 @@
 <section class="p-2">
   <div class="flex justify-between">
     <input class="w-80" hlmInput placeholder="Search" type="search" />
+    <hlm-dialog>
+      <button brnDialogTrigger hlmBtn>
+        {{ "pack_detail.add_pack" | translate }}
+      </button>
+      <app-update [prestations]="prestations"></app-update>
+    </hlm-dialog>
   </div>
   <hlm-table class="w-full min-w-[400px]">
-    <hlm-caption>{{ "prestation_detail.list" | translate }}</hlm-caption>
+    <hlm-caption>{{ "pack_detail.list" | translate }}</hlm-caption>
     <hlm-trow>
-      <hlm-th class="w-52">{{ "prestation_detail.label" | translate }}</hlm-th>
+      <hlm-th class="w-52">{{ "pack_detail.label" | translate }}</hlm-th>
       <hlm-th class="flex-1">{{
         "prestation_detail.price" | translate
       }}</hlm-th>
-      <hlm-th class="justify-end">{{ "common.action" | translate }}</hlm-th>
+      <hlm-th class="justify-end">Action</hlm-th>
     </hlm-trow>
     @for (pack of packs; track pack._id) {
     <hlm-trow class="group" *ngIf="!loading">
@@ -25,7 +31,10 @@
           >
             {{ "common.edit" | translate }}
           </button>
-          <app-update [selectedPack]="selectedPack"></app-update>
+          <app-update
+            [selectedPack]="selectedPack"
+            [prestations]="prestations"
+          ></app-update>
         </hlm-dialog>
 
         <button hlmBtn variant="destructive" (click)="deletePack(pack._id)">

@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IPack, IUser } from '@/types/output';
+import { IPack, IPrestation, IUser } from '@/types/output';
 import { PackService } from '@/app/back-office/services/pack/pack.service';
 import { FormControl } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
+import { PrestationService } from '../../services/prestation/prestation.service';
 
 @Component({
   selector: 'app-list',
@@ -17,6 +18,7 @@ export class ListComponent {
   searchControl = new FormControl('');
   loading: boolean = false;
   selectedPack: IPack | null = null;
+  prestations: IPrestation[] = [];
 
   currentPage = 1;
   itemsPerPage = 10;
@@ -26,7 +28,8 @@ export class ListComponent {
 
   constructor(
     private packService: PackService,
-    private authService: AuthService
+    private authService: AuthService,
+    private prestationService: PrestationService
   ) {}
 
   ngOnInit(): void {
@@ -51,10 +54,18 @@ export class ListComponent {
       .finally(() => {
         this.loading = false;
       });
+    this.prestationService
+      .getAllPrestations()
+      .then((prestations) => {
+        this.prestations = prestations;
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   }
 
   selectPackForUpdate(pack: IPack) {
-    this.selectedPack = pack;
+    this.selectedPack = this.packs.find((p) => p._id === pack._id) || null;
   }
 
   deletePack(id: string): void {

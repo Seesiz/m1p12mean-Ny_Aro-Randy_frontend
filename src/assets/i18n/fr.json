@@ -72,5 +72,10 @@
   "dateFormats": {
     "fullDateTime": "Le d-MM-yyyy à HH:mm",
     "fullDateWithLetters": "EEEE d MMMM yyyy à HH:mm"
+  },
+  "pack_detail": {
+    "update": "Mettre à jour le pack",
+    "update_text": "Mettre à jour les détails du pack",
+    "add_pack": "Ajouter un pack"
   }
 }
