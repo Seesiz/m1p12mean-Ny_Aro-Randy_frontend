@@ -117,5 +117,10 @@
   "dateFormats": {
     "fullDateTime": "d-MM-yyyy 'at' HH:mm",
     "fullDateWithLetters": "EEEE MMMM d yyyy 'at' HH:mm"
+  },
+  "pack_detail": {
+    "update": "Update pack",
+    "update_text": "Update details of pack",
+    "add_pack": "Add pack"
   }
 }

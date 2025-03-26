@@ -9,6 +9,20 @@ import { environment } from '@/environments/environments';
 export class PackService {
   constructor() {}
 
+  async savePack(pack: IPack): Promise<IPack> {
+    try {
+      const response: AxiosResponse<IPack> = await axios.post(
+        `${environment.apiUrl}/packs`,
+        pack
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
+
   async getAll(): Promise<IPack[]> {
     try {
       const response: AxiosResponse<IPack[]> = await axios.get(
