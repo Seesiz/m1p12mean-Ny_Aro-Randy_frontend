@@ -13,7 +13,7 @@ import { UpdateComponent } from '../update/update.component';
 export class ListComponent {
   prestations: IPrestation[] = [];
   loading: boolean = false;
-  @ViewChild(BrnDialogComponent) dialogRef!: BrnDialogComponent; // Fixed viewChild to ViewChild
+  @ViewChild(BrnDialogComponent) dialogRef!: BrnDialogComponent;
   selectedPrestation: IPrestation | null = null;
 
   constructor(private prestationsService: PrestationService) {}
@@ -40,7 +40,7 @@ export class ListComponent {
         this.prestations = prestations;
       })
       .catch((error) => {
-        console.error('Error loading prestations:', error); // Fixed error message
+        console.error('Error loading prestations:', error);
       })
       .finally(() => {
         this.loading = false;
@@ -51,7 +51,6 @@ export class ListComponent {
   }
 
   deletePrestation(id: string): void {
-    // Added method for delete button functionality
     if (confirm('Are you sure you want to delete this prestation?')) {
       this.loading = true;
       this.prestationsService

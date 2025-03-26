@@ -38,4 +38,11 @@ type IPrestation = {
   type: { status: number; reduction: 0; updatedAt?: Date };
 };
 
-export type { IUser, IRole, IRendez_vous, IPrestation };
+type IPack = {
+  _id: string;
+  price: number;
+  label: string;
+  services: IPrestation[];
+};
+
+export type { IUser, IRole, IRendez_vous, IPrestation, IPack };

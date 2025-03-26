@@ -20,7 +20,6 @@ export class ListComponent implements OnInit, OnDestroy {
   selectedRDV: IRendez_vous | null = null;
   userConnected: IUser | null = null;
 
-  // Pagination
   currentPage = 1;
   itemsPerPage = 10;
   totalItems = 0;
@@ -36,7 +35,6 @@ export class ListComponent implements OnInit, OnDestroy {
     this.loadData(this.selectedStatus.value || 'pending');
     this.userConnected = this.authService.getUserConnected();
 
-    // Setup search with debounce
     this.searchControl.valueChanges
       .pipe(takeUntil(this.destroy$), debounceTime(300), distinctUntilChanged())
       .subscribe((searchTerm) => {
@@ -50,7 +48,7 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   onStatusChange(status: string): void {
-    this.currentPage = 1; // Reset to first page when status changes
+    this.currentPage = 1; 
     this.loadData(status);
   }
 

@@ -3,22 +3,36 @@
     <input class="w-80" hlmInput placeholder="Search" type="search" />
   </div>
   <hlm-table class="w-full min-w-[400px]">
-    <hlm-caption>{{ "prestation_detail.list" }}</hlm-caption>
+    <hlm-caption>{{ "prestation_detail.list" | translate }}</hlm-caption>
     <hlm-trow>
-      <hlm-th class="w-52">{{ "prestation_detail.label" }}</hlm-th>
-      <hlm-th class="w-60">{{ "prestation_detail.price" }}</hlm-th>
-      <hlm-th class="flex-1">{{ "prestation_detail.description" }}</hlm-th>
-      <hlm-th class="justify-end">Action</hlm-th>
+      <hlm-th class="w-52">{{ "prestation_detail.label" | translate }}</hlm-th>
+      <hlm-th class="flex-1">{{
+        "prestation_detail.price" | translate
+      }}</hlm-th>
+      <hlm-th class="justify-end">{{ "common.action" | translate }}</hlm-th>
     </hlm-trow>
-    <hlm-trow>
-      <hlm-td class="font-medium w-52">{{ "prestation.label" }}</hlm-td>
-      <hlm-td class="w-60">{{ "prestation.price" }}</hlm-td>
-      <hlm-td class="flex-1">{{ "prestation.description" }}</hlm-td>
+    @for (pack of packs; track pack._id) {
+    <hlm-trow class="group" *ngIf="!loading">
+      <hlm-td class="font-medium w-52">{{ pack.label }}</hlm-td>
+      <hlm-td class="flex-1">{{ pack.price | number : "1.0-2" }}</hlm-td>
       <hlm-td class="justify-end gap-2">
-        <button hlmBtn variant="destructive">
-          {{ "common.delete" }}
+        <hlm-dialog>
+          <button
+            brnDialogTrigger
+            hlmBtn
+            variant="outline"
+            (click)="selectPackForUpdate(pack)"
+          >
+            {{ "common.edit" | translate }}
+          </button>
+          <app-update [selectedPack]="selectedPack"></app-update>
+        </hlm-dialog>
+
+        <button hlmBtn variant="destructive" (click)="deletePack(pack._id)">
+          {{ "common.delete" | translate }}
         </button>
       </hlm-td>
     </hlm-trow>
+    }
   </hlm-table>
 </section>

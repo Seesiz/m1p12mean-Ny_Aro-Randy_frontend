@@ -7,6 +7,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UI_MODULE_IMPORTS } from '@/types/ui.module.import';
 import { ModalComponent } from './modal/modal.component';
 import { UpdateComponent } from './update/update.component';
+import { provideIcons } from '@ng-icons/core';
+import { lucideEye, lucideLoaderCircle } from '@ng-icons/lucide';
 
 @NgModule({
   declarations: [ListComponent, ModalComponent, UpdateComponent],
@@ -16,6 +18,12 @@ import { UpdateComponent } from './update/update.component';
     TranslateModule,
     ReactiveFormsModule,
     ...UI_MODULE_IMPORTS,
+  ],
+  providers: [
+    provideIcons({
+      lucideLoaderCircle,
+      lucideEye,
+    }),
   ],
 })
 export class PrestationModule {}
