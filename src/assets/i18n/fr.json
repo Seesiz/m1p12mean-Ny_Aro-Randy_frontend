@@ -115,7 +115,8 @@
     "today": "Aujourd'hui",
     "month": "Mois",
     "week": "Semaine",
-    "day": "Jour"
+    "day": "Jour",
+    "why-choose-us-description": "Chez MECANET, nous priorisons votre satisfaction avec des services de qualité, une expertise reconnue et une transparence totale."
   },
   "dateFormats": {
     "fullDateTime": "Le d-MM-yyyy à HH:mm",
