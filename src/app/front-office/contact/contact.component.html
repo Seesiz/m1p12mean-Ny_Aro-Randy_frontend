@@ -1,0 +1,13 @@
+<section
+  id="contact"
+  class="w-full min-h-[calc(100vh-5rem)] p-6 flex flex-col justify-start items-center gap-4"
+>
+  <div id="title" class="flex items-center flex-col gap-4">
+    <h1 class="text-5xl">
+      {{ "contact.title" | translate }}
+    </h1>
+    <hr class="h-1 bg-primary bar" />
+  </div>
+  <span class="text-sm">{{ "contact.description" | translate }}</span>
+  <app-contact-form class="w-full flex justify-center" />
+</section>

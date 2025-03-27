@@ -1,0 +1,7 @@
+nav button {
+  border-bottom: 1px solid transparent;
+  border-radius: 0px;
+}
+nav button.is-active {
+  border-bottom: 1px solid var(--color-primary-foreground);
+}

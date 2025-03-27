@@ -64,4 +64,25 @@ export class RendezVousService {
       throw new Error("Échec de l'authentification");
     }
   }
+
+  async add_rendez_vous_from_client(
+    rendez_vous: Omit<IRendez_vous, '_id'| 'status'>
+  ): Promise<IRendez_vous> {
+    try {
+      const response: AxiosResponse<IRendez_vous> = await axios.post(
+        `${environment.apiUrl}/rdv`,
+        rendez_vous,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
 }

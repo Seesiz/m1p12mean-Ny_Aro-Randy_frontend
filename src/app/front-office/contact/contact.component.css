@@ -1,0 +1,13 @@
+#title .bar {
+  width: 50%;
+  animation: barAnimation 1s ease-in-out;
+}
+
+@keyframes barAnimation {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 50%;
+  }
+}

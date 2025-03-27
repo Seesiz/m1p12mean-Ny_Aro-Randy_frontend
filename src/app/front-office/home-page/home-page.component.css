@@ -1,3 +1,8 @@
+.encoche {
+  animation: show-encoche 0.5s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
 .encoche::after,
 .encoche::before {
   --radius: 2rem;
@@ -13,7 +18,7 @@
   left: 0;
   transform: translateX(-100%);
   border-radius: 0px 0px var(--radius) 0px;
-  box-shadow: calc(var(--radius) / 2) calc(var(--radius) / 2) 0px
+  box-shadow: calc(var(--radius) / 2) calc(var(--radius) / 1.2) 0px
     calc(var(--radius) / 2) var(--color-background);
 }
 
@@ -32,7 +37,7 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  animation: show-hero 0.5s ease-in-out forwards;
 }
 
 #hero * {
@@ -48,4 +53,30 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.4);
   z-index: 0;
+}
+
+.text-up {
+  backdrop-filter: blur(10px);
+}
+
+@keyframes show-hero {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+    scale: 0.9;
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    scale: 1;
+  }
+}
+
+@keyframes show-encoche {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
