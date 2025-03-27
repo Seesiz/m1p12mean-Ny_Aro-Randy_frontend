@@ -1,0 +1,77 @@
+<hlm-dialog-content class="sm:max-w-[425px]" *brnDialogContent="let ctx">
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit(); ctx.close()">
+    <hlm-dialog-header>
+      <h3 hlmDialogTitle>
+        {{ "prestation_detail.update_prestation" | translate }}
+      </h3>
+      <p hlmDialogDescription>
+        {{ "prestation_detail.update_prestation_text" | translate }}
+      </p>
+    </hlm-dialog-header>
+    <div class="py-4 grid gap-4">
+      <div class="items-center grid grid-cols-4 gap-4">
+        <label hlmLabel for="label" class="text-right">{{
+          "prestation_detail.label" | translate
+        }}</label>
+        <input hlmInput id="label" formControlName="label" class="col-span-3" />
+      </div>
+      <div class="items-center grid grid-cols-4 gap-4">
+        <label hlmLabel for="description" class="text-right">{{
+          "prestation_detail.description" | translate
+        }}</label>
+        <input
+          hlmInput
+          id="description"
+          formControlName="description"
+          class="col-span-3"
+        />
+      </div>
+      <div class="items-center grid grid-cols-4 gap-4">
+        <label hlmLabel for="price" class="text-right">{{
+          "prestation_detail.price" | translate
+        }}</label>
+        <input
+          hlmInput
+          id="price"
+          formControlName="price"
+          class="col-span-3"
+          type="number"
+        />
+      </div>
+      <div class="items-center grid grid-cols-4 gap-4">
+        <label hlmLabel for="duree" class="text-right">{{
+          "prestation_detail.duree" | translate
+        }}</label>
+        <input
+          hlmInput
+          id="duree"
+          formControlName="duree"
+          class="col-span-3"
+          type="number"
+        />
+      </div>
+      <div class="items-center grid grid-cols-4 gap-4">
+        <label hlmLabel for="status" class="text-right">{{
+          "prestation_detail.status" | translate
+        }}</label>
+        <input
+          hlmInput
+          id="status"
+          formControlName="status"
+          class="col-span-3"
+          type="number"
+        />
+      </div>
+    </div>
+    <hlm-dialog-footer>
+      <button
+        hlmBtn
+        type="submit"
+        [disabled]="updateForm.invalid"
+        [disabled]="isSubmit"
+      >
+        {{ "common.save_change" | translate }}
+      </button>
+    </hlm-dialog-footer>
+  </form>
+</hlm-dialog-content>

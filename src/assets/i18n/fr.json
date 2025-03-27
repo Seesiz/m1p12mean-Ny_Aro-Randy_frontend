@@ -20,7 +20,17 @@
     "mechanic": "Mécanicien",
     "refuser": "Refuser",
     "valider": "Confirmer",
-    "service": "Service"
+    "service": "Service",
+    "search": "Rechercher...",
+    "items_per_page": "Éléments par page",
+    "page": "Page",
+    "of": "sur",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "pack": "Pack",
+    "cancel": "Annuler"
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
@@ -36,23 +46,39 @@
     "make_changes": "Faire des modifications sur votre profil. Cliquez sur sauvegarder quand vous avez fini."
   },
   "rdv_detail": {
+    "modal_info": "Information du rendez-vous",
+    "description_modal": "Voici les informations du rendez-vous pour une meilleure prise de décision",
     "list": "Liste des rendez-vous",
     "full_name": "Nom complet",
     "contact": "Contact",
-    "date_demande": "Date de la demande",
-    "date_proposee": "Date proposée",
+    "demande_date": "Date de la demande",
+    "proposed_date": "Date proposée",
     "pending": "En attente",
     "confirmed": "Validé",
-    "cancelled": "Refusé"
+    "cancelled": "Refusé",
+    "search_placeholder": "Rechercher par nom ou contact..."
   },
   "prestation_detail": {
     "list": "Liste des prestations actifs",
     "label": "Libellé",
     "description": "Description",
-    "price": "Prix"
+    "price": "Prix",
+    "add_prestation": "Ajouter une prestation",
+    "add_prestation_text": "Ajouter les services à votre liste",
+    "duree": "Durée",
+    "status": "Status",
+    "update_prestation": "Modifier la prestation",
+    "update_prestation_text": "Mettre à jour les détails d'une prestation",
+    "delete": "Supprimer le service",
+    "delete_text": "Êtes-vous sûr de vouloir supprimer ce service?"
   },
   "dateFormats": {
     "fullDateTime": "Le d-MM-yyyy à HH:mm",
     "fullDateWithLetters": "EEEE d MMMM yyyy à HH:mm"
+  },
+  "pack_detail": {
+    "update": "Mettre à jour le pack",
+    "update_text": "Mettre à jour les détails du pack",
+    "add_pack": "Ajouter un pack"
   }
 }

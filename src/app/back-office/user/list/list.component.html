@@ -5,7 +5,7 @@
       <button brnDialogTrigger hlmBtn>
         {{ "user_detail.add_user" | translate }}
       </button>
-      <app-modal></app-modal>
+      <app-modal (loadUsers)="loadUsers()"></app-modal>
     </hlm-dialog>
   </div>
   <hlm-table class="w-full min-w-[400px]">
@@ -21,8 +21,8 @@
       }}</hlm-th>
       <hlm-th class="justify-end">Action</hlm-th>
     </hlm-trow>
-    @for (user of users; track user._id) {
-    <hlm-trow *ngIf="!loading" class="group">
+    @for (user of users(); track user._id) {
+    <hlm-trow *ngIf="!loading()" class="group">
       <hlm-td truncate class="font-medium w-52">{{
         user.lastname.toLocaleUpperCase()
       }}</hlm-td>
@@ -37,14 +37,14 @@
             class="invisible group-hover:visible"
             variant="ghost"
           >
-            <ng-icon name="lucidePencil" />
+            <ng-icon name="lucidePencil" hlm size="sm" />
           </button>
           <app-update (loadUsers)="loadUsers()" [selectedUser]="selectedUser" />
         </hlm-dialog>
       </hlm-td>
     </hlm-trow>
     }
-    <div class="flex items-center justify-center p-20" *ngIf="loading">
+    <div class="flex items-center justify-center p-20" *ngIf="loading()">
       <ng-icon hlm size="lg" name="lucideLoaderCircle" class="animate-spin" />
     </div>
   </hlm-table>

@@ -1,6 +1,12 @@
 <section class="p-2">
   <div class="flex justify-between">
     <input class="w-80" hlmInput placeholder="Search" type="search" />
+    <hlm-dialog>
+      <button brnDialogTrigger hlmBtn>
+        {{ "prestation_detail.add_prestation" | translate }}
+      </button>
+      <app-modal></app-modal>
+    </hlm-dialog>
   </div>
   <hlm-table class="w-full min-w-[400px]">
     <hlm-caption>{{ "prestation_detail.list" | translate }}</hlm-caption>
@@ -12,16 +18,49 @@
       }}</hlm-th>
       <hlm-th class="justify-end">Action</hlm-th>
     </hlm-trow>
-    @for (prestation of prestations; track prestation._id) {
-    <hlm-trow>
+    @for (prestation of prestations(); track prestation._id) {
+    <hlm-trow class="group" *ngIf="!loading()">
       <hlm-td class="font-medium w-52">{{ prestation.label }}</hlm-td>
       <hlm-td class="w-60">{{ prestation.price | number : "1.0-2" }}</hlm-td>
       <hlm-td class="flex-1">{{ prestation.description }}</hlm-td>
-      <hlm-td class="justify-end">
-        <button hlmBtn variant="outline">Modifier</button>
-        <button hlmBtn variant="destructive">Supprimer</button>
+      <hlm-td class="justify-end gap-2">
+        <hlm-dialog>
+          <button
+            brnDialogTrigger
+            hlmBtn
+            variant="ghost"
+            class="group-hover:opacity-100 opacity-0"
+            (click)="selectPrestationForUpdate(prestation)"
+          >
+            <ng-icon name="lucidePencil" hlm size="sm"></ng-icon>
+          </button>
+          <app-update
+            (loadServices)="loadServices()"
+            [selectedPrestation]="selectedPrestation"
+          ></app-update>
+        </hlm-dialog>
+        <hlm-alert-dialog>
+          <button
+            hlmBtn
+            variant="ghost"
+            class="group-hover:opacity-100 opacity-0 text-destructive"
+            brnAlertDialogTrigger
+          >
+            <ng-icon name="lucideTrash" hlm size="sm"></ng-icon>
+          </button>
+          <app-alert
+            (submit)="deletePrestation(prestation._id)"
+            [title]="'prestation_detail.delete'"
+            [description]="'prestation_detail.delete_text'"
+            [cancelText]="'common.cancel'"
+            [actionText]="'common.delete'"
+          />
+        </hlm-alert-dialog>
       </hlm-td>
     </hlm-trow>
     }
+    <div class="flex items-center justify-center p-20" *ngIf="loading()">
+      <ng-icon hlm size="lg" name="lucideLoaderCircle" class="animate-spin" />
+    </div>
   </hlm-table>
 </section>

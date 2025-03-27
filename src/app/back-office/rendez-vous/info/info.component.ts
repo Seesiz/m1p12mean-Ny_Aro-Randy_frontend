@@ -10,12 +10,21 @@ export class InfoComponent {
   @Input() selectedRDV: IRendez_vous | null = null;
   @Output() confirm = new EventEmitter<string>();
   @Output() refuse = new EventEmitter<string>();
+  isSubmit: boolean = false;
 
   onConfirm() {
-    if (this.selectedRDV) this.confirm.emit(this.selectedRDV._id);
+    this.isSubmit = true;
+    if (this.selectedRDV) {
+      this.confirm.emit(this.selectedRDV._id);
+      this.isSubmit = false;
+    }
   }
 
   onRefuse() {
-    if (this.selectedRDV) this.refuse.emit(this.selectedRDV._id);
+    this.isSubmit = true;
+    if (this.selectedRDV) {
+      this.refuse.emit(this.selectedRDV._id);
+      this.isSubmit = false;
+    }
   }
 }

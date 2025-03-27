@@ -1,15 +1,14 @@
 <hlm-dialog-content class="sm:max-w-[425px]" *brnDialogContent="let ctx">
   <hlm-dialog-header>
-    <h3 hlmDialogTitle>Information du rendez-vous</h3>
+    <h3 hlmDialogTitle>{{ "rdv_detail.modal_info" | translate }}</h3>
     <p hlmDialogDescription>
-      Voici les informations d'un rendez-vous pour une meilleure prise de
-      décision
+      {{ "rdv_detail.description_modal" | translate }}
     </p>
   </hlm-dialog-header>
   <div class="py-4 flex flex-col gap-4">
     <div class="flex gap-4 flex-col">
       <label hlmLabel for="lastname">{{
-        "rdv_detail.date_demande" | translate
+        "rdv_detail.demande_date" | translate
       }}</label>
       <span class="pl-2 col-span-3 first-letter:capitalize">
         {{
@@ -26,7 +25,7 @@
     </div>
     <div class="flex gap-4 flex-col">
       <label hlmLabel for="lastname">{{
-        "rdv_detail.date_proposee" | translate
+        "rdv_detail.proposed_date" | translate
       }}</label>
       <span class="pl-2 col-span-3 first-letter:capitalize">
         {{
@@ -45,13 +44,33 @@
       <label hlmLabel for="lastname">Message</label>
       <span class="pl-2 col-span-3"> {{ selectedRDV?.info?.message }}</span>
     </div>
-    <div class="flex gap-1 flex-col">
-      <button hlmBtn variant="default" (click)="onConfirm()">
-        {{ "common.valider" | translate }}
-      </button>
-      <button hlmBtn variant="ghost" (click)="onRefuse()">
-        {{ "common.refuser" | translate }}
-      </button>
-    </div>
+    <ng-container>
+      <div class="flex gap-1 flex-col">
+        <button
+          hlmBtn
+          variant="default"
+          (click)="onConfirm(); ctx.close()"
+          [disabled]="isSubmit"
+          *ngIf="
+            selectedRDV?.status === 'pending' ||
+            selectedRDV?.status === 'refused'
+          "
+        >
+          {{ "common.valider" | translate }}
+        </button>
+        <button
+          hlmBtn
+          variant="outline"
+          (click)="onRefuse(); ctx.close()"
+          [disabled]="isSubmit"
+          *ngIf="
+            selectedRDV?.status === 'pending' ||
+            selectedRDV?.status === 'confirmed'
+          "
+        >
+          {{ "common.refuser" | translate }}
+        </button>
+      </div>
+    </ng-container>
   </div>
 </hlm-dialog-content>

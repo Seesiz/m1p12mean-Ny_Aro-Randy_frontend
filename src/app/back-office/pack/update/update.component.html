@@ -1,0 +1,61 @@
+<hlm-dialog-content class="sm:max-w-[425px]" *brnDialogContent="let ctx">
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <hlm-dialog-header>
+      <h3 hlmDialogTitle>
+        {{ "pack_detail.update" | translate }}
+      </h3>
+      <p hlmDialogDescription>
+        {{ "pack_detail.update_text" | translate }}
+      </p>
+    </hlm-dialog-header>
+    <div class="py-4 grid gap-4">
+      <div class="items-center grid grid-cols-4 gap-4">
+        <label hlmLabel for="label" class="text-right">{{
+          "prestation_detail.label" | translate
+        }}</label>
+        <input
+          hlmInput
+          id="label"
+          formControlName="label"
+          class="col-span-3"
+          [value]="selectedPack?.label"
+        />
+      </div>
+      <div class="items-center grid grid-cols-4 gap-4">
+        <label hlmLabel for="price" class="text-right">{{
+          "prestation_detail.price" | translate
+        }}</label>
+        <input
+          hlmInput
+          id="price"
+          formControlName="price"
+          class="col-span-3"
+          type="number"
+          [value]="selectedPack?.price"
+        />
+      </div>
+      <div class="items-center grid grid-cols-4 gap-4">
+        <ng-container
+          *ngFor="let prestation of prestations; trackBy: trackPrestationById"
+        >
+          <label hlmLabel class="text-right">{{ prestation.label }}</label>
+          <div class="col-span-3">
+            <input
+              type="checkbox"
+              name="prestation"
+              [id]="prestation._id"
+              [value]="prestation._id"
+              (change)="onPrestationChange($event, prestation._id)"
+              [checked]="isPrestationSelected(prestation._id)"
+            />
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <hlm-dialog-footer>
+      <button hlmBtn type="submit">
+        {{ "common.save_change" | translate }}
+      </button>
+    </hlm-dialog-footer>
+  </form>
+</hlm-dialog-content>

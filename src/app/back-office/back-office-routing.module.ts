@@ -113,6 +113,10 @@ export const backOfficeRoutes: Routes = [
               label: 'service',
               path: 'config/service',
             },
+            {
+              label: 'pack',
+              path: 'config/pack',
+            },
           ],
         },
         children: [
@@ -122,6 +126,11 @@ export const backOfficeRoutes: Routes = [
               import('./prestation/prestation.module').then(
                 (m) => m.PrestationModule
               ),
+          },
+          {
+            path: 'pack',
+            loadChildren: () =>
+              import('./pack/pack.module').then((m) => m.PackModule),
           },
         ],
       },
