@@ -6,12 +6,10 @@ import {
   SimpleChanges,
   EventEmitter,
   Output,
-  viewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrestationService } from '../../services/prestation/prestation.service';
 import { IPrestation } from '@/types/output';
-import { BrnDialogComponent } from '@spartan-ng/brain/dialog';
 
 @Component({
   selector: 'app-update',
@@ -21,7 +19,6 @@ import { BrnDialogComponent } from '@spartan-ng/brain/dialog';
 })
 export class UpdateComponent implements OnInit, OnChanges {
   updateForm!: FormGroup;
-  public viewchildDialogRef = viewChild(BrnDialogComponent);
   isSubmit: boolean = false;
   @Input() selectedPrestation: IPrestation | null = null;
   @Output() loadServices = new EventEmitter<void>();
@@ -77,7 +74,6 @@ export class UpdateComponent implements OnInit, OnChanges {
       this.prestationService
         .updatePrestation(updatedPrestation)
         .then(() => {
-          this.viewchildDialogRef()?.close({});
           this.loadServices.emit();
         })
         .catch((error) => {

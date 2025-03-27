@@ -1,9 +1,7 @@
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrestationService } from '@/app/back-office/services/prestation/prestation.service';
 import { IPrestation } from '@/types/output';
-import { viewChild } from '@angular/core';
-import { BrnDialogComponent } from '@spartan-ng/brain/dialog';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-modal',
   standalone: false,
@@ -12,8 +10,8 @@ import { Component } from '@angular/core';
 })
 export class ModalComponent {
   addForm: FormGroup;
-  public viewchildDialogRef = viewChild(BrnDialogComponent);
   isSubmit: boolean = false;
+  @Output() loadServices = new EventEmitter<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -41,7 +39,7 @@ export class ModalComponent {
         .savePrestation(prestation)
         .then(
           () => {
-            this.viewchildDialogRef()?.close({});
+            this.loadServices.emit();
           },
           (error) => {
             console.error('Error updating user:', error);

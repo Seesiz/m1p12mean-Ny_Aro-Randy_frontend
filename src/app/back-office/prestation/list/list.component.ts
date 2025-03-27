@@ -1,8 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { IPrestation } from '@/types/output';
 import { PrestationService } from '@/app/back-office/services/prestation/prestation.service';
-import { BrnDialogComponent } from '@spartan-ng/brain/dialog';
-import { UpdateComponent } from '../update/update.component';
 
 @Component({
   selector: 'app-list',
@@ -11,9 +9,8 @@ import { UpdateComponent } from '../update/update.component';
   styleUrls: ['./list.component.css'],
 })
 export class ListComponent {
-  prestations: IPrestation[] = [];
-  loading: boolean = false;
-  @ViewChild(BrnDialogComponent) dialogRef!: BrnDialogComponent;
+  prestations = signal<IPrestation[]>([]);
+  loading = signal(false);
   selectedPrestation: IPrestation | null = null;
 
   constructor(private prestationsService: PrestationService) {}
@@ -33,37 +30,32 @@ export class ListComponent {
   }
 
   loadServices(): void {
-    this.loading = true;
+    this.loading.set(true);
     this.prestationsService
       .getAllPrestations()
       .then((prestations) => {
-        this.prestations = prestations;
+        this.prestations.set(prestations);
       })
       .catch((error) => {
         console.error('Error loading prestations:', error);
       })
       .finally(() => {
-        this.loading = false;
-        if (this.dialogRef) {
-          this.dialogRef.close({});
-        }
+        this.loading.set(false);
       });
   }
 
   deletePrestation(id: string): void {
-    if (confirm('Are you sure you want to delete this prestation?')) {
-      this.loading = true;
-      this.prestationsService
-        .deletePrestation(id)
-        .then(() => {
-          this.loadServices();
-        })
-        .catch((error) => {
-          console.error('Error deleting prestation:', error);
-        })
-        .finally(() => {
-          this.loading = false;
-        });
-    }
+    this.loading.set(true);
+    this.prestationsService
+      .deletePrestation(id)
+      .then(() => {
+        this.loadServices();
+      })
+      .catch((error) => {
+        console.error('Error deleting prestation:', error);
+      })
+      .finally(() => {
+        this.loading.set(false);
+      });
   }
 }

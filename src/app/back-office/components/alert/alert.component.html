@@ -1,0 +1,16 @@
+<hlm-alert-dialog-content *brnAlertDialogContent="let ctx">
+  <hlm-alert-dialog-header>
+    <h3 hlmAlertDialogTitle>{{ title | translate }}</h3>
+    <p hlmAlertDialogDescription>
+      {{ description | translate }}
+    </p>
+  </hlm-alert-dialog-header>
+  <hlm-alert-dialog-footer>
+    <button hlmAlertDialogCancel (click)="ctx.close()">
+      {{ cancelText | translate }}
+    </button>
+    <button hlmAlertDialogAction (click)="onSubmit(); ctx.close()">
+      {{ actionText | translate }}
+    </button>
+  </hlm-alert-dialog-footer>
+</hlm-alert-dialog-content>

@@ -29,7 +29,8 @@
     "previous": "Précédent",
     "edit": "Modifier",
     "delete": "Supprimer",
-    "pack": "Pack"
+    "pack": "Pack",
+    "cancel": "Annuler"
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
@@ -67,7 +68,9 @@
     "duree": "Durée",
     "status": "Status",
     "update_prestation": "Modifier la prestation",
-    "update_prestation_text": "Mettre à jour les détails d'une prestation"
+    "update_prestation_text": "Mettre à jour les détails d'une prestation",
+    "delete": "Supprimer le service",
+    "delete_text": "Êtes-vous sûr de vouloir supprimer ce service?"
   },
   "dateFormats": {
     "fullDateTime": "Le d-MM-yyyy à HH:mm",

@@ -9,11 +9,27 @@ import { ModalComponent } from './modal/modal.component';
 import { UpdateComponent } from './update/update.component';
 import { provideIcons } from '@ng-icons/core';
 import {
+  BrnAlertDialogContentDirective,
+  BrnAlertDialogTriggerDirective,
+} from '@spartan-ng/brain/alert-dialog';
+import {
+  HlmAlertDialogActionButtonDirective,
+  HlmAlertDialogCancelButtonDirective,
+  HlmAlertDialogComponent,
+  HlmAlertDialogContentComponent,
+  HlmAlertDialogDescriptionDirective,
+  HlmAlertDialogFooterComponent,
+  HlmAlertDialogHeaderComponent,
+  HlmAlertDialogOverlayDirective,
+  HlmAlertDialogTitleDirective,
+} from '@spartan-ng/ui-alertdialog-helm';
+import {
   lucideEye,
   lucideLoaderCircle,
   lucidePencil,
   lucideTrash,
 } from '@ng-icons/lucide';
+import { AlertComponent } from "../components/alert/alert.component";
 
 @NgModule({
   declarations: [ListComponent, ModalComponent, UpdateComponent],
@@ -22,8 +38,20 @@ import {
     PrestationRoutingModule,
     TranslateModule,
     ReactiveFormsModule,
+    BrnAlertDialogContentDirective,
+    BrnAlertDialogTriggerDirective,
+    HlmAlertDialogActionButtonDirective,
+    HlmAlertDialogCancelButtonDirective,
+    HlmAlertDialogComponent,
+    HlmAlertDialogContentComponent,
+    HlmAlertDialogDescriptionDirective,
+    HlmAlertDialogFooterComponent,
+    HlmAlertDialogHeaderComponent,
+    HlmAlertDialogOverlayDirective,
+    HlmAlertDialogTitleDirective,
     ...UI_MODULE_IMPORTS,
-  ],
+    AlertComponent
+],
   providers: [
     provideIcons({
       lucideLoaderCircle,
