@@ -8,7 +8,12 @@ import { UI_MODULE_IMPORTS } from '@/types/ui.module.import';
 import { ModalComponent } from './modal/modal.component';
 import { UpdateComponent } from './update/update.component';
 import { provideIcons } from '@ng-icons/core';
-import { lucideEye, lucideLoaderCircle } from '@ng-icons/lucide';
+import {
+  lucideEye,
+  lucideLoaderCircle,
+  lucidePencil,
+  lucideTrash,
+} from '@ng-icons/lucide';
 
 @NgModule({
   declarations: [ListComponent, ModalComponent, UpdateComponent],
@@ -23,6 +28,8 @@ import { lucideEye, lucideLoaderCircle } from '@ng-icons/lucide';
     provideIcons({
       lucideLoaderCircle,
       lucideEye,
+      lucidePencil,
+      lucideTrash,
     }),
   ],
 })
