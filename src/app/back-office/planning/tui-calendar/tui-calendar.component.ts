@@ -3,7 +3,7 @@ import {
   AfterViewInit,
   ElementRef,
   ViewChild,
-  inject,
+  signal,
   Input,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
@@ -13,7 +13,6 @@ import Calendar from '@toast-ui/calendar';
 import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 import { FormsModule } from '@angular/forms';
-import { HlmDialogService } from '@spartan-ng/ui-dialog-helm';
 import { EventObject } from '@/types/event';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronLeft, lucideChevronRight } from '@ng-icons/lucide';
@@ -38,10 +37,10 @@ import { CommonModule } from '@angular/common';
 })
 export class TuiCalendarComponent implements AfterViewInit {
   @ViewChild('calendarContainer') calendarContainer!: ElementRef;
-  private calendar!: Calendar;
-  viewType: 'month' | 'week' | 'day' = 'month';
-  selectedDate: Date | null = null;
-  show_data: EventObject | null = null;
+  private calendar = signal<Calendar | null>(null);
+  viewType = signal<'month' | 'week' | 'day'>('month');
+  selectedDate = signal<Date | null>(null);
+  show_data = signal<EventObject | null>(null);
   @Input() events: EventObject[] = [
     {
       id: '1',
@@ -59,78 +58,80 @@ export class TuiCalendarComponent implements AfterViewInit {
   ];
 
   ngAfterViewInit() {
-    this.calendar = new Calendar(this.calendarContainer.nativeElement, {
-      defaultView: this.viewType,
-      usageStatistics: false,
-      isReadOnly: false,
-      taskView: false,
-      scheduleView: true,
-      useCreationPopup: false,
-      useDetailPopup: false,
-      useFormPopup: false,
-      theme: {
-        common: {
-          backgroundColor: 'var(--color-background)',
-          dayName: { color: 'var(--color-primary)' },
-        },
-      },
-      month: {
-        dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-        startDayOfWeek: 1,
-      },
-      week: {
-        dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-        startDayOfWeek: 1,
+    this.calendar.set(
+      new Calendar(this.calendarContainer.nativeElement, {
+        defaultView: this.viewType(),
+        usageStatistics: false,
+        isReadOnly: false,
         taskView: false,
-      },
-      calendars: [
-        {
-          id: '1',
-          name: 'Mission',
-          color: '#ffffff',
-          bgColor: '#734de4',
-          borderColor: '#734de4',
+        scheduleView: true,
+        useCreationPopup: false,
+        useDetailPopup: false,
+        useFormPopup: false,
+        theme: {
+          common: {
+            backgroundColor: 'var(--color-background)',
+            dayName: { color: 'var(--color-primary)' },
+          },
         },
-        {
-          id: '2',
-          name: 'Rendez-vous',
-          color: '#ffffff',
-          bgColor: '#0080ff',
-          borderColor: '#0080ff',
+        month: {
+          dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+          startDayOfWeek: 1,
         },
-      ],
-      template: {
-        popupDetailTitle: (event: any) => `
+        week: {
+          dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+          startDayOfWeek: 1,
+          taskView: false,
+        },
+        calendars: [
+          {
+            id: '1',
+            name: 'Mission',
+            color: '#ffffff',
+            bgColor: '#734de4',
+            borderColor: '#734de4',
+          },
+          {
+            id: '2',
+            name: 'Rendez-vous',
+            color: '#ffffff',
+            bgColor: '#0080ff',
+            borderColor: '#0080ff',
+          },
+        ],
+        template: {
+          popupDetailTitle: (event: any) => `
         <div class="popup-title">
           <span class="text-lg font-bold">${event.title}</span>
         </div>
       `,
-        popupDetailAttendees({ attendees = [] }) {
-          return attendees.join(', ');
-        },
-        popupDetailBody: (event: any) => `
+          popupDetailAttendees({ attendees = [] }) {
+            return attendees.join(', ');
+          },
+          popupDetailBody: (event: any) => `
         <div class="popup-body">
           <p>${event.body || ''}</p>
         </div>
       `,
-        popupEdit: () => `
+          popupEdit: () => `
         <button hlmBtn class="custom-edit-button">Modifier</button>
       `,
-        popupDelete: () => `
+          popupDelete: () => `
         Supprimer
       `,
-      },
-    });
+        },
+      })
+    );
 
-    this.calendar.on('selectDateTime', (data: any) => {
-      this.show_data = {
+    this.calendar().on('selectDateTime', (data: any) => {
+      this.show_data.set({
         start: this.formatDateForInput(data.start),
         end: this.formatDateForInput(data.end),
-      };
-      this.calendar.clearGridSelections();
+      });
+      this.calendar().clearGridSelections();
     });
 
-    this.calendar.createEvents(this.events);
+    this.calendar().createEvents(this.events);
   }
 
   private formatDateForInput(date: Date): string {
@@ -140,23 +141,23 @@ export class TuiCalendarComponent implements AfterViewInit {
   }
 
   setViewType(viewType: 'month' | 'week' | 'day') {
-    this.viewType = viewType;
-    this.calendar.changeView(viewType);
+    this.viewType.set(viewType);
+    this.calendar().changeView(viewType);
   }
 
   goToPreviousMonth() {
-    this.calendar.prev();
+    this.calendar().prev();
   }
 
   goToNextMonth() {
-    this.calendar.next();
+    this.calendar().next();
   }
 
   goToToday() {
-    this.calendar.today();
+    this.calendar().today();
   }
 
   closeData() {
-    this.show_data = null;
+    this.show_data.set(null);
   }
 }

@@ -1,7 +1,17 @@
 import { IPack, IPrestation } from '@/types/output';
-import { Component, Input, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import {
+  Component,
+  Input,
+  signal,
+  SimpleChanges,
+  effect,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PackService } from '../../services/pack/pack.service';
+
+type Framework = { label: string; value: string };
 
 @Component({
   selector: 'app-update',
@@ -12,6 +22,11 @@ import { PackService } from '../../services/pack/pack.service';
 export class UpdateComponent {
   @Input() selectedPack: IPack | null = null;
   @Input() prestations: IPrestation[] = [];
+  @Output() loadPack = new EventEmitter<void>();
+
+  public currentPrestations = signal<IPrestation[]>([]);
+  public state = signal<'closed' | 'open'>('closed');
+  selectablePrestations = signal<IPrestation[]>([]);
 
   updateForm: FormGroup;
 
@@ -19,43 +34,41 @@ export class UpdateComponent {
     this.updateForm = this.fb.group({
       label: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
-      prestations: this.fb.array([]),
+      prestations: [[]],
+    });
+
+    effect(() => {
+      this.updateForm
+        .get('prestations')
+        ?.setValue(this.currentPrestations().map((p) => p._id));
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes['prestations']) {
+      this.selectablePrestations.set(this.prestations);
+    }
     if (changes['selectedPack'] && this.selectedPack) {
       this.updateForm.patchValue({
         label: this.selectedPack.label,
         price: this.selectedPack.price,
       });
-
-      const prestations = this.updateForm.get('prestations') as FormArray;
-      prestations.clear();
-
-      if (this.selectedPack.services && this.selectedPack.services.length > 0) {
-        this.selectedPack.services.forEach((service) => {
-          const serviceId = typeof service === 'string' ? service : service._id;
-          prestations.push(this.fb.control(serviceId));
-        });
+      if (
+        this.selectedPack &&
+        this.selectedPack.services &&
+        this.selectedPack.services.length > 0
+      ) {
+        this.selectablePrestations.set(
+          this.prestations.filter(
+            (p) => !this.selectedPack?.services.some((s) => s._id === p._id)
+          )
+        );
+        this.currentPrestations.set(this.selectedPack.services);
+        this.updateForm
+          .get('prestations')
+          ?.setValue(this.selectedPack.services.map((s) => s._id));
       }
     }
-  }
-
-  trackPrestationById(index: number, prestation: any): string {
-    return prestation._id;
-  }
-
-  isPrestationSelected(prestationId: string): boolean {
-    if (!this.selectedPack || !this.selectedPack.services) {
-      return false;
-    }
-
-    return this.selectedPack.services.some((service) =>
-      typeof service === 'string'
-        ? service === prestationId
-        : service._id === prestationId
-    );
   }
 
   onSubmit(): void {
@@ -63,11 +76,11 @@ export class UpdateComponent {
       const newPack = {
         ...this.updateForm.value,
       };
-      console.log(newPack);
       this.packService
         .savePack(newPack)
         .then(() => {
           this.updateForm.reset();
+          this.loadPack.emit();
         })
         .catch((error) => {
           console.error('Error creating pack:', error);
@@ -87,7 +100,7 @@ export class UpdateComponent {
         )
         .then(
           () => {
-            //this.loadPrestations.emit();
+            this.loadPack.emit();
           },
           (error) => {
             console.error('Error updating pack:', error);
@@ -96,18 +109,22 @@ export class UpdateComponent {
     }
   }
 
-  onPrestationChange(event: any, prestationId: string): void {
-    const prestationsArray = this.updateForm.get('prestations') as FormArray;
+  stateChanged(state: 'open' | 'closed') {
+    this.state.set(state);
+  }
 
-    if (event.target.checked) {
-      prestationsArray.push(this.fb.control(prestationId));
-    } else {
-      const index = prestationsArray.controls.findIndex(
-        (control) => control.value === prestationId
-      );
-      if (index !== -1) {
-        prestationsArray.removeAt(index);
-      }
-    }
+  commandSelected(prestation: IPrestation) {
+    this.state.set('closed');
+    this.currentPrestations.update((value) => [...value, prestation]);
+    this.selectablePrestations.update((value) =>
+      value.filter((p) => p._id !== prestation._id)
+    );
+  }
+
+  removePrestation(prestation: IPrestation) {
+    this.currentPrestations.update((value) =>
+      value.filter((p) => p._id !== prestation._id)
+    );
+    this.selectablePrestations.update((value) => [...value, prestation]);
   }
 }

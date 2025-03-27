@@ -35,7 +35,7 @@
         (valueChange)="setViewType($event)"
       >
         <hlm-select-trigger class="w-56">
-          {{ "calendar." + viewType | translate }}
+          {{ "calendar." + viewType() | translate }}
         </hlm-select-trigger>
         <hlm-select-content>
           <hlm-option value="month">{{
@@ -50,12 +50,12 @@
     </header>
     <div
       #calendarContainer
-      [class]="`flex-1 w-full rounded overflow-hidden ${show_data ? 'rounded-r-none':'rounded-b-3xl'}`"
+      [class]="`flex-1 w-full rounded overflow-hidden ${show_data() ? 'rounded-r-none':'rounded-b-3xl'}`"
     ></div>
   </section>
   <app-form-popup
-    [class]="`h-full transition-all ${show_data ? 'w-3/12 opacity-100':'w-0 opacity-0'}`"
-    [data]="show_data"
+    [class]="`h-full transition-all ${show_data() ? 'w-3/12 opacity-100':'w-0 opacity-0'}`"
+    [data]="show_data()"
     (close)="closeData()"
   />
 </div>

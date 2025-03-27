@@ -5,7 +5,10 @@
       <button brnDialogTrigger hlmBtn>
         {{ "pack_detail.add_pack" | translate }}
       </button>
-      <app-update [prestations]="prestations"></app-update>
+      <app-update
+        [prestations]="prestations"
+        (loadPack)="loadData()"
+      ></app-update>
     </hlm-dialog>
   </div>
   <hlm-table class="w-full min-w-[400px]">
@@ -34,6 +37,7 @@
           <app-update
             [selectedPack]="selectedPack"
             [prestations]="prestations"
+            (loadPack)="loadData()"
           ></app-update>
         </hlm-dialog>
 
