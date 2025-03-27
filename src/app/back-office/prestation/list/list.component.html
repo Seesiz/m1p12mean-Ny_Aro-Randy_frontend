@@ -19,7 +19,7 @@
       <hlm-th class="justify-end">Action</hlm-th>
     </hlm-trow>
     @for (prestation of prestations; track prestation._id) {
-    <hlm-trow>
+    <hlm-trow class="group" *ngIf="!loading">
       <hlm-td class="font-medium w-52">{{ prestation.label }}</hlm-td>
       <hlm-td class="w-60">{{ prestation.price | number : "1.0-2" }}</hlm-td>
       <hlm-td class="flex-1">{{ prestation.description }}</hlm-td>
@@ -28,10 +28,11 @@
           <button
             brnDialogTrigger
             hlmBtn
-            variant="outline"
+            variant="ghost"
+            class="group-hover:opacity-100 opacity-0"
             (click)="selectPrestationForUpdate(prestation)"
           >
-            {{ "common.edit" | translate }}
+            <ng-icon name="lucidePencil" hlm size="sm"></ng-icon>
           </button>
           <app-update
             (loadServices)="loadServices()"
@@ -41,10 +42,11 @@
 
         <button
           hlmBtn
-          variant="destructive"
+          variant="ghost"
+          class="group-hover:opacity-100 opacity-0 text-destructive"
           (click)="deletePrestation(prestation._id)"
         >
-          {{ "common.delete" | translate }}
+          <ng-icon name="lucideTrash" hlm size="sm"></ng-icon>
         </button>
       </hlm-td>
     </hlm-trow>
