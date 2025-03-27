@@ -31,7 +31,8 @@
     "edit": "Modifier",
     "delete": "Supprimer",
     "pack": "Pack",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "send": "Envoyer"
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
