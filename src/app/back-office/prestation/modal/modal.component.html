@@ -1,5 +1,5 @@
 <hlm-dialog-content class="sm:max-w-[425px]" *brnDialogContent="let ctx">
-  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit(); ctx.close()">
     <hlm-dialog-header>
       <h3 hlmDialogTitle>
         {{ "prestation_detail.add_prestation" | translate }}

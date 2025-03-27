@@ -44,21 +44,29 @@
       <label hlmLabel for="lastname">Message</label>
       <span class="pl-2 col-span-3"> {{ selectedRDV?.info?.message }}</span>
     </div>
-    <ng-container *ngIf="selectedRDV?.status == 'pending'">
+    <ng-container>
       <div class="flex gap-1 flex-col">
         <button
           hlmBtn
           variant="default"
-          (click)="onConfirm()"
+          (click)="onConfirm(); ctx.close()"
           [disabled]="isSubmit"
+          *ngIf="
+            selectedRDV?.status === 'pending' ||
+            selectedRDV?.status === 'refused'
+          "
         >
           {{ "common.valider" | translate }}
         </button>
         <button
           hlmBtn
           variant="outline"
-          (click)="onRefuse()"
+          (click)="onRefuse(); ctx.close()"
           [disabled]="isSubmit"
+          *ngIf="
+            selectedRDV?.status === 'pending' ||
+            selectedRDV?.status === 'confirmed'
+          "
         >
           {{ "common.refuser" | translate }}
         </button>

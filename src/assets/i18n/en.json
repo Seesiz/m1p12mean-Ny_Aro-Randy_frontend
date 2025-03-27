@@ -30,7 +30,8 @@
     "previous": "Previous",
     "edit": "Edit",
     "delete": "Delete",
-    "pack": "Pack"
+    "pack": "Pack",
+    "cancel": "Cancel"
   },
   "user_detail": {
     "list": "Users list",
@@ -68,7 +69,9 @@
     "duree": "Duration",
     "status": "Status",
     "update_prestation": "Update prestation",
-    "update_prestation_text": "Update details of prestation"
+    "update_prestation_text": "Update details of prestation",
+    "delete": "Delete service",
+    "delete_text": "Are you sure you want to delete this service?"
   },
   "home-page": {
     "see-our-services": "See our services",
