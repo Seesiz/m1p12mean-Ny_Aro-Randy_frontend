@@ -19,6 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RatingComponent } from './components/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PrestationComponent,
     ContactComponent,
     ContactFormComponent,
+    RatingComponent,
   ],
   imports: [
     CommonModule,
