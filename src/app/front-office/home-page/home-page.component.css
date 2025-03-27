@@ -1,0 +1,82 @@
+.encoche {
+  animation: show-encoche 0.5s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+
+.encoche::after,
+.encoche::before {
+  --radius: 2rem;
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  z-index: -1;
+}
+
+.encoche::after {
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  border-radius: 0px 0px var(--radius) 0px;
+  box-shadow: calc(var(--radius) / 2) calc(var(--radius) / 1.2) 0px
+    calc(var(--radius) / 2) var(--color-background);
+}
+
+.encoche::before {
+  top: 0;
+  right: 0;
+  transform: translateY(-100%);
+  border-radius: 0px 0px var(--radius) 0px;
+  box-shadow: calc(var(--radius) / 2) calc(var(--radius) / 2) 0px
+    calc(var(--radius) / 2) var(--color-background);
+}
+
+#hero {
+  position: relative;
+  background: url("/assets/img/background.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: show-hero 0.5s ease-in-out forwards;
+}
+
+#hero * {
+  z-index: 1;
+}
+
+#hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+.text-up {
+  backdrop-filter: blur(10px);
+}
+
+@keyframes show-hero {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+    scale: 0.9;
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    scale: 1;
+  }
+}
+
+@keyframes show-encoche {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,5 +1,5 @@
 <hlm-dialog-content class="sm:max-w-[425px]" *brnDialogContent="let ctx">
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit(); ctx.close()">
     <hlm-dialog-header>
       <h3 hlmDialogTitle>{{ "user_detail.create_user" | translate }}</h3>
       <p hlmDialogDescription>

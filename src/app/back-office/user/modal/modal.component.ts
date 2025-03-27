@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '@/app/back-office/services/user/user.service';
@@ -12,6 +12,7 @@ import { UserService } from '@/app/back-office/services/user/user.service';
 export class ModalComponent {
   userForm: FormGroup;
   currentRole: string = '';
+  @Output() loadUsers = new EventEmitter<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -30,21 +31,22 @@ export class ModalComponent {
     });
   }
 
-  async onSubmit() {
+  onSubmit() {
     if (this.userForm.valid) {
-      try {
-        const response = await this.userService.addUser(
+      this.userService
+        .addUser(
           this.userForm.value.lastname,
           this.userForm.value.firstname,
           this.userForm.value.email,
           this.userForm.value.pass,
-          [this.currentRole] // Utiliser le rôle actuel
-        );
-        // Recharger la liste après l'ajout
-        window.location.reload();
-      } catch (error) {
-        console.error('Error adding user:', error);
-      }
+          [this.currentRole]
+        )
+        .then(() => {
+          this.loadUsers.emit();
+        })
+        .catch((error) => {
+          console.error('Error adding user:', error);
+        });
     }
   }
 }

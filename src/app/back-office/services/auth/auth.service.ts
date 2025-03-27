@@ -42,4 +42,23 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
   }
+
+  getUserConnected(): IUser | null {
+    const user = localStorage.getItem('user');
+    return user ? (JSON.parse(user) as IUser) : null;
+  }
+
+  async getConnectedByToken(token: string) {
+    try {
+      const response: AxiosResponse<IUser> = await axios.get(
+        `${environment.apiUrl}/auth/me`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
 }

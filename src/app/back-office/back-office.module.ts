@@ -13,6 +13,8 @@ import {
   UI_MODULE_IMPORTS,
   UI_MODULE_PROVIDERS,
 } from '@/types/ui.module.import';
+import { FooterComponent } from './components/footer/footer.component';
+import { FormPopupComponent } from './components/tui-calendar/form-popup/form-popup.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import {
     HeaderComponent,
     AccessDeniedComponent,
     LoginComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,

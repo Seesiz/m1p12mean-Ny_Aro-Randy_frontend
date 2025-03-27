@@ -30,6 +30,7 @@ module.exports = {
         destructive: "hsl(var(--destructive))",
         "destructive-foreground": "hsl(var(--destructive-foreground))",
         ring: "hsl(var(--ring))",
+        header: "hsl(var(--header))",
       },
       borderRadius: {
         DEFAULT: "var(--radius)",

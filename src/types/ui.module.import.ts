@@ -41,6 +41,7 @@ import {
   HlmDialogTitleDirective,
 } from '@spartan-ng/ui-dialog-helm';
 import { HlmInputDirective } from '@spartan-ng/ui-input-helm';
+import { HlmFormFieldModule } from '@spartan-ng/ui-formfield-helm';
 import {
   HlmCaptionComponent,
   HlmTableComponent,
@@ -102,6 +103,8 @@ export const UI_MODULE_IMPORTS = [
   HlmHoverCardContentComponent,
   CdkMenuModule,
   HlmMenuItemDirective,
+  HlmFormFieldModule,
+  HlmDatePickerComponent,
 ];
 
 import {
@@ -115,6 +118,7 @@ import {
   lucideMenu,
 } from '@ng-icons/lucide';
 import { HlmSelectDirective } from '@spartan-ng/ui-select-helm';
+import { HlmDatePickerComponent } from '@spartan-ng/ui-datepicker-helm';
 
 export const UI_MODULE_PROVIDERS = [
   provideIcons({

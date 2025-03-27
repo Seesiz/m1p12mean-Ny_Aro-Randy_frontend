@@ -1,0 +1,80 @@
+<header
+  class="w-full h-20 flex items-center justify-between px-4 fixed top-0 header"
+>
+  <div class="header__logo flex items-center gap-1 w-2/12">
+    <img src="assets/img/engrenages.gif" alt="Engrenages" width="40px" />
+    <b class="uppercase text-primary">mecanet</b>
+  </div>
+  <nav class="flex items-center gap-2">
+    <button
+      hlmBtn
+      variant="link"
+      routerLink="home"
+      routerLinkActive="is-active"
+    >
+      {{ "header.home" | translate }}
+    </button>
+    <button
+      hlmBtn
+      variant="link"
+      routerLink="service"
+      routerLinkActive="is-active"
+    >
+      {{ "header.services" | translate }}
+    </button>
+    <button
+      hlmBtn
+      variant="link"
+      routerLink="contact"
+      routerLinkActive="is-active"
+    >
+      {{ "header.contact" | translate }}
+    </button>
+  </nav>
+  <div class="w-2/12 flex justify-end gap-4">
+    <label class="flex items-center" hlmLabel>
+      <hlm-switch
+        class="mr-2"
+        [checked]="isDarkMode"
+        (checkedChange)="setTheme($event)"
+      />
+      <ng-icon hlm [name]="isDarkMode ? 'lucideSunDim' : 'lucideMoon'" />
+    </label>
+    <button
+      hlmBtn
+      variant="ghost"
+      class="rounded-2xl"
+      [brnMenuTriggerFor]="language"
+    >
+      <ng-icon hlm name="lucideLanguages" />
+    </button>
+    <button
+      hlmBtn
+      routerLink="/dashboard/client/statistique"
+      class="rounded-full"
+    >
+      {{ "header.dashboard" | translate }}
+    </button>
+  </div>
+</header>
+
+<ng-template #language>
+  <hlm-menu variant="menubar" class="w-48">
+    <hlm-menu-group>
+      <button
+        hlmMenuItem
+        (click)="setLangue('fr')"
+        [class]="`${langueValue === 'fr' ? 'font-bold' : ''}`"
+      >
+        {{ "header.french" | translate }}
+      </button>
+      <button
+        hlmMenuItem
+        (click)="setLangue('en')"
+        [class]="`${langueValue === 'en' ? 'font-bold' : ''}`"
+      >
+        {{ "header.english" | translate }}
+      </button>
+    </hlm-menu-group>
+  </hlm-menu>
+</ng-template>

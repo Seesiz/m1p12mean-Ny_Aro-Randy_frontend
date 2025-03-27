@@ -1,0 +1,64 @@
+<form class="p-6" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="flex md:flex-row flex-col gap-4 w-full mb-4">
+    <label hlmLabel class="flex-1">
+      {{ "contact-form.name" | translate }}
+      <input
+        hlmInput
+        class="w-full"
+        formControlName="name"
+        type="text"
+        [placeholder]="'contact-form.name' | translate"
+      />
+    </label>
+    <label hlmLabel class="flex-1">
+      {{ "contact-form.email" | translate }}
+      <input
+        hlmInput
+        class="w-full"
+        type="email"
+        formControlName="email"
+        [placeholder]="'contact-form.email' | translate"
+      />
+    </label>
+  </div>
+  <div class="flex md:flex-row flex-col gap-4 w-full mb-4">
+    <label hlmLabel class="flex-1 flex flex-col justify-center">
+      {{ "contact-form.pick-date" | translate }}
+      <hlm-date-picker class="w-full" formControlName="date" [min]="minDate">
+        <span>{{ "contact-form.pick-date" | translate }}</span>
+      </hlm-date-picker>
+    </label>
+    <label hlmLabel class="flex-1">
+      {{ "contact-form.pick-time" | translate }}
+      <input
+        hlmInput
+        formControlName="time"
+        class="w-full"
+        type="time"
+        [placeholder]="'contact-form.pick-time' | translate"
+      />
+    </label>
+  </div>
+  <label hlmLabel class="flex-1">
+    {{ "contact-form.contact" | translate }}
+    <input
+      hlmInput
+      formControlName="contact"
+      class="w-full"
+      type="text"
+      [placeholder]="'033 ...'"
+    />
+  </label>
+  <label hlmLabel class="w-full mb-4">
+    {{ "contact-form.message" | translate }}
+    <textarea
+      hlmInput
+      formControlName="message"
+      class="w-full h-40"
+      [placeholder]="'contact-form.message' | translate"
+    ></textarea>
+  </label>
+  <div class="flex items-center justify-end">
+    <button hlmBtn type="submit">{{ "common.send" | translate }}</button>
+  </div>
+</form>

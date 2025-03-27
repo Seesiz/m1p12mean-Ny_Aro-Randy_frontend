@@ -3,7 +3,8 @@
     "statistics": "Statistiques",
     "users": "Utilisateurs",
     "rendez-vous": "Rendez-vous",
-    "planning": "Planning"
+    "planning": "Planning",
+    "config": "Configuration"
   },
   "common": {
     "my-account": "Mon compte",
@@ -16,7 +17,21 @@
     "connection": "Connexion",
     "client": "Client",
     "manager": "Manager",
-    "mechanic": "Mécanicien"
+    "mechanic": "Mécanicien",
+    "refuser": "Refuser",
+    "valider": "Confirmer",
+    "service": "Service",
+    "send": "Envoyer",
+    "search": "Rechercher...",
+    "items_per_page": "Éléments par page",
+    "page": "Page",
+    "of": "sur",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "pack": "Pack",
+    "cancel": "Annuler"
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
@@ -30,5 +45,86 @@
     "create_user": "Créer un utilisateur",
     "edit_info": "Modifier les informations",
     "make_changes": "Faire des modifications sur votre profil. Cliquez sur sauvegarder quand vous avez fini."
+  },
+  "rdv_detail": {
+    "modal_info": "Information du rendez-vous",
+    "description_modal": "Voici les informations du rendez-vous pour une meilleure prise de décision",
+    "list": "Liste des rendez-vous",
+    "full_name": "Nom complet",
+    "contact": "Contact",
+    "demande_date": "Date de la demande",
+    "proposed_date": "Date proposée",
+    "pending": "En attente",
+    "confirmed": "Validé",
+    "cancelled": "Refusé",
+    "search_placeholder": "Rechercher par nom ou contact..."
+  },
+  "prestation_detail": {
+    "list": "Liste des prestations actifs",
+    "label": "Libellé",
+    "description": "Description",
+    "price": "Prix",
+    "add_prestation": "Ajouter une prestation",
+    "add_prestation_text": "Ajouter les services à votre liste",
+    "duree": "Durée",
+    "status": "Status",
+    "update_prestation": "Modifier la prestation",
+    "update_prestation_text": "Mettre à jour les détails d'une prestation",
+    "delete": "Supprimer le service",
+    "delete_text": "Êtes-vous sûr de vouloir supprimer ce service?"
+  },
+  "home-page": {
+    "see-our-services": "Voir nos services",
+    "slogan": "Votre garage, notre passion. Service, qualité, confiance !",
+    "book-appointment": "Prendre un rendez-vous",
+    "why-choose-us": "Pourquoi nous choisir ?",
+    "why-choose-us-description": "Chez MECANET, nous priorisons votre satisfaction avec des services de qualité, une expertise reconnue et une transparence totale.",
+    "about-us": "A propos de nous",
+    "about-us-description": "Nous sommes une équipe passionnée dédiée à la création de solutions innovantes qui font une différence. Notre mission est de livrer des produits et des services de qualité qui empowèrent nos utilisateurs et favorisent un changement positif dans le monde."
+  },
+  "header": {
+    "home": "Accueil",
+    "services": "Services",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "french": "Français",
+    "english": "Anglais"
+  },
+  "footer": {
+    "home": "Accueil",
+    "services": "Services",
+    "contact": "Contact",
+    "address": "Adresse",
+    "address_value": "IT University Andoharanofotsy, Antananarivo, Madagascar",
+    "french": "Français",
+    "english": "Anglais",
+    "copyright": "Copyright  2025 - Tous droits réservés"
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "description": "Veuillez entrer les informations nécessaires pour la prise de rendez-vous"
+  },
+  "contact-form": {
+    "name": "Nom & prénom",
+    "email": "Email",
+    "pick-date": "Choisissez une date",
+    "pick-time": "Choisissez une heure",
+    "message": "Message"
+  },
+  "calendar": {
+    "today": "Aujourd'hui",
+    "month": "Mois",
+    "week": "Semaine",
+    "day": "Jour",
+    "why-choose-us-description": "Chez MECANET, nous priorisons votre satisfaction avec des services de qualité, une expertise reconnue et une transparence totale."
+  },
+  "dateFormats": {
+    "fullDateTime": "Le d-MM-yyyy à HH:mm",
+    "fullDateWithLetters": "EEEE d MMMM yyyy à HH:mm"
+  },
+  "pack_detail": {
+    "update": "Mettre à jour le pack",
+    "update_text": "Mettre à jour les détails du pack",
+    "add_pack": "Ajouter un pack"
   }
 }

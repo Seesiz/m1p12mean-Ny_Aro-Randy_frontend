@@ -1,39 +1,117 @@
-<section hlmCard class="w-fit">
-  <div hlmCardHeader>
-    <h3 hlmCardTitle>Notifications</h3>
-    <p hlmCardDescription>You have 3 unread notifications</p>
-  </div>
-  <div hlmCardContent class="grid gap-4">
-    <div
-      class="flex items-center p-4 border border-border space-x-4 rounded-md"
+<section class="px-8 overflow-hidden">
+  <div
+    class="w-full h-[calc(100vh-6rem)] bg-primary relative rounded-4xl rounded-tl overflow-hidden flex flex-col items-start justify-center px-10 gap-4 select-none"
+    id="hero"
+    #heroSection
+  >
+    <button
+      hlmBtn
+      variant="ghost"
+      class="absolute right-2 top-2 rounded-tr-3xl bg-white text-black"
+      routerLink="/service"
     >
-      <div class="flex-1 space-y-1">
-        <p class="text-sm font-medium leading-none">Push Notifications</p>
-        <p class="text-sm text-muted-foreground">
-          Send notifications to device.
+      <ng-icon hlm name="lucideArrowUpLeft" />
+      {{ "home-page.see-our-services" | translate }}
+    </button>
+    <h1 #heroText class="text-2xl md:text-5xl lg:text-9xl font-bold text-white">
+      <span class="relative" *ngFor="let letter of 'MECANET'.split('')">
+        {{ letter }}
+      </span>
+    </h1>
+
+    <div class="flex items-center gap-4 w-full">
+      <hr class="h-[1px] w-1/12 bg-white md:block hidden" />
+      <button
+        hlmBtn
+        routerLink="/contact"
+        class="rounded-4xl bg-transparent backdrop-blur-lg border border-white text-white"
+      >
+        {{ "home-page.book-appointment" | translate }}
+      </button>
+      <hr id="animated-line" class="h-[1px] bg-white w-0 md:block hidden" />
+    </div>
+    <div
+      class="absolute md:flex hidden z-10 encoche right-0 bottom-0 bg-background rounded-tl-4xl p-4 px-5 flex-col items-start"
+    >
+      {{ "home-page.slogan" | translate }}
+    </div>
+  </div>
+  <div
+    class="w-full min-h-screen about-us py-16 px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-12"
+    id="about-us"
+    #aboutUsSection
+  >
+    <div class="max-w-7xl mx-auto shrink-0">
+      <div class="lg:text-center">
+        <h2
+          class="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl"
+        >
+          {{ "home-page.about-us" | translate }}
+        </h2>
+        <p
+          class="mt-4 max-w-4xl text-xl translate-y-10 text-muted-foreground lg:mx-auto opacity-0"
+          #aboutUsText
+        >
+          {{ "home-page.about-us-description" | translate }}
         </p>
       </div>
-      <hlm-switch class="ml-4" aria-label="Enable notifications" />
     </div>
-    <div>
-      @for (notification of notifications; track notification.id) {
+    <div class="flex-1 flex flex-row w-10/12">
+      <div class="flex-1 rounded-2xl bg-muted-foreground" #leftBlock></div>
       <div
-        class="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
-      >
-        <span class="flex w-2 h-2 rounded-full translate-y-1 bg-sky-500"></span>
-        <div class="space-y-1">
-          <p class="text-sm font-medium leading-none">
-            {{ notification.title }}
-          </p>
-          <p class="text-sm text-muted-foreground">
-            {{ notification.description }}
-          </p>
-        </div>
-      </div>
-      }
+        class="flex-1 bg-primary rounded-2xl z-[2] shadow-2xl"
+        #middleBlock
+      ></div>
+      <div class="flex-1 rounded-2xl bg-muted-foreground" #rightBlock></div>
     </div>
   </div>
-  <div hlmCardFooter class="justify-between">
-    <button class="w-full" hlmBtn>Mark all as read</button>
+  <div class="w-full relative h-[300vh]" #whyChooseUsSection>
+    <div
+      class="w-full h-screen flex items-center justify-center relative"
+      #whyChooseUsTrack
+    >
+      <h3
+        class="text-8xl text-center uppercase text-primary z-10"
+        #whyChooseUsText
+      >
+        {{ "home-page.why-choose-us" | translate }}
+      </h3>
+      <ng-container *ngFor="let ratedUser of ratedUsers; index as i">
+        <ng-container
+          *ngTemplateOutlet="
+            templateRef;
+            context: { ratedUser: ratedUser, index: i }
+          "
+        ></ng-container>
+      </ng-container>
+    </div>
   </div>
+  <div class="w-full h-screen">parce que c'est beau</div>
 </section>
+
+<ng-template #templateRef let-ratedUser="ratedUser" let-index="index">
+  <div
+    #textUp
+    class="absolute text-up p-4 text-sm rounded-2xl border bg-transparent z-[11] flex items-center gap-2"
+    [style.left]="ratedUser.left"
+    [style.scale]="ratedUser.scale"
+    [attr.data-start]="ratedUser.start"
+    [attr.data-speed]="ratedUser.speed"
+    hlmCard
+  >
+    <hlm-avatar>
+      <img
+        src="https://picsum.photos/200/300?random={{ index }}"
+        alt="user rating logo"
+        hlmAvatarImage
+      />
+      <span class="text-white bg-destructive uppercase" hlmAvatarFallback>{{
+        ratedUser.name[0] + ratedUser.name[1]
+      }}</span>
+    </hlm-avatar>
+    <div>
+      <b class="text-primary"> {{ ratedUser.name }}</b>
+      <app-rating [rating]="ratedUser.rating"></app-rating>
+    </div>
+  </div>
+</ng-template>
