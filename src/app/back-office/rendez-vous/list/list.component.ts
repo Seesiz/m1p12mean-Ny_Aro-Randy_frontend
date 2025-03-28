@@ -15,7 +15,9 @@ export class ListComponent implements OnInit, OnDestroy {
   loading = signal(false);
   rendez_vous = signal<IRendez_vous[]>([]);
   filteredRendezVous = signal<IRendez_vous[]>([]);
-  selectedStatus = new FormControl('pending');
+  selectedStatus = new FormControl<'pending' | 'confirmed' | 'cancelled'>(
+    'pending'
+  );
   searchControl = new FormControl('');
   selectedRDV: IRendez_vous | null = null;
   userConnected = signal<IUser | null>(null);
@@ -47,12 +49,12 @@ export class ListComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  onStatusChange(status: string): void {
+  onStatusChange(status: 'pending' | 'confirmed' | 'cancelled'): void {
     this.currentPage = 1;
     this.loadData(status);
   }
 
-  loadData(status: string) {
+  loadData(status: 'pending' | 'confirmed' | 'cancelled') {
     this.loading.set(true);
     this.rendezVousService
       .getAllWithStatus(status)

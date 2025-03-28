@@ -5,6 +5,7 @@ import {
   ViewChild,
   signal,
   Input,
+  SimpleChanges,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
@@ -41,21 +42,15 @@ export class TuiCalendarComponent implements AfterViewInit {
   viewType = signal<'month' | 'week' | 'day'>('month');
   selectedDate = signal<Date | null>(null);
   show_data = signal<EventObject | null>(null);
-  @Input() events: EventObject[] = [
-    {
-      id: '1',
-      calendarId: '1',
-      title: "Réunion d'équipe",
-      category: 'time',
-      start: new Date().toISOString(),
-      end: new Date(
-        new Date().setHours(new Date().getHours() + 2)
-      ).toISOString(),
-      isAllday: true,
-      body: "Réunion d'équipe mavesatra",
-      attendees: ['John Doe', 'Jane Doe'],
-    },
-  ];
+  @Input() events: EventObject[] = [];
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['events']) {
+      if (this.calendar()) {
+        this.calendar().createEvents(this.events);
+      }
+    }
+  }
 
   ngAfterViewInit() {
     this.calendar.set(
@@ -85,18 +80,18 @@ export class TuiCalendarComponent implements AfterViewInit {
         },
         calendars: [
           {
-            id: '1',
+            id: 'MISSION',
             name: 'Mission',
-            color: '#ffffff',
-            bgColor: '#734de4',
-            borderColor: '#734de4',
+            color: 'var(--color-primary-foreground)',
+            bgColor: 'var(--color-primary)',
+            borderColor: 'var(--color-primary)',
           },
           {
-            id: '2',
+            id: 'RENDEZ_VOUS',
             name: 'Rendez-vous',
-            color: '#ffffff',
-            bgColor: '#0080ff',
-            borderColor: '#0080ff',
+            color: 'var(--color-primary-foreground)',
+            bgColor: 'var(--color-primary)',
+            borderColor: 'var(--color-primary)',
           },
         ],
         template: {
@@ -123,15 +118,23 @@ export class TuiCalendarComponent implements AfterViewInit {
       })
     );
 
-    this.calendar().on('selectDateTime', (data: any) => {
+    this.calendar().on('selectDateTime', (selectedDate: any) => {
       this.show_data.set({
-        start: this.formatDateForInput(data.start),
-        end: this.formatDateForInput(data.end),
+        start: this.formatDateForInput(selectedDate.start),
+        end: this.formatDateForInput(selectedDate.end),
       });
       this.calendar().clearGridSelections();
     });
-
-    this.calendar().createEvents(this.events);
+    this.calendar().on('clickEvent', (selectedDate: any) => {
+      this.show_data.set({
+        ...selectedDate.event,
+        start: this.formatDateForInput(selectedDate.event.start),
+        end: this.formatDateForInput(selectedDate.event.end),
+        data: this.events.find((event) => event.id === selectedDate.event.id)
+          ?.data,
+      });
+      this.calendar().clearGridSelections();
+    });
   }
 
   private formatDateForInput(date: Date): string {

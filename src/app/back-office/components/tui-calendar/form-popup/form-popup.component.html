@@ -1,18 +1,58 @@
-<section class="border-l w-full h-full p-2 pl-4" *ngIf="data">
+<section class="border-l w-full h-full p-2 pl-4 overflow-y-auto" *ngIf="data">
   <header class="flex items-center justify-between mb-4">
-    <h1 class="text-primary font-bold">Ajouter un événement</h1>
+    <h1 class="text-primary font-bold">
+      {{ data.calendarId ? "Modifier l'évenement" : "Ajouter une mission" }}
+    </h1>
     <button hlmBtn variant="ghost" (click)="closeData()" class="rounded-full">
       <ng-icon name="lucideX"></ng-icon>
     </button>
   </header>
   <div class="flex flex-col gap-2">
     <label hlmLabel
+      >Type
+      <input
+        disabled
+        class="w-80"
+        hlmInput
+        type="text"
+        [value]="data.calendarId"
+      />
+    </label>
+    <label hlmLabel
       >Debut
-      <input class="w-80" hlmInput type="datetime-local" [value]="data.start" />
+      <input
+        [disabled]="data.calendarId === 'RENDEZ_VOUS'"
+        class="w-80"
+        hlmInput
+        type="datetime-local"
+        [value]="data.start"
+      />
     </label>
     <label hlmLabel
       >Fin
-      <input class="w-80" hlmInput type="datetime-local" [value]="data.end" />
+      <input
+        [disabled]="data.calendarId === 'RENDEZ_VOUS'"
+        class="w-80"
+        hlmInput
+        type="datetime-local"
+        [value]="data.end"
+      />
     </label>
+    <ul
+      class="flex flex-col gap-2 items-start bg-background p-2 px-4 rounded-2xl text-sm"
+    >
+      <b>Invités</b>
+      @for(people of data.attendees; track people; let i = $index){
+      <li>
+        <span> {{ people }} ({{ i === 0 ? "organisateur" : "invité" }}) </span>
+      </li>
+      }
+    </ul>
+    <div
+      class="flex flex-col gap-2 items-start bg-background p-2 px-4 rounded-2xl text-sm"
+    >
+      <b>Contenu</b>
+      <p>{{ data.body }}</p>
+    </div>
   </div>
 </section>
