@@ -14,7 +14,7 @@
   <hlm-table class="w-full min-w-[400px]">
     <hlm-caption>{{ "pack_detail.list" | translate }}</hlm-caption>
     <hlm-trow>
-      <hlm-th class="w-52">{{ "pack_detail.label" | translate }}</hlm-th>
+      <hlm-th class="w-52">{{ "prestation_detail.label" | translate }}</hlm-th>
       <hlm-th class="flex-1">{{
         "prestation_detail.price" | translate
       }}</hlm-th>
@@ -29,10 +29,11 @@
           <button
             brnDialogTrigger
             hlmBtn
-            variant="outline"
+            variant="ghost"
+            class="group-hover:opacity-100 opacity-0"
             (click)="selectPackForUpdate(pack)"
           >
-            {{ "common.edit" | translate }}
+            <ng-icon name="lucidePencil" hlm size="sm"></ng-icon>
           </button>
           <app-update
             [selectedPack]="selectedPack"
@@ -40,10 +41,23 @@
             (loadPack)="loadData()"
           ></app-update>
         </hlm-dialog>
-
-        <button hlmBtn variant="destructive" (click)="deletePack(pack._id)">
-          {{ "common.delete" | translate }}
-        </button>
+        <hlm-alert-dialog>
+          <button
+            hlmBtn
+            variant="ghost"
+            class="group-hover:opacity-100 opacity-0 text-destructive"
+            brnAlertDialogTrigger
+          >
+            <ng-icon name="lucideTrash" hlm size="sm"></ng-icon>
+          </button>
+          <app-alert
+            (submit)="deletePack(pack._id)"
+            [title]="'pack_detail.delete'"
+            [description]="'pack_detail.delete_text'"
+            [cancelText]="'common.cancel'"
+            [actionText]="'common.delete'"
+          />
+        </hlm-alert-dialog>
       </hlm-td>
     </hlm-trow>
     }

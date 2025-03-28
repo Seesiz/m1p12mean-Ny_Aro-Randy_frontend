@@ -53,6 +53,7 @@ export class UpdateComponent {
         label: this.selectedPack.label,
         price: this.selectedPack.price,
       });
+      this.currentPrestations.set(this.selectedPack.services);
       if (
         this.selectedPack &&
         this.selectedPack.services &&
@@ -63,7 +64,7 @@ export class UpdateComponent {
             (p) => !this.selectedPack?.services.some((s) => s._id === p._id)
           )
         );
-        this.currentPrestations.set(this.selectedPack.services);
+
         this.updateForm
           .get('prestations')
           ?.setValue(this.selectedPack.services.map((s) => s._id));

@@ -31,7 +31,8 @@
     "edit": "Modifier",
     "delete": "Supprimer",
     "pack": "Pack",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "no-result": "Aucun résultat trouvé"
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
@@ -71,7 +72,8 @@
     "update_prestation": "Modifier la prestation",
     "update_prestation_text": "Mettre à jour les détails d'une prestation",
     "delete": "Supprimer le service",
-    "delete_text": "Êtes-vous sûr de vouloir supprimer ce service?"
+    "delete_text": "Êtes-vous sûr de vouloir supprimer ce service?",
+    "select_service": "Sélectionner un service"
   },
   "home-page": {
     "see-our-services": "Voir nos services",
@@ -125,6 +127,8 @@
   "pack_detail": {
     "update": "Mettre à jour le pack",
     "update_text": "Mettre à jour les détails du pack",
-    "add_pack": "Ajouter un pack"
+    "add_pack": "Ajouter un pack",
+    "delete": "Supprimer le pack",
+    "delete_text": "Êtes-vous sûr de vouloir supprimer ce pack ?"
   }
 }

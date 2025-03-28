@@ -13,6 +13,8 @@ import {
   lucideLoaderCircle,
   lucideSearch,
   lucideX,
+  lucideTrash,
+  lucidePencil,
 } from '@ng-icons/lucide';
 import { BrnCommandImports } from '@spartan-ng/brain/command';
 import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
@@ -24,6 +26,23 @@ import {
   BrnPopoverTriggerDirective,
 } from '@spartan-ng/brain/popover';
 import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
+import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
+import {
+  BrnAlertDialogContentDirective,
+  BrnAlertDialogTriggerDirective,
+} from '@spartan-ng/brain/alert-dialog';
+import {
+  HlmAlertDialogActionButtonDirective,
+  HlmAlertDialogCancelButtonDirective,
+  HlmAlertDialogComponent,
+  HlmAlertDialogContentComponent,
+  HlmAlertDialogDescriptionDirective,
+  HlmAlertDialogFooterComponent,
+  HlmAlertDialogHeaderComponent,
+  HlmAlertDialogOverlayDirective,
+  HlmAlertDialogTitleDirective,
+} from '@spartan-ng/ui-alertdialog-helm';
+import { AlertComponent } from "../components/alert/alert.component";
 
 @NgModule({
   declarations: [ListComponent, UpdateComponent],
@@ -34,14 +53,27 @@ import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
     ReactiveFormsModule,
     [BrnCommandImports],
     [HlmCommandImports],
+    BrnAlertDialogContentDirective,
+    BrnAlertDialogTriggerDirective,
     HlmIconDirective,
     HlmButtonDirective,
     BrnPopoverComponent,
     BrnPopoverTriggerDirective,
     HlmPopoverContentDirective,
     BrnPopoverContentDirective,
+    HlmBadgeDirective,
+    HlmAlertDialogActionButtonDirective,
+    HlmAlertDialogCancelButtonDirective,
+    HlmAlertDialogComponent,
+    HlmAlertDialogContentComponent,
+    HlmAlertDialogDescriptionDirective,
+    HlmAlertDialogFooterComponent,
+    HlmAlertDialogHeaderComponent,
+    HlmAlertDialogOverlayDirective,
+    HlmAlertDialogTitleDirective,
     ...UI_MODULE_IMPORTS,
-  ],
+    AlertComponent
+],
   providers: [
     provideIcons({
       lucideLoaderCircle,
@@ -49,6 +81,8 @@ import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
       lucideChevronsUpDown,
       lucideSearch,
       lucideX,
+      lucideTrash,
+      lucidePencil,
     }),
   ],
 })

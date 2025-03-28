@@ -68,23 +68,19 @@ export class ListComponent {
     this.selectedPack = pack;
   }
 
-
-
   deletePack(id: string): void {
-    if (confirm('Are you sure you want to delete this pack?')) {
-      this.loading = true;
-      this.packService
-        .delete(id)
-        .then(() => {
-          this.loadData();
-        })
-        .catch((error) => {
-          console.error('Error deleting pack:', error);
-        })
-        .finally(() => {
-          this.loading = false;
-        });
-    }
+    this.loading = true;
+    this.packService
+      .delete(id)
+      .then(() => {
+        this.loadData();
+      })
+      .catch((error) => {
+        console.error('Error deleting pack:', error);
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   }
 
   filterPacks(searchTerm: string) {

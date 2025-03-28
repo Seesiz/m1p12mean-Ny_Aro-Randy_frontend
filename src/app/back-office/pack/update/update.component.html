@@ -48,7 +48,7 @@
           type="button"
           hlmBtn
         >
-          Select prestation
+          {{ "prestation_detail.select_service" | translate }}
           <ng-icon hlm size="sm" name="lucideChevronsUpDown" />
         </button>
         <hlm-command
@@ -58,9 +58,14 @@
         >
           <hlm-command-search>
             <ng-icon hlm name="lucideSearch" />
-            <input placeholder="Search framework..." hlm-command-search-input />
+            <input
+              placeholder="{{ 'common.search' | translate }}"
+              hlm-command-search-input
+            />
           </hlm-command-search>
-          <div *brnCommandEmpty hlmCommandEmpty>No results found.</div>
+          <div *brnCommandEmpty hlmCommandEmpty>
+            {{ "common.no-result" | translate }}
+          </div>
           <hlm-command-list>
             <hlm-command-group>
               <button
@@ -75,17 +80,18 @@
           </hlm-command-list>
         </hlm-command>
       </brn-popover>
-      <div class="bg-background flex flex-col gap-2">
+      <div class="bg-background flex flex-wrap gap-2">
         <div
           *ngFor="let prestation of currentPrestations()"
-          class="flex text-sm px-4 items-center justify-between border rounded-4xl"
+          hlmBadge
+          class="flex text-sm items-center gap-2 w-fit"
         >
           {{ prestation.label }}
           <button
             hlmBtn
             variant="ghost"
             type="button"
-            class="p-0"
+            class="p-0 hover:bg-transparent"
             (click)="removePrestation(prestation)"
           >
             <ng-icon hlm name="lucideX" size="sm" />

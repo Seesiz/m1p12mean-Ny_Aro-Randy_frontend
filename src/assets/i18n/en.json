@@ -31,7 +31,8 @@
     "edit": "Edit",
     "delete": "Delete",
     "pack": "Pack",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "no-result": "No results found"
   },
   "user_detail": {
     "list": "Users list",
@@ -71,7 +72,8 @@
     "update_prestation": "Update prestation",
     "update_prestation_text": "Update details of prestation",
     "delete": "Delete service",
-    "delete_text": "Are you sure you want to delete this service?"
+    "delete_text": "Are you sure you want to delete this service?",
+    "select_service": "Select service"
   },
   "home-page": {
     "see-our-services": "See our services",
@@ -125,6 +127,8 @@
   "pack_detail": {
     "update": "Update pack",
     "update_text": "Update details of pack",
-    "add_pack": "Add pack"
+    "add_pack": "Add pack",
+    "delete": "Delete pack",
+    "delete_text": "Are you sure you want to delete this pack?"
   }
 }
