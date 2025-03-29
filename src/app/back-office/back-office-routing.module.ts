@@ -75,6 +75,17 @@ export const backOfficeRoutes: Routes = [
         },
       },
       {
+        path: 'mission',
+        loadChildren: () =>
+          import('./mission/mission.module').then((m) => m.MissionModule),
+        canActivate: [AccessGuard],
+        data: {
+          role: [Role.manager],
+          label: 'mission',
+          icon: 'file',
+        },
+      },
+      {
         path: 'user/:role',
         loadChildren: () =>
           import('./user/user.module').then((m) => m.UserModule),

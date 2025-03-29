@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { IRendez_vous, IUser } from '@/types/output';
 import { RendezVousService } from '@/app/back-office/services/rendez_vous/rendez-vous.service';
 import { FormControl } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
-import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -11,7 +11,7 @@ import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css'],
 })
-export class ListComponent implements OnInit, OnDestroy {
+export class ListComponent implements OnInit {
   loading = signal(false);
   rendez_vous = signal<IRendez_vous[]>([]);
   filteredRendezVous = signal<IRendez_vous[]>([]);
@@ -26,8 +26,6 @@ export class ListComponent implements OnInit, OnDestroy {
   itemsPerPage = 10;
   totalItems = 0;
 
-  private destroy$ = new Subject<void>();
-
   constructor(
     private rendezVousService: RendezVousService,
     private authService: AuthService
@@ -38,15 +36,10 @@ export class ListComponent implements OnInit, OnDestroy {
     this.userConnected.set(this.authService.getUserConnected());
 
     this.searchControl.valueChanges
-      .pipe(takeUntil(this.destroy$), debounceTime(300), distinctUntilChanged())
+      .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((searchTerm) => {
         this.filterRendezVous(searchTerm || '');
       });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   onStatusChange(status: 'pending' | 'confirmed' | 'cancelled'): void {
