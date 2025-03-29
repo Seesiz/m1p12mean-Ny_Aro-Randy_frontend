@@ -54,6 +54,7 @@ export class UpdateComponent {
       this.updateForm.patchValue({
         label: this.selectedPack.label,
         price: this.selectedPack.price,
+        remise: this.selectedPack.remise,
       });
       this.currentPrestations.set(this.selectedPack.services);
       if (
@@ -98,6 +99,7 @@ export class UpdateComponent {
     if (this.updateForm.valid && !this.selectedPack) {
       const newPack = {
         ...this.updateForm.value,
+        remise: this.updateForm.get('remise')?.value,
       };
       this.packService
         .savePack(newPack)
@@ -112,6 +114,7 @@ export class UpdateComponent {
       const updatedPack = {
         _id: this.selectedPack._id,
         ...this.updateForm.value,
+        remise: this.updateForm.get('remise')?.value,
       };
 
       this.packService
@@ -119,7 +122,8 @@ export class UpdateComponent {
           updatedPack._id,
           updatedPack.label,
           updatedPack.price,
-          updatedPack.prestations
+          updatedPack.prestations,
+          updatedPack.remise
         )
         .then(
           () => {

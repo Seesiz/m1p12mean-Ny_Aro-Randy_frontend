@@ -43,6 +43,21 @@ type IPack = {
   price: number;
   label: string;
   services: IPrestation[];
+  remise: number;
 };
 
-export type { IUser, IRole, IRendez_vous, IPrestation, IPack };
+type IMission = {
+  _id: string;
+  client: IUser;
+  manager: IUser;
+  services: (Omit<IPrestation, 'type'> & { status: string })[];
+  dateDebut: Date;
+  infoMission: {
+    marque: string;
+    model: string;
+    serialNumber: string;
+    description: string;
+  };
+};
+
+export type { IUser, IRole, IRendez_vous, IPrestation, IPack, IMission };

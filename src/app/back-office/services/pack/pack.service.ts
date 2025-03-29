@@ -50,15 +50,16 @@ export class PackService {
     id: string,
     label: string,
     price: number,
-    prestations: string[]
+    prestations: string[],
+    remise: number
   ): Promise<IPack> {
     try {
       const data = {
         label,
         price,
         services: prestations,
+        remise: remise,
       };
-      console.log(data);
 
       const response: AxiosResponse<IPack> = await axios.put(
         `${environment.apiUrl}/packs/${id}`,
