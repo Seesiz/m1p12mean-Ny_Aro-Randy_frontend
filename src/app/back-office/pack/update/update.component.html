@@ -22,18 +22,20 @@
         />
       </div>
       <div class="items-center grid grid-cols-4 gap-4">
-        <label hlmLabel for="price" class="text-right">{{
-          "prestation_detail.price" | translate
+        <label hlmLabel for="remise" class="text-right">{{
+          "remise" | translate
         }}</label>
         <input
           hlmInput
-          id="price"
-          formControlName="price"
+          id="remise"
+          formControlName="remise"
           class="col-span-3"
           type="number"
-          [value]="selectedPack?.price"
+          (input)="calculatePrix()"
         />
       </div>
+
+      <div><b>Total :</b> {{ prixTotal() }}</div>
       <brn-popover
         [state]="state()"
         (stateChanged)="stateChanged($event)"

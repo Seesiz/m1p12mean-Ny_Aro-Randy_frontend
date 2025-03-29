@@ -36,7 +36,7 @@
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
-    "edit_profile": "Editer le profil",
+    "edit_profile": "Mettre à jour le profil",
     "add_user": "Ajouter un utilisateur",
     "lastname": "Nom",
     "firstname": "Prénom",
@@ -45,7 +45,7 @@
     "role": "Rôle",
     "create_user": "Créer un utilisateur",
     "edit_info": "Modifier les informations",
-    "make_changes": "Faire des modifications sur votre profil. Cliquez sur sauvegarder quand vous avez fini."
+    "make_changes": "Mettre à jour les informations du profil. Cliquez sur sauvegarder quand vous avez fini."
   },
   "rdv_detail": {
     "modal_info": "Information du rendez-vous",
@@ -66,7 +66,7 @@
     "description": "Description",
     "price": "Prix",
     "add_prestation": "Ajouter une prestation",
-    "add_prestation_text": "Ajouter les services à votre liste",
+    "add_prestation_text": "Soyez créatif et flexible dans l'ajout de prestations pour fidéliser votre clientèle et booster vos ventes.",
     "duree": "Durée",
     "status": "Status",
     "update_prestation": "Modifier la prestation",
@@ -126,7 +126,7 @@
   },
   "pack_detail": {
     "update": "Mettre à jour le pack",
-    "update_text": "Mettre à jour les détails du pack",
+    "update_text": "Actualiser le packaging en y apportant des changements significatifs et en mettant à jour tous les détails du pack pour le rendre plus attrayant et moderne.",
     "add_pack": "Ajouter un pack",
     "delete": "Supprimer le pack",
     "delete_text": "Êtes-vous sûr de vouloir supprimer ce pack ?"

@@ -24,8 +24,9 @@ export class UpdateComponent {
   @Input() prestations: IPrestation[] = [];
   @Output() loadPack = new EventEmitter<void>();
 
-  public currentPrestations = signal<IPrestation[]>([]);
-  public state = signal<'closed' | 'open'>('closed');
+  currentPrestations = signal<IPrestation[]>([]);
+  state = signal<'closed' | 'open'>('closed');
+  prixTotal = signal(0);
   selectablePrestations = signal<IPrestation[]>([]);
 
   updateForm: FormGroup;
@@ -33,8 +34,9 @@ export class UpdateComponent {
   constructor(private fb: FormBuilder, private packService: PackService) {
     this.updateForm = this.fb.group({
       label: ['', Validators.required],
-      price: ['', [Validators.required, Validators.min(0)]],
+      price: [0, [Validators.required, Validators.min(0)]],
       prestations: [[]],
+      remise: [0, Validators.required],
     });
 
     effect(() => {
@@ -70,6 +72,26 @@ export class UpdateComponent {
           ?.setValue(this.selectedPack.services.map((s) => s._id));
       }
     }
+
+    this.calculatePrix();
+  }
+
+  calculatePrix() {
+    const prestationSumm = this.currentPrestations().reduce(
+      (acc, p) => acc + p.price,
+      0
+    );
+    const prixTotal = this.calculateWithRemise(prestationSumm);
+    this.updateForm.get('price')?.setValue(prixTotal);
+  }
+
+  calculateWithRemise(prestationSumm: number) {
+    const remiseValue = this.updateForm.get('remise')?.value || 0;
+    const remise = 100 - remiseValue;
+    const prixTotal = (prestationSumm * remise) / 100;
+    this.prixTotal.set(prixTotal);
+
+    return prixTotal;
   }
 
   onSubmit(): void {
@@ -120,6 +142,7 @@ export class UpdateComponent {
     this.selectablePrestations.update((value) =>
       value.filter((p) => p._id !== prestation._id)
     );
+    this.calculatePrix();
   }
 
   removePrestation(prestation: IPrestation) {
@@ -127,5 +150,6 @@ export class UpdateComponent {
       value.filter((p) => p._id !== prestation._id)
     );
     this.selectablePrestations.update((value) => [...value, prestation]);
+    this.calculatePrix();
   }
 }
