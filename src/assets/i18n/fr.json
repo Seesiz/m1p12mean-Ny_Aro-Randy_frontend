@@ -33,7 +33,8 @@
     "delete": "Supprimer",
     "pack": "Pack",
     "cancel": "Annuler",
-    "no-result": "Aucun résultat trouvé"
+    "no-result": "Aucun résultat trouvé",
+    "full_name": "Nom complet"
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
@@ -132,5 +133,10 @@
     "add_pack": "Ajouter un pack",
     "delete": "Supprimer le pack",
     "delete_text": "Êtes-vous sûr de vouloir supprimer ce pack ?"
+  },
+  "mission": {
+    "list": "Liste des missions",
+    "client": "Client",
+    "dateDebut": "Date de début"
   }
 }

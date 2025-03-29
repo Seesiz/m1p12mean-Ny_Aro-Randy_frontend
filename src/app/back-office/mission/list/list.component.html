@@ -1,0 +1,39 @@
+<section class="p-2">
+  <div class="flex justify-between">
+    <input class="w-80" hlmInput placeholder="Search" type="search" />
+  </div>
+  <hlm-table class="w-full min-w-[400px]">
+    <hlm-caption>{{ "mission.list" | translate }}</hlm-caption>
+    <hlm-trow>
+      <hlm-th class="w-60">{{ "common.full_name" | translate }}</hlm-th>
+      <hlm-th class="w-60">{{ "mission.dateDebut" | translate }}</hlm-th>
+      <hlm-th class="flex-1">{{
+        "prestation_detail.description" | translate
+      }}</hlm-th>
+      <hlm-th class="justify-end">Action</hlm-th>
+    </hlm-trow>
+    @for (mission of missions; track mission._id) {
+    <hlm-trow class="group">
+      <hlm-td truncate class="font-medium w-60">{{
+        mission.client.lastname + " " + mission.client.firstname
+      }}</hlm-td>
+      <hlm-td class="w-60">{{
+        mission.dateDebut | date : "dd/MM/yyyy"
+      }}</hlm-td>
+      <hlm-td class="flex-1">{{ mission.infoMission.description }}</hlm-td>
+      <hlm-td class="justify-end">
+        <hlm-dialog>
+          <button
+            brnDialogTrigger
+            hlmBtn
+            class="invisible group-hover:visible"
+            variant="ghost"
+          >
+            <ng-icon name="lucidePencil" hlm size="sm" />
+          </button>
+        </hlm-dialog>
+      </hlm-td>
+    </hlm-trow>
+    }
+  </hlm-table>
+</section>
