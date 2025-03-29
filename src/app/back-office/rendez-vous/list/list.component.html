@@ -50,6 +50,16 @@
       }}</hlm-td>
       <hlm-td class="flex-1">{{ rendez_vous.info.contact }}</hlm-td>
       <hlm-td class="justify-end">
+        <button
+          variant="ghost"
+          brnDialogTrigger
+          hlmBtn
+          *ngIf="rendez_vous.status === 'confirmed'"
+          class="invisible group-hover:visible"
+          [routerLink]="['create-mission', { rdvId: rendez_vous._id }]"
+        >
+          <ng-icon hlm name="lucideFilePen" size="sm"></ng-icon>
+        </button>
         <hlm-dialog>
           <button
             variant="ghost"

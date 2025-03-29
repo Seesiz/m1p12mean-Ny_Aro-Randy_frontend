@@ -4,7 +4,8 @@
     "users": "Users",
     "rendez-vous": "Appointments",
     "planning": "Planning",
-    "config": "Configuration"
+    "config": "Configuration",
+    "mission": "Mission"
   },
   "common": {
     "my-account": "My account",

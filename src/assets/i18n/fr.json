@@ -4,7 +4,8 @@
     "users": "Utilisateurs",
     "rendez-vous": "Rendez-vous",
     "planning": "Planning",
-    "config": "Configuration"
+    "config": "Configuration",
+    "mission": "Mission"
   },
   "common": {
     "my-account": "Mon compte",
@@ -122,7 +123,7 @@
     "why-choose-us-description": "Chez MECANET, nous priorisons votre satisfaction avec des services de qualité, une expertise reconnue et une transparence totale."
   },
   "dateFormats": {
-    "fullDateTime": "Le d-MM-yyyy à HH:mm",
+    "fullDateTime": "'Le' d-MM-yyyy à HH:mm",
     "fullDateWithLetters": "EEEE d MMMM yyyy à HH:mm"
   },
   "pack_detail": {

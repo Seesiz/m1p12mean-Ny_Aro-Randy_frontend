@@ -11,10 +11,11 @@ import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 import { LocalizedDatePipe } from '@/pipe/localized-date.pipe';
 import { provideIcons } from '@ng-icons/core';
-import { lucideEye, lucideLoaderCircle } from '@ng-icons/lucide';
+import { lucideEye, lucideFilePen, lucideLoaderCircle } from '@ng-icons/lucide';
+import { CreateMissionComponent } from './create-mission/create-mission.component';
 
 @NgModule({
-  declarations: [ListComponent, InfoComponent],
+  declarations: [ListComponent, InfoComponent, CreateMissionComponent],
   imports: [
     CommonModule,
     RendezVousRoutingModule,
@@ -29,6 +30,7 @@ import { lucideEye, lucideLoaderCircle } from '@ng-icons/lucide';
     provideIcons({
       lucideLoaderCircle,
       lucideEye,
+      lucideFilePen,
     }),
   ],
 })

@@ -1,0 +1,32 @@
+<section class="container flex flex-col items-center py-4">
+  <h3>{{ "common.create-mission" | translate }}</h3>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col gap-4 md:w-1/2 w-full"
+  >
+    <label hlmLabel class="flex-1">
+      {{ "common.manager" | translate }}
+      <input
+        hlmInput
+        class="w-full"
+        formControlName="manager"
+        type="text"
+        [placeholder]="'common.manager' | translate"
+      />
+    </label>
+    <div class="flex flex-row gap-2 items-center">
+      <label hlmLabel class="flex-1">
+        {{ "common.client" | translate }}
+        <input
+          hlmInput
+          class="w-full"
+          formControlName="client"
+          type="text"
+          [placeholder]="'common.client' | translate"
+        />
+      </label>
+      <button hlmBtn>{{ "user_detail.create_user" | translate }}</button>
+    </div>
+  </form>
+</section>
