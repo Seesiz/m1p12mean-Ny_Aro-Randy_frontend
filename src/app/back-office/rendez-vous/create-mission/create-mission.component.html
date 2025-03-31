@@ -89,12 +89,13 @@
           </hlm-command>
         </brn-popover>
       </label>
-      <hlm-dialog>
-        <button class="mb-1" brnDialogTrigger hlmBtn>
-          {{ "user_detail.create_user" | translate }}
-        </button>
-        <app-modal (loadUsers)="loadUser()"></app-modal>
-      </hlm-dialog>
+      <button
+        class="mb-1"
+        [routerLink]="['/dashboard/manager/user/client']"
+        hlmBtn
+      >
+        {{ "user_detail.create_user" | translate }}
+      </button>
     </div>
     <label hlmLabel class="flex-1">
       {{ "mission.dateDebut" | translate }}

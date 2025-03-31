@@ -32,13 +32,11 @@ import {
 } from '@spartan-ng/brain/popover';
 import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
 import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
-import { ModalComponent } from '../user/modal/modal.component';
 
 @NgModule({
   declarations: [ListComponent, InfoComponent, CreateMissionComponent],
   imports: [
     CommonModule,
-    ModalComponent,
     RendezVousRoutingModule,
     TranslateModule,
     ReactiveFormsModule,

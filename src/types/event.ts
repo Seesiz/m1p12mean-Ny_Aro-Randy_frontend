@@ -1,4 +1,4 @@
-import { IRendez_vous } from './output';
+import { IPlaning, IRendez_vous } from './output';
 
 type EventObject = {
   id?: string;
@@ -25,7 +25,8 @@ type EventObject = {
   dragBackgroundColor?: string;
   borderColor?: string;
   raw?: any;
-  data?: IRendez_vous;
+  rendezVous?: IRendez_vous;
+  planing?: IPlaning;
 };
 
 export { type EventObject };

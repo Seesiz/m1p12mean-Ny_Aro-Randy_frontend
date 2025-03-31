@@ -6,6 +6,8 @@ import {
   signal,
   Input,
   SimpleChanges,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
@@ -19,6 +21,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronLeft, lucideChevronRight } from '@ng-icons/lucide';
 import { FormPopupComponent } from '../../components/tui-calendar/form-popup/form-popup.component';
 import { CommonModule } from '@angular/common';
+import { IPlaning, IRendez_vous } from '@/types/output';
 
 @Component({
   selector: 'app-tui-calendar',
@@ -43,6 +46,8 @@ export class TuiCalendarComponent implements AfterViewInit {
   selectedDate = signal<Date | null>(null);
   show_data = signal<EventObject | null>(null);
   @Input() events: EventObject[] = [];
+  @Output() updateRendezVous = new EventEmitter<IRendez_vous>();
+  @Output() updatePlaning = new EventEmitter<IPlaning>();
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['events']) {
@@ -130,10 +135,41 @@ export class TuiCalendarComponent implements AfterViewInit {
         ...selectedDate.event,
         start: this.formatDateForInput(selectedDate.event.start),
         end: this.formatDateForInput(selectedDate.event.end),
-        data: this.events.find((event) => event.id === selectedDate.event.id)
-          ?.data,
+        rendezVous: this.events.find(
+          (event) => event.id === selectedDate.event.id
+        )?.rendezVous,
+        planing: this.events.find((event) => event.id === selectedDate.event.id)
+          ?.planing,
       });
       this.calendar().clearGridSelections();
+    });
+    this.calendar().on('beforeUpdateEvent', ({ event, changes }: any) => {
+      this.calendar().updateEvent(event.id, event.calendarId, changes);
+      let dataEvent = this.events.find((e) => e.id === event.id);
+      if (event.id === this.show_data()?.id) {
+        this.show_data.set(null);
+      }
+
+      if (dataEvent) {
+        if (event.calendarId === 'RENDEZ_VOUS' && dataEvent.rendezVous) {
+          dataEvent.rendezVous.date = new Date(changes.start || event.start);
+          dataEvent.rendezVous.duree = Math.floor(
+            (new Date(changes.end || event.end).getTime() -
+              new Date(changes.start || event.start).getTime()) /
+              (1000 * 60)
+          );
+
+          this.updateRendezVous.emit(dataEvent.rendezVous);
+        } else if (event.calendarId === 'MISSION' && dataEvent.planing) {
+          dataEvent.planing.dateDebut = new Date(changes.start || event.start);
+          dataEvent.planing.duree = Math.floor(
+            (new Date(changes.end || event.end).getTime() -
+              new Date(changes.start || event.start).getTime()) /
+              (1000 * 60)
+          );
+          this.updatePlaning.emit(dataEvent.planing);
+        }
+      }
     });
   }
 
@@ -158,6 +194,11 @@ export class TuiCalendarComponent implements AfterViewInit {
 
   goToToday() {
     this.calendar().today();
+  }
+
+  updatePlaningHandler(planing: EventObject) {
+    this.calendar().updateEvent(planing.id, 'MISSION', planing);
+    this.events = this.events.map((e) => (e.id === planing.id ? planing : e));
   }
 
   closeData() {

@@ -11,10 +11,9 @@ import { provideIcons } from '@ng-icons/core';
 import { lucideLoaderCircle, lucidePencil } from '@ng-icons/lucide';
 
 @NgModule({
-  declarations: [ListComponent, UpdateComponent],
+  declarations: [ListComponent, UpdateComponent, ModalComponent],
   imports: [
     CommonModule,
-    ModalComponent,
     UserRoutingModule,
     TranslateModule,
     ReactiveFormsModule,
@@ -26,6 +25,5 @@ import { lucideLoaderCircle, lucidePencil } from '@ng-icons/lucide';
       lucideLoaderCircle,
     }),
   ],
-  exports: [ModalComponent],
 })
 export class UserModule {}

@@ -1,1 +1,5 @@
-<app-tui-calendar [events]="planning()" />
+<app-tui-calendar
+  [events]="planning()"
+  (updateRendezVous)="updateRendezVous($event)"
+  (updatePlaning)="updatePlaning($event)"
+/>

@@ -68,4 +68,21 @@ type INote = {
   note: number;
 };
 
-export type { IUser, IRole, IRendez_vous, IPrestation, IPack, IMission, INote };
+type IPlaning = {
+  _id: string;
+  dateDebut: Date;
+  duree: number;
+  mecaniciens: IUser[];
+  services: IPrestation[];
+  mission: IMission;
+};
+export type {
+  IUser,
+  IRole,
+  IRendez_vous,
+  IPrestation,
+  IPack,
+  IMission,
+  INote,
+  IPlaning,
+};
