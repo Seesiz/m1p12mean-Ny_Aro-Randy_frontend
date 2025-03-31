@@ -1,13 +1,29 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '@/app/back-office/services/user/user.service';
+import { UI_MODULE_IMPORTS } from '@/types/ui.module.import';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-modal',
-  standalone: false,
+  standalone: true,
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
+  imports: [
+    ...UI_MODULE_IMPORTS,
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    TranslateModule,
+  ],
 })
 export class ModalComponent {
   userForm: FormGroup;

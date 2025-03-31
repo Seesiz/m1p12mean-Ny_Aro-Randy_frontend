@@ -1,0 +1,51 @@
+<hlm-dialog-content class="sm:max-w-[425px]" *brnDialogContent="let ctx">
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit(); ctx.close()">
+    <hlm-dialog-header>
+      <h3 hlmDialogTitle>{{ "note.add" | translate }}</h3>
+      <p hlmDialogDescription>
+        {{ "note.add_text" | translate }}
+      </p>
+    </hlm-dialog-header>
+    <div class="py-4 grid gap-4">
+      <div class="items-center grid grid-cols-4 gap-4">
+        <label hlmLabel for="fullname" class="text-right">{{
+          "common.full_name" | translate
+        }}</label>
+        <input
+          hlmInput
+          id="fullname"
+          formControlName="fullName"
+          class="col-span-3"
+        />
+      </div>
+      <div class="items-center grid grid-cols-4 gap-4">
+        <label hlmLabel for="note" class="text-right">{{
+          "note.note" | translate
+        }}</label>
+        <app-rating
+          (ratingChange)="updateForm.get('note')?.setValue($event)"
+          [rating]="updateForm.get('note')?.value"
+          [disabled]="false"
+          class="pl-2 scale-150"
+        ></app-rating>
+      </div>
+      <div class="items-start grid grid-cols-4 gap-4">
+        <label hlmLabel for="description" class="text-right mt-2"
+          >{{ "common.description" | translate }}
+        </label>
+        <textarea
+          hlmInput
+          cols="10"
+          id="description"
+          formControlName="description"
+          class="col-span-3"
+        ></textarea>
+      </div>
+    </div>
+    <hlm-dialog-footer>
+      <button hlmBtn type="submit">
+        {{ "common.save_change" | translate }}
+      </button>
+    </hlm-dialog-footer>
+  </form>
+</hlm-dialog-content>

@@ -5,7 +5,8 @@
     "rendez-vous": "Appointments",
     "planning": "Planning",
     "config": "Configuration",
-    "mission": "Mission"
+    "mission": "Mission",
+    "note": "Your review"
   },
   "common": {
     "my-account": "My account",
@@ -34,7 +35,9 @@
     "pack": "Pack",
     "cancel": "Cancel",
     "no-result": "No results found",
-    "full_name": "Full name"
+    "full_name": "Full name",
+    "description": "Description",
+    "save": "Save"
   },
   "user_detail": {
     "list": "Users list",
@@ -137,6 +140,19 @@
   "mission": {
     "list": "List of missions",
     "client": "Client",
-    "dateDebut": "Start date"
+    "dateDebut": "Start date",
+    "marque": "Brand",
+    "modele": "Model",
+    "serial_number": "Serial number",
+    "description": "Description",
+    "services": "Services",
+    "services_list": "Services list"
+  },
+  "note": {
+    "add": "Add note",
+    "add_text": "Share your valuable feedback on MECANET to help us improve our services. Your feedback is essential to our continued innovation and best meeting your needs. Thank you in advance for your contribution!",
+    "update": "Update note",
+    "update_text": "Update your review",
+    "note": "Note"
   }
 }

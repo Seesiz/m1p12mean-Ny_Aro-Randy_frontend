@@ -5,7 +5,8 @@
     "rendez-vous": "Rendez-vous",
     "planning": "Planning",
     "config": "Configuration",
-    "mission": "Mission"
+    "mission": "Mission",
+    "note": "Votre avis"
   },
   "common": {
     "my-account": "Mon compte",
@@ -34,7 +35,9 @@
     "pack": "Pack",
     "cancel": "Annuler",
     "no-result": "Aucun résultat trouvé",
-    "full_name": "Nom complet"
+    "full_name": "Nom complet",
+    "description": "Description",
+    "save": "Sauvegarder"
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
@@ -137,6 +140,19 @@
   "mission": {
     "list": "Liste des missions",
     "client": "Client",
-    "dateDebut": "Date de début"
+    "dateDebut": "Date de début",
+    "marque": "Marque",
+    "modele": "Modèle",
+    "serial_number": "Matriculation",
+    "description": "Description",
+    "services": "Services",
+    "services_list": "Services list"
+  },
+  "note": {
+    "add": "Ajouter une note",
+    "add_text": "Partagez vos précieuses opinions sur MECANET pour nous aider à perfectionner nos prestations. Vos retours d'expérience sont essentiels pour continuer à innover et répondre au mieux à vos besoins. Merci d'avance pour votre contribution !",
+    "update": "Mettre à jour la note",
+    "update_text": "Mettez à jour votre avis",
+    "note": "Note"
   }
 }

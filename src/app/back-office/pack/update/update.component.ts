@@ -11,8 +11,6 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PackService } from '../../services/pack/pack.service';
 
-type Framework = { label: string; value: string };
-
 @Component({
   selector: 'app-update',
   standalone: false,

@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { IMission } from '@/types/output';
+import { INote } from '@/types/output';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { environment } from '@/environments/environments';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MissionService {
+export class NoteService {
   constructor() {}
 
-  async getAll(): Promise<IMission[]> {
+  async getAll(): Promise<INote[]> {
     try {
-      const response: AxiosResponse<IMission[]> = await axios.get(
-        `${environment.apiUrl}/missions`
+      const response: AxiosResponse<INote[]> = await axios.get(
+        `${environment.apiUrl}/notes`
       );
       return response.data;
     } catch (error) {
@@ -22,11 +22,11 @@ export class MissionService {
     }
   }
 
-  async add(mission: Omit<IMission, '_id'>): Promise<IMission> {
+  async add(note: INote): Promise<INote> {
     try {
-      const response: AxiosResponse<IMission> = await axios.post(
-        `${environment.apiUrl}/missions`,
-        mission
+      const response: AxiosResponse<INote> = await axios.post(
+        `${environment.apiUrl}/notes`,
+        note
       );
       return response.data;
     } catch (error) {
