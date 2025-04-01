@@ -22,6 +22,19 @@ export class MissionService {
     }
   }
 
+  async getMission(id: string): Promise<IMission> {
+    try {
+      const response: AxiosResponse<IMission> = await axios.get(
+        `${environment.apiUrl}/missions/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
+
   async add(mission: Omit<IMission, '_id'>): Promise<IMission> {
     try {
       const response: AxiosResponse<IMission> = await axios.post(

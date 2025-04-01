@@ -42,6 +42,7 @@
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
+    "select_user": "Sélectionner un utilisateur",
     "edit_profile": "Mettre à jour le profil",
     "add_user": "Ajouter un utilisateur",
     "lastname": "Nom",
@@ -121,6 +122,10 @@
     "message": "Message"
   },
   "calendar": {
+    "organizer": "organisateur",
+    "guest": "invité",
+    "guests": "Invités",
+    "content": "Contenu",
     "today": "Aujourd'hui",
     "month": "Mois",
     "week": "Semaine",
@@ -138,8 +143,15 @@
     "delete": "Supprimer le pack",
     "delete_text": "Êtes-vous sûr de vouloir supprimer ce pack ?"
   },
+  "mission_detail": {
+    "select_mission": "Sélectionner une mission",
+    "modify_event": "Modifier l'événement",
+    "schedule_mission": "Planifier une mission"
+  },
   "mission": {
     "list": "Liste des missions",
+    "start": "Début",
+    "end": "Fin",
     "client": "Client",
     "dateDebut": "Date de début",
     "marque": "Marque",

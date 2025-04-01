@@ -1,7 +1,11 @@
 <section class="border-l w-full h-full p-2 pl-4 overflow-y-auto" *ngIf="data">
   <header class="flex items-center justify-between mb-4">
     <h1 class="text-primary font-bold">
-      {{ data.calendarId ? "Modifier l'évenement" : "Plannifié une mission" }}
+      {{
+        data.calendarId
+          ? ("mission_detail.modify_event" | translate)
+          : ("mission_detail.schedule_mission" | translate)
+      }}
     </h1>
     <button hlmBtn variant="ghost" (click)="closeData()" class="rounded-full">
       <ng-icon name="lucideX"></ng-icon>
@@ -13,7 +17,7 @@
       class="flex flex-col gap-1"
       *ngIf="data.calendarId !== 'RENDEZ_VOUS'"
     >
-      Mission
+      {{ "common.service" | translate }}
       <brn-popover
         [state]="state()"
         (stateChanged)="stateChanged($event)"
@@ -84,7 +88,7 @@
       </brn-popover>
     </label>
     <label hlmLabel
-      >Debut
+      >{{ "mission.start" | translate }}
       <input
         [disabled]="data.calendarId === 'RENDEZ_VOUS'"
         class="w-full"
@@ -94,7 +98,7 @@
       />
     </label>
     <label hlmLabel
-      >Fin
+      >{{ "mission.end" | translate }}
       <input
         [disabled]="data.calendarId === 'RENDEZ_VOUS'"
         class="w-full"
@@ -108,7 +112,7 @@
       class="flex flex-col gap-1"
       *ngIf="data.calendarId !== 'RENDEZ_VOUS'"
     >
-      Mechanicien
+      {{ "common.mechanic" | translate }}
       <brn-popover
         [state]="mechanicState()"
         (stateChanged)="mechanicStateChanged($event)"
@@ -181,10 +185,16 @@
       class="flex flex-col gap-2 items-start bg-background p-2 px-4 rounded-2xl text-sm"
       *ngIf="data.calendarId === 'RENDEZ_VOUS'"
     >
-      <b>Invités</b>
+      <b>{{ "calendar.guests" | translate }}</b>
       @for(people of data.attendees; track people; let i = $index){
       <li>
-        <span> {{ people }} ({{ i === 0 ? "organisateur" : "invité" }}) </span>
+        <span>
+          {{ people }} ({{
+            i === 0
+              ? ("calendar.organizer" | translate)
+              : ("calendar.guest" | translate)
+          }})
+        </span>
       </li>
       }
     </ul>
@@ -192,7 +202,7 @@
       class="flex flex-col gap-2 items-start bg-background p-2 px-4 rounded-2xl text-sm"
       *ngIf="data.calendarId === 'RENDEZ_VOUS'"
     >
-      <b>Contenu</b>
+      <b>{{ "calendar.content" | translate }}</b>
       <p>{{ data.body }}</p>
     </div>
   </div>

@@ -1,0 +1,77 @@
+<section class="p-2 w-full h-full flex flex-col gap-2">
+  <header>
+    <h2 class="text-2xl font-bold">
+      Suivi de la mission :
+      {{
+        missions()?.infoMission?.marque +
+          " " +
+          missions()?.infoMission?.model +
+          " " +
+          missions()?.infoMission?.serialNumber
+      }}
+    </h2>
+  </header>
+  <main
+    class="flex md:flex-row flex-col bg-background flex-1 rounded-2xl overflow-hidden p-2 gap-4"
+  >
+    <!-- Pending -->
+    <div
+      class="pending md:w-3/12 w-full rounded-xl max-h-full h-fit flex flex-col overflow-hidden"
+      hlmCard
+    >
+      <div class="shrink-0 p-4 bg-destructive text-white font-bold">
+        En attente ⏳
+      </div>
+      <div
+        class="taches bg-background rounded-xl flex-1 m-2 overflow-y-auto flex flex-col gap-2 p-1"
+      >
+        <div
+          hlmCard
+          class="text-primary shadow-none p-4"
+          *ngFor="let task of pending()"
+        >
+          {{ task.label }}
+        </div>
+        <button hlmBtn variant="ghost">
+          <ng-icon name="lucidePlus" hlm size="sm"></ng-icon>
+          Ajouter
+        </button>
+      </div>
+      <hlm-caption>{{ "mission.list_pending" | translate }}</hlm-caption>
+    </div>
+    <!-- Progress -->
+    <div
+      class="pending md:w-3/12 w-full rounded-xl max-h-full h-fit flex flex-col overflow-hidden"
+      hlmCard
+    >
+      <div class="shrink-0 p-4 text-primary font-bold">En cours 🚀</div>
+      <div
+        class="taches bg-background rounded-xl flex-1 m-2 overflow-y-auto flex flex-col gap-2 p-1"
+      >
+        <button hlmBtn variant="ghost">
+          <ng-icon name="lucidePlus" hlm size="sm"></ng-icon>
+          Ajouter
+        </button>
+      </div>
+      <hlm-caption>{{ "mission.list_progress" | translate }}</hlm-caption>
+    </div>
+    <!-- Done -->
+    <div
+      class="pending md:w-3/12 w-full rounded-xl max-h-full h-fit flex flex-col overflow-hidden"
+      hlmCard
+    >
+      <div class="shrink-0 p-4 bg-green-300 text-primary font-bold">
+        Terminé 🎉
+      </div>
+      <div
+        class="taches bg-background rounded-xl flex-1 m-2 overflow-y-auto flex flex-col gap-2 p-1"
+      >
+        <button hlmBtn variant="ghost">
+          <ng-icon name="lucidePlus" hlm size="sm"></ng-icon>
+          Ajouter
+        </button>
+      </div>
+      <hlm-caption>{{ "mission.list_progress" | translate }}</hlm-caption>
+    </div>
+  </main>
+</section>

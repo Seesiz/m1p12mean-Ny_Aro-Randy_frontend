@@ -3,17 +3,25 @@ import { CommonModule } from '@angular/common';
 import { UI_MODULE_IMPORTS } from '@/types/ui.module.import';
 
 import { MissionRoutingModule } from './mission-routing.module';
-import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { lucideEye, lucidePlus } from '@ng-icons/lucide';
+import { provideIcons } from '@ng-icons/core';
+import { SuiviComponent } from './suivi/suivi.component';
 
 @NgModule({
-  declarations: [CreateComponent, ListComponent],
+  declarations: [ListComponent, SuiviComponent],
   imports: [
     CommonModule,
     MissionRoutingModule,
     TranslateModule,
     ...UI_MODULE_IMPORTS,
+  ],
+  providers: [
+    provideIcons({
+      lucideEye,
+      lucidePlus,
+    }),
   ],
 })
 export class MissionModule {}
