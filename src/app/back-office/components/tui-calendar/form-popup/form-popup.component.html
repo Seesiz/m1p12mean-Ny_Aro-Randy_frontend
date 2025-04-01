@@ -1,18 +1,227 @@
-<section class="border-l w-full h-full p-2 pl-4" *ngIf="data">
-  <header class="flex items-center justify-between">
-    <h1 class="text-primary">Ajouter un événement</h1>
+<section class="border-l w-full h-full p-2 pl-4 overflow-y-auto" *ngIf="data">
+  <header class="flex items-center justify-between mb-4">
+    <h1 class="text-primary font-bold">
+      {{
+        data.calendarId
+          ? ("mission_detail.modify_event" | translate)
+          : ("mission_detail.schedule_mission" | translate)
+      }}
+    </h1>
     <button hlmBtn variant="ghost" (click)="closeData()" class="rounded-full">
       <ng-icon name="lucideX"></ng-icon>
     </button>
   </header>
-  <div class="flex flex-col gap-2">
-    <label hlmLabel
-      >Debut
-      <input class="w-80" hlmInput type="datetime-local" [value]="data.start" />
+  <div class="flex flex-col gap-2 w-full">
+    <label
+      hlmLabel
+      class="flex flex-col gap-1"
+      *ngIf="data.calendarId !== 'RENDEZ_VOUS'"
+    >
+      {{ "common.service" | translate }}
+      <brn-popover
+        [state]="state()"
+        (stateChanged)="stateChanged($event)"
+        sideOffset="5"
+        class="w-full"
+      >
+        <button
+          class="w-full justify-between"
+          id="edit-profile"
+          variant="outline"
+          brnPopoverTrigger
+          hlmBtn
+        >
+          {{
+            currentMission()
+              ? currentMission()?.infoMission?.marque +
+                " " +
+                currentMission()?.infoMission?.model +
+                " <" +
+                currentMission()?.infoMission?.serialNumber +
+                ">"
+              : ("mission_detail.select_mission" | translate)
+          }}
+          <ng-icon hlm size="sm" name="lucideChevronsUpDown" />
+        </button>
+        <hlm-command
+          *brnPopoverContent="let ctx"
+          hlmPopoverContent
+          class="p-0 w-full"
+        >
+          <hlm-command-search>
+            <ng-icon hlm name="lucideSearch" />
+            <input
+              placeholder="{{ 'common.search' | translate }}"
+              hlm-command-search-input
+            />
+          </hlm-command-search>
+          <div *brnCommandEmpty hlmCommandEmpty>
+            {{ "common.no-result" | translate }}
+          </div>
+          <hlm-command-list>
+            <hlm-command-group>
+              <button
+                *ngFor="let mission of missions()"
+                hlm-command-item
+                [value]="
+                  mission.infoMission.marque +
+                  ' ' +
+                  mission.infoMission.model +
+                  ' <' +
+                  mission.infoMission.serialNumber +
+                  '>'
+                "
+                (selected)="commandSelected(mission)"
+              >
+                {{
+                  mission.infoMission.marque +
+                    " " +
+                    mission.infoMission.model +
+                    " <" +
+                    mission.infoMission.serialNumber +
+                    ">"
+                }}
+              </button>
+            </hlm-command-group>
+          </hlm-command-list>
+        </hlm-command>
+      </brn-popover>
     </label>
     <label hlmLabel
-      >Fin
-      <input class="w-80" hlmInput type="datetime-local" [value]="data.end" />
+      >{{ "mission.start" | translate }}
+      <input
+        [disabled]="data.calendarId === 'RENDEZ_VOUS'"
+        class="w-full"
+        hlmInput
+        type="datetime-local"
+        [(ngModel)]="data.start"
+      />
     </label>
+    <label hlmLabel
+      >{{ "mission.end" | translate }}
+      <input
+        [disabled]="data.calendarId === 'RENDEZ_VOUS'"
+        class="w-full"
+        hlmInput
+        type="datetime-local"
+        [(ngModel)]="data.end"
+      />
+    </label>
+    <label
+      hlmLabel
+      class="flex flex-col gap-1"
+      *ngIf="data.calendarId !== 'RENDEZ_VOUS'"
+    >
+      {{ "common.mechanic" | translate }}
+      <brn-popover
+        [state]="mechanicState()"
+        (stateChanged)="mechanicStateChanged($event)"
+        sideOffset="5"
+        class="w-full"
+      >
+        <button
+          class="w-full justify-between"
+          id="edit-profile"
+          variant="outline"
+          brnPopoverTrigger
+          hlmBtn
+        >
+          {{ "user_detail.select_user" | translate }}
+          <ng-icon hlm size="sm" name="lucideChevronsUpDown" />
+        </button>
+        <hlm-command
+          *brnPopoverContent="let ctx"
+          hlmPopoverContent
+          class="p-0 w-full"
+        >
+          <hlm-command-search>
+            <ng-icon hlm name="lucideSearch" />
+            <input
+              placeholder="{{ 'common.search' | translate }}"
+              hlm-command-search-input
+            />
+          </hlm-command-search>
+          <div *brnCommandEmpty hlmCommandEmpty>
+            {{ "common.no-result" | translate }}
+          </div>
+          <hlm-command-list>
+            <hlm-command-group>
+              <button
+                *ngFor="let mechanics of selectableMechanics()"
+                hlm-command-item
+                [value]="
+                  mechanics.firstname +
+                  ' ' +
+                  mechanics.lastname +
+                  ' <' +
+                  mechanics.email +
+                  '>'
+                "
+                (selected)="mechanicsSelected(mechanics)"
+              >
+                {{ mechanics.firstname + " <" + mechanics.email + ">" }}
+              </button>
+            </hlm-command-group>
+          </hlm-command-list>
+        </hlm-command>
+      </brn-popover>
+    </label>
+    <ul
+      class="flex flex-col gap-2 items-start bg-background p-2 px-4 rounded-2xl text-sm"
+      *ngIf="data.calendarId !== 'RENDEZ_VOUS'"
+    >
+      @for(user of currentMechanic(); track user._id; let i = $index){
+      <li class="flex items-center justify-between">
+        <span>
+          {{ user.firstname + " " + user.lastname + " <" + user.email + ">" }}
+        </span>
+        <button (click)="removeMechanic(user)">
+          <ng-icon name="lucideX"></ng-icon>
+        </button>
+      </li>
+      }
+    </ul>
+    <ul
+      class="flex flex-col gap-2 items-start bg-background p-2 px-4 rounded-2xl text-sm"
+      *ngIf="data.calendarId === 'RENDEZ_VOUS'"
+    >
+      <b>{{ "calendar.guests" | translate }}</b>
+      @for(people of data.attendees; track people; let i = $index){
+      <li>
+        <span>
+          {{ people }} ({{
+            i === 0
+              ? ("calendar.organizer" | translate)
+              : ("calendar.guest" | translate)
+          }})
+        </span>
+      </li>
+      }
+    </ul>
+    <div
+      class="flex flex-col gap-2 items-start bg-background p-2 px-4 rounded-2xl text-sm"
+      *ngIf="data.calendarId === 'RENDEZ_VOUS'"
+    >
+      <b>{{ "calendar.content" | translate }}</b>
+      <p>{{ data.body }}</p>
+    </div>
   </div>
+  <footer class="flex items-center justify-between w-full mt-2">
+    <button
+      hlmBtn
+      variant="default"
+      (click)="save()"
+      *ngIf="data.calendarId !== 'RENDEZ_VOUS'"
+    >
+      {{ "common.save" | translate }}
+    </button>
+    <button
+      hlmBtn
+      variant="ghost"
+      [routerLink]="['../mission', data.planing?.mission?._id, 'suivi']"
+      *ngIf="data.calendarId !== 'RENDEZ_VOUS'"
+    >
+      {{ "common.show_detail" | translate }}
+    </button>
+  </footer>
 </section>

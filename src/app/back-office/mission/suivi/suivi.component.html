@@ -1,0 +1,112 @@
+<section class="p-2 w-full h-full flex flex-col gap-1 transition-all">
+  <header>
+    <h2 class="text-2xl font-bold">
+      Suivi de la mission :
+      {{
+        missions()?.infoMission?.marque +
+          " " +
+          missions()?.infoMission?.model +
+          " " +
+          missions()?.infoMission?.serialNumber
+      }}
+    </h2>
+  </header>
+  <main
+    class="flex md:flex-row flex-col bg-background flex-1 rounded-2xl overflow-hidden p-2 gap-4"
+  >
+    <!-- Pending -->
+    <div
+      class="pending w-full rounded-xl max-h-full h-fit flex flex-col overflow-hidden"
+      hlmCard
+    >
+      <div class="shrink-0 p-4 bg-destructive text-white font-bold">
+        En attente ⏳
+      </div>
+      <div
+        class="taches bg-background rounded-xl flex-1 m-2 overflow-y-auto flex flex-col gap-1 p-1"
+        cdkDropList
+        #pendingList="cdkDropList"
+        [cdkDropListData]="pending()"
+        [cdkDropListConnectedTo]="[progressList, doneList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          hlmCard
+          class="text-primary shadow-none p-4 cursor-grab active:cursor-grabbing focus:cursor-grabbing service"
+          *ngFor="let task of pending()"
+          cdkDrag
+        >
+          <div class="placeholder" *cdkDragPlaceholder></div>
+          {{ task.label }}
+        </div>
+      </div>
+      <button hlmBtn variant="ghost" class="mx-2">
+        <ng-icon name="lucidePlus" hlm size="sm"></ng-icon>
+        Ajouter
+      </button>
+      <hlm-caption>{{ "mission.list_pending" | translate }}</hlm-caption>
+    </div>
+    <!-- Progress -->
+    <div
+      class="pending w-full rounded-xl max-h-full h-fit flex flex-col overflow-hidden"
+      hlmCard
+    >
+      <div class="shrink-0 p-4 text-primary font-bold">En cours 🚀</div>
+      <div
+        class="taches bg-background rounded-xl flex-1 m-2 overflow-y-auto flex flex-col gap-1 p-1"
+        cdkDropList
+        #progressList="cdkDropList"
+        [cdkDropListData]="inProgress()"
+        [cdkDropListConnectedTo]="[pendingList, doneList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          hlmCard
+          class="text-primary shadow-none p-4 cursor-grab active:cursor-grabbing focus:cursor-grabbing service"
+          *ngFor="let task of inProgress()"
+          cdkDrag
+        >
+          <div class="placeholder" *cdkDragPlaceholder></div>
+          {{ task.label }}
+        </div>
+      </div>
+      <button hlmBtn variant="ghost" class="mx-2">
+        <ng-icon name="lucidePlus" hlm size="sm"></ng-icon>
+        Ajouter
+      </button>
+      <hlm-caption>{{ "mission.list_progress" | translate }}</hlm-caption>
+    </div>
+    <!-- Done -->
+    <div
+      class="pending w-full rounded-xl max-h-full h-fit flex flex-col overflow-hidden"
+      hlmCard
+    >
+      <div class="shrink-0 p-4 bg-green-300 text-primary font-bold">
+        Terminé 🎉
+      </div>
+      <div
+        class="taches bg-background rounded-xl flex-1 m-2 overflow-y-auto flex flex-col gap-1 p-1"
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="done()"
+        [cdkDropListConnectedTo]="[pendingList, progressList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          hlmCard
+          class="text-primary shadow-none p-4 cursor-grab active:cursor-grabbing focus:cursor-grabbing service"
+          *ngFor="let task of done()"
+          cdkDrag
+        >
+          <div class="placeholder text-primary" *cdkDragPlaceholder></div>
+          {{ task.label }}
+        </div>
+      </div>
+      <button hlmBtn variant="ghost" class="mx-2">
+        <ng-icon name="lucidePlus" hlm size="sm"></ng-icon>
+        Ajouter
+      </button>
+      <hlm-caption>{{ "mission.list_done" | translate }}</hlm-caption>
+    </div>
+  </main>
+</section>

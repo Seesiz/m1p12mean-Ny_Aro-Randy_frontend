@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { IRendez_vous, IUser } from '@/types/output';
 import { RendezVousService } from '@/app/back-office/services/rendez_vous/rendez-vous.service';
 import { FormControl } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
-import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -11,11 +11,13 @@ import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css'],
 })
-export class ListComponent implements OnInit, OnDestroy {
+export class ListComponent implements OnInit {
   loading = signal(false);
   rendez_vous = signal<IRendez_vous[]>([]);
   filteredRendezVous = signal<IRendez_vous[]>([]);
-  selectedStatus = new FormControl('pending');
+  selectedStatus = new FormControl<'pending' | 'confirmed' | 'cancelled'>(
+    'pending'
+  );
   searchControl = new FormControl('');
   selectedRDV: IRendez_vous | null = null;
   userConnected = signal<IUser | null>(null);
@@ -23,8 +25,6 @@ export class ListComponent implements OnInit, OnDestroy {
   currentPage = 1;
   itemsPerPage = 10;
   totalItems = 0;
-
-  private destroy$ = new Subject<void>();
 
   constructor(
     private rendezVousService: RendezVousService,
@@ -36,23 +36,18 @@ export class ListComponent implements OnInit, OnDestroy {
     this.userConnected.set(this.authService.getUserConnected());
 
     this.searchControl.valueChanges
-      .pipe(takeUntil(this.destroy$), debounceTime(300), distinctUntilChanged())
+      .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((searchTerm) => {
         this.filterRendezVous(searchTerm || '');
       });
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  onStatusChange(status: string): void {
+  onStatusChange(status: 'pending' | 'confirmed' | 'cancelled'): void {
     this.currentPage = 1;
     this.loadData(status);
   }
 
-  loadData(status: string) {
+  loadData(status: 'pending' | 'confirmed' | 'cancelled') {
     this.loading.set(true);
     this.rendezVousService
       .getAllWithStatus(status)

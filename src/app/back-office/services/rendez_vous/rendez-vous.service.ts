@@ -22,7 +22,9 @@ export class RendezVousService {
     }
   }
 
-  async getAllWithStatus(status: string): Promise<IRendez_vous[]> {
+  async getAllWithStatus(
+    status: 'confirmed' | 'pending' | 'cancelled'
+  ): Promise<IRendez_vous[]> {
     try {
       const response: AxiosResponse<IRendez_vous[]> = await axios.get(
         `${environment.apiUrl}/rdv/status/${status}`
@@ -66,7 +68,7 @@ export class RendezVousService {
   }
 
   async add_rendez_vous_from_client(
-    rendez_vous: Omit<IRendez_vous, '_id'| 'status'>
+    rendez_vous: Omit<IRendez_vous, '_id' | 'status'>
   ): Promise<IRendez_vous> {
     try {
       const response: AxiosResponse<IRendez_vous> = await axios.post(

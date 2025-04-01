@@ -27,6 +27,30 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+    this.route.paramMap.subscribe((params) => {
+      const typeParam = params.get('type');
+      if (typeParam?.toUpperCase() === 'MANAGER') {
+        this.loginForm.setValue({
+          email: 'nyarodina@gmail.com',
+          password: 'motdepasse',
+        });
+      } else if (typeParam?.toUpperCase() === 'CLIENT') {
+        this.loginForm.setValue({
+          email: 'randy.rajaonson@gmail.com',
+          password: 'motdepasse',
+        });
+      } else if (typeParam?.toUpperCase() === 'MECANIC') {
+        this.loginForm.setValue({
+          email: 'randyrjn08@gmail.com',
+          password: 'motdepasse',
+        });
+      } else {
+        this.loginForm.setValue({
+          email: 'randy.rajaonson@gmail.com',
+          password: 'motdepasse',
+        });
+      }
+    });
   }
 
   ngOnInit(): void {

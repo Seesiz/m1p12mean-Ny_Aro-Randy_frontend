@@ -1,0 +1,3 @@
+.indicator.active {
+  background-color: var(--color-muted-foreground);
+}

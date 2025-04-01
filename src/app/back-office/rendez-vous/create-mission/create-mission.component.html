@@ -1,0 +1,227 @@
+<section class="container flex flex-col gap-4 items-center py-4">
+  <h3 class="text-2xl font-bold">{{ "common.create-mission" | translate }}</h3>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col gap-4 md:w-1/2 w-full"
+  >
+    <label hlmLabel class="flex-1">
+      {{ "common.manager" | translate }}
+      <input
+        hlmInput
+        class="w-full"
+        disabled
+        [value]="connectedUser()?.firstname + ' ' + connectedUser()?.lastname"
+        type="text"
+        [placeholder]="'common.manager' | translate"
+      />
+    </label>
+    <div class="flex flex-row gap-2 items-end">
+      <label hlmLabel class="flex-1 flex flex-col gap-1">
+        {{ "common.client" | translate }}
+        <brn-popover
+          [state]="clientState()"
+          (stateChanged)="clientStateChanged($event)"
+          sideOffset="5"
+          class="w-full"
+        >
+          <button
+            class="w-full justify-between"
+            id="edit-profile"
+            variant="outline"
+            brnPopoverTrigger
+            type="button"
+            hlmBtn
+          >
+            {{
+              form.get("client")?.value
+                ? form.get("client")?.value?.firstname +
+                  " " +
+                  form.get("client")?.value?.lastname +
+                  " <" +
+                  form.get("client")?.value?.email +
+                  ">"
+                : "Select client..."
+            }}
+            <ng-icon hlm size="sm" name="lucideChevronsUpDown" />
+          </button>
+          <hlm-command
+            *brnPopoverContent="let ctx"
+            hlmPopoverContent
+            class="p-0 w-full"
+          >
+            <hlm-command-search>
+              <ng-icon hlm name="lucideSearch" />
+              <input
+                placeholder="{{ 'common.search' | translate }}"
+                hlm-command-search-input
+              />
+            </hlm-command-search>
+            <div *brnCommandEmpty hlmCommandEmpty>
+              {{ "common.no-result" | translate }}
+            </div>
+            <hlm-command-list>
+              <hlm-command-group>
+                <button
+                  *ngFor="let user of users()"
+                  hlm-command-item
+                  [value]="
+                    user.lastname +
+                    ' ' +
+                    user.firstname +
+                    ' ' +
+                    user.email +
+                    ' '
+                  "
+                  (selected)="commandSelectedClient(user)"
+                >
+                  {{
+                    user.firstname +
+                      " " +
+                      user.lastname +
+                      " <" +
+                      user.email +
+                      ">"
+                  }}
+                </button>
+              </hlm-command-group>
+            </hlm-command-list>
+          </hlm-command>
+        </brn-popover>
+      </label>
+      <button
+        class="mb-1"
+        [routerLink]="['/dashboard/manager/user/client']"
+        hlmBtn
+      >
+        {{ "user_detail.create_user" | translate }}
+      </button>
+    </div>
+    <label hlmLabel class="flex-1">
+      {{ "mission.dateDebut" | translate }}
+      <input
+        hlmInput
+        class="w-full"
+        formControlName="dateDebut"
+        type="date"
+        [placeholder]="'mission.dateDebut' | translate"
+      />
+    </label>
+
+    <b>Information sur la mission</b>
+    <div class="flex items-center gap-2">
+      <label hlmLabel class="flex-1">
+        {{ "mission.marque" | translate }}
+        <input
+          hlmInput
+          class="w-full"
+          formControlName="marque"
+          type="text"
+          [placeholder]="'mission.marque' | translate"
+        />
+      </label>
+      <label hlmLabel class="flex-1">
+        {{ "mission.modele" | translate }}
+        <input
+          hlmInput
+          class="w-full"
+          formControlName="modele"
+          type="text"
+          [placeholder]="'mission.modele' | translate"
+        />
+      </label>
+    </div>
+    <label hlmLabel class="flex-1">
+      {{ "mission.serial_number" | translate }}
+      <input
+        hlmInput
+        class="w-full"
+        formControlName="serial_number"
+        type="text"
+        [placeholder]="'mission.serial_number' | translate"
+      />
+    </label>
+    <label hlmLabel class="flex-1">
+      {{ "mission.description" | translate }}
+      <textarea
+        hlmInput
+        class="w-full"
+        formControlName="description"
+        [placeholder]="'mission.description' | translate"
+      ></textarea>
+    </label>
+    <label hlmLabel class="flex-1 flex flex-col gap-1">
+      {{ "mission.services" | translate }}
+      <brn-popover
+        [state]="state()"
+        (stateChanged)="stateChanged($event)"
+        sideOffset="5"
+        class="w-full"
+      >
+        <button
+          class="w-full justify-between"
+          id="edit-profile"
+          variant="outline"
+          brnPopoverTrigger
+          type="button"
+          hlmBtn
+        >
+          {{ "prestation_detail.select_service" | translate }}
+          <ng-icon hlm size="sm" name="lucideChevronsUpDown" />
+        </button>
+        <hlm-command
+          *brnPopoverContent="let ctx"
+          hlmPopoverContent
+          class="p-0 w-full"
+        >
+          <hlm-command-search>
+            <ng-icon hlm name="lucideSearch" />
+            <input
+              placeholder="{{ 'common.search' | translate }}"
+              hlm-command-search-input
+            />
+          </hlm-command-search>
+          <div *brnCommandEmpty hlmCommandEmpty>
+            {{ "common.no-result" | translate }}
+          </div>
+          <hlm-command-list>
+            <hlm-command-group>
+              <button
+                *ngFor="let prestation of selectablePrestations()"
+                hlm-command-item
+                [value]="prestation.label"
+                (selected)="commandSelected(prestation)"
+              >
+                {{ prestation.label }}
+              </button>
+            </hlm-command-group>
+          </hlm-command-list>
+        </hlm-command>
+      </brn-popover>
+    </label>
+    <b class="text-sm">{{ "mission.services_list" | translate }}</b>
+    <div class="bg-background flex flex-wrap gap-2 p-4">
+      <div
+        *ngFor="let prestation of currentPrestations()"
+        hlmBadge
+        class="flex text-sm items-center gap-2 w-fit"
+      >
+        {{ prestation.label }}
+        <button
+          hlmBtn
+          variant="ghost"
+          type="button"
+          class="p-0 hover:bg-transparent"
+          (click)="removePrestation(prestation)"
+        >
+          <ng-icon hlm name="lucideX" size="sm" />
+        </button>
+      </div>
+    </div>
+    <footer class="flex flex-row items-center justify-end">
+      <button hlmBtn type="submit" [disabled]="!form.valid">
+        {{ "common.save" | translate }}
+      </button>
+    </footer>
+  </form>
+</section>

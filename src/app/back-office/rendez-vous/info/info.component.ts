@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IRendez_vous } from '@/types/output';
+
 @Component({
   selector: 'app-info',
   standalone: false,
   templateUrl: './info.component.html',
-  styleUrl: './info.component.css',
+  styleUrls: ['./info.component.css'],
 })
 export class InfoComponent {
   @Input() selectedRDV: IRendez_vous | null = null;

@@ -41,7 +41,6 @@ export class UpdateComponent implements OnInit, OnChanges {
         description: this.selectedPrestation.description,
         price: this.selectedPrestation.price,
         duree: this.selectedPrestation.duree,
-        status: this.selectedPrestation.type?.status || 0,
       });
     }
   }
@@ -52,7 +51,6 @@ export class UpdateComponent implements OnInit, OnChanges {
       description: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(0)]],
       duree: [0, [Validators.required, Validators.min(0)]],
-      status: [0, [Validators.required]],
     });
   }
 
@@ -67,7 +65,6 @@ export class UpdateComponent implements OnInit, OnChanges {
         duree: this.updateForm.value.duree,
         type: {
           ...this.selectedPrestation.type,
-          status: this.updateForm.value.status,
         },
       };
 

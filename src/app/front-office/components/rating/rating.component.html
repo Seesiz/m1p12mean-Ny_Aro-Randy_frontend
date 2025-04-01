@@ -1,8 +1,9 @@
 <div class="flex items-center">
   <svg
     *ngFor="let i of [1, 2, 3, 4, 5]"
-    [class]="`w-4 h-4 ${i<= rating ? 'text-yellow-300' : 'text-gray-300'} ms-1`"
+    [class]="`w-4 h-4 ${i<= rating ? 'text-yellow-300' : 'text-gray-300'} cursor-pointer ms-1`"
     aria-hidden="true"
+    (click)="disabled ? null : ratingChange.emit(i)"
     xmlns="http://www.w3.org/2000/svg"
     fill="currentColor"
     viewBox="0 0 22 20"
