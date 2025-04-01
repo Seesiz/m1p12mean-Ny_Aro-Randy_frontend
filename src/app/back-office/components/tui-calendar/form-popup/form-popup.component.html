@@ -215,5 +215,13 @@
     >
       {{ "common.save" | translate }}
     </button>
+    <button
+      hlmBtn
+      variant="ghost"
+      [routerLink]="['../mission', data.planing?.mission?._id, 'suivi']"
+      *ngIf="data.calendarId !== 'RENDEZ_VOUS'"
+    >
+      {{ "common.show_detail" | translate }}
+    </button>
   </footer>
 </section>

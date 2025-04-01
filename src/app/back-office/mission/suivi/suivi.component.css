@@ -1,3 +1,7 @@
+.taches {
+  min-height: 50px;
+}
+
 .cdk-drag-preview {
   border: none;
   box-sizing: border-box;

@@ -38,7 +38,10 @@
     "full_name": "Full name",
     "description": "Description",
     "save": "Save",
-    "create-mission": "Create Mission"
+    "create-mission": "Create Mission",
+    "show_detail": "Show detail",
+    "access_denied": "Access Denied",
+    "access_denied_message": "You do not have the necessary permissions to access this page"
   },
   "user_detail": {
     "list": "Users list",

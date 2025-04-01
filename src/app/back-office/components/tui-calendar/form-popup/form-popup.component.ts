@@ -34,13 +34,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { UserService } from '@/app/back-office/services/user/user.service';
 import { PlaningService } from '@/app/back-office/services/planing/planing.service';
 import { IPlaning } from '@/types/output';
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-form-popup',
   standalone: true,
   templateUrl: './form-popup.component.html',
   styleUrl: './form-popup.component.css',
   imports: [
+    RouterModule,
     CommonModule,
     FormsModule,
     HlmButtonDirective,
