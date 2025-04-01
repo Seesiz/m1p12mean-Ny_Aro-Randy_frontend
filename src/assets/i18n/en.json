@@ -37,7 +37,8 @@
     "no-result": "No results found",
     "full_name": "Full name",
     "description": "Description",
-    "save": "Save"
+    "save": "Save",
+    "create-mission": "Create Mission"
   },
   "user_detail": {
     "list": "Users list",

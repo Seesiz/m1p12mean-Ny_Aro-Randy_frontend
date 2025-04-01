@@ -1,7 +1,7 @@
 import { Component, effect, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RendezVousService } from '../../services/rendez_vous/rendez-vous.service';
-import { IPrestation, IRendez_vous, IUser } from '@/types/output';
+import { IMission, IPrestation, IRendez_vous, IUser } from '@/types/output';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PrestationService } from '../../services/prestation/prestation.service';
 import { MissionService } from '../../services/mission/mission.service';
@@ -24,16 +24,16 @@ export class CreateMissionComponent implements OnInit {
   connectedUser = signal<IUser | null>(null);
 
   form = new FormGroup({
-    manager: new FormControl('', [Validators.required]),
+    manager: new FormControl<IUser | null>(null, [Validators.required]),
     client: new FormControl<IUser | null>(null, [Validators.required]),
-    marque: new FormControl('', [Validators.required]),
-    modele: new FormControl('', [Validators.required]),
-    serial_number: new FormControl('', [Validators.required]),
-    description: new FormControl('', [
+    marque: new FormControl('Hyundai', [Validators.required]),
+    modele: new FormControl('Starex', [Validators.required]),
+    serial_number: new FormControl('WWT 1025', [Validators.required]),
+    description: new FormControl('La voiture est en très mauvais état', [
       Validators.required,
       Validators.minLength(10),
     ]),
-    dateDebut: new FormControl('', [Validators.required]),
+    dateDebut: new FormControl(new Date(), [Validators.required]),
     services: new FormControl<IPrestation[]>([], [Validators.required]),
   });
   constructor(
@@ -66,9 +66,9 @@ export class CreateMissionComponent implements OnInit {
       this.connectedUser.set(userConnected);
       if (
         userConnected &&
-        userConnected.roles.some((role) => role.name === 'manager')
+        userConnected.roles.some((role) => role.name === 'MANAGER')
       ) {
-        this.form.get('manager')?.setValue(userConnected._id);
+        this.form.get('manager')?.setValue(userConnected);
       }
     });
   }
@@ -91,21 +91,27 @@ export class CreateMissionComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      const data = {
-        client: this.form.value.client?._id,
-        manager: this.form.value.manager,
-        services: this.form.value.services,
-        dateDebut: this.form.value.dateDebut,
+      const data: Omit<IMission, '_id'> = {
+        client: this.form.value.client!,
+        manager: this.form.value.manager!,
+        services: this.form.value.services!.map(
+          (service: Omit<IPrestation, 'type'>) => ({
+            ...service,
+            status: 'pending',
+          })
+        ),
+        dateDebut: this.form.value.dateDebut!,
         infoMission: {
-          marque: this.form.value.marque,
-          modele: this.form.value.modele,
-          serial_number: this.form.value.serial_number,
-          description: this.form.value.description,
+          marque: this.form.value.marque!,
+          model: this.form.value.modele!,
+          serialNumber: this.form.value.serial_number!,
+          description: this.form.value.description!,
         },
       };
       try {
-        console.log(data);
-        //const resp = await this.missionService.add(mission);
+        this.missionService.add(data).then(() => {
+          this.form.reset();
+        });
       } catch (error) {
         console.error(error);
       }

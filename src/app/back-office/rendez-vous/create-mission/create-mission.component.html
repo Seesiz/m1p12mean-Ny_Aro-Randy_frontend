@@ -189,7 +189,7 @@
               <button
                 *ngFor="let prestation of selectablePrestations()"
                 hlm-command-item
-                [value]="prestation._id"
+                [value]="prestation.label"
                 (selected)="commandSelected(prestation)"
               >
                 {{ prestation.label }}
@@ -200,7 +200,7 @@
       </brn-popover>
     </label>
     <b class="text-sm">{{ "mission.services_list" | translate }}</b>
-    <div class="bg-background flex flex-wrap gap-2">
+    <div class="bg-background flex flex-wrap gap-2 p-4">
       <div
         *ngFor="let prestation of currentPrestations()"
         hlmBadge
@@ -219,7 +219,9 @@
       </div>
     </div>
     <footer class="flex flex-row items-center justify-end">
-      <button hlmBtn type="submit">{{ "common.save" | translate }}</button>
+      <button hlmBtn type="submit" [disabled]="!form.valid">
+        {{ "common.save" | translate }}
+      </button>
     </footer>
   </form>
 </section>

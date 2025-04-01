@@ -37,7 +37,8 @@
     "no-result": "Aucun résultat trouvé",
     "full_name": "Nom complet",
     "description": "Description",
-    "save": "Sauvegarder"
+    "save": "Sauvegarder",
+    "create-mission": "Créer une Mission"
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
@@ -146,7 +147,7 @@
     "serial_number": "Matriculation",
     "description": "Description",
     "services": "Services",
-    "services_list": "Services list"
+    "services_list": "Liste des services"
   },
   "note": {
     "add": "Ajouter une note",
