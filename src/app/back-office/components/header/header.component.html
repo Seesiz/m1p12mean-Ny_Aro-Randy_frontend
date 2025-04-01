@@ -20,44 +20,36 @@
     >
       {{ `menu.${option.label}` | translate }}
     </button>
-    <brn-hover-card *ngIf="option.hasDropDown">
-      <button
-        hlmBtn
-        [class]="
-          'flex items-center gap-2 cursor-pointer rounded-4xl header-option text-primary bg-transparent hover:bg-transparent ' +
-          (routerLinkActive().includes(option.path.split('/')[0])
-            ? 'is-active'
-            : '')
-        "
-        brnHoverCardTrigger
-        style="z-index: 11"
-        [attr.aria-label]="'menu.' + option.label | translate"
-      >
-        {{ `menu.${option.label}` | translate }}
-        <ng-icon
-          hlm
-          name="lucideChevronDown"
-          size="sm"
-          class="cursor-pointer"
-        />
-      </button>
-      <hlm-hover-card-content *brnHoverCardContent class="w-60">
-        <div class="flex flex-col border-l pl-4 rounded-t-none">
-          @for (subOption of option.subOptions; track subOption.path) {
-          <button
-            hlmBtn
-            variant="ghost"
-            class="w-full justify-start"
-            [routerLink]="subOption.path"
-            variant="ghost"
-            [attr.aria-label]="'common.' + subOption.label | translate"
-          >
-            {{ `common.${subOption.label}` | translate }}
-          </button>
-          }
-        </div>
-      </hlm-hover-card-content>
-    </brn-hover-card>
+    <button
+      hlmBtn
+      *ngIf="option.hasDropDown"
+      [class]="
+        'flex items-center gap-2 cursor-pointer rounded-4xl header-option text-primary bg-transparent hover:bg-transparent ' +
+        (routerLinkActive().includes(option.path.split('/')[0])
+          ? 'is-active'
+          : '')
+      "
+      [brnMenuTriggerFor]="sub_menu"
+      style="z-index: 11"
+      [attr.aria-label]="'menu.' + option.label | translate"
+    >
+      {{ `menu.${option.label}` | translate }}
+      <ng-icon hlm name="lucideChevronDown" size="sm" class="cursor-pointer" />
+    </button>
+    <ng-template #sub_menu>
+      <hlm-menu class="w-56">
+        @for (subOption of option.subOptions; track subOption.path) {
+        <button
+          hlmMenuItem
+          class="w-full justify-start"
+          [routerLink]="subOption.path"
+          [attr.aria-label]="'common.' + subOption.label | translate"
+        >
+          {{ `common.${subOption.label}` | translate }}
+        </button>
+        }
+      </hlm-menu>
+    </ng-template>
     }
     <div
       class="active-button absolute bg-primary rounded-4xl bottom-0 h-1 w-10"

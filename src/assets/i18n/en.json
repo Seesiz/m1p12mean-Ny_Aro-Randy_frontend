@@ -4,7 +4,9 @@
     "users": "Users",
     "rendez-vous": "Appointments",
     "planning": "Planning",
-    "config": "Configuration"
+    "config": "Configuration",
+    "mission": "Mission",
+    "note": "Your review"
   },
   "common": {
     "my-account": "My account",
@@ -31,10 +33,19 @@
     "edit": "Edit",
     "delete": "Delete",
     "pack": "Pack",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "no-result": "No results found",
+    "full_name": "Full name",
+    "description": "Description",
+    "save": "Save",
+    "create-mission": "Create Mission",
+    "show_detail": "Show detail",
+    "access_denied": "Access Denied",
+    "access_denied_message": "You do not have the necessary permissions to access this page"
   },
   "user_detail": {
     "list": "Users list",
+    "select_user": "Select user",
     "edit_profile": "Edit profile",
     "add_user": "Add user",
     "lastname": "Last name",
@@ -71,7 +82,9 @@
     "update_prestation": "Update prestation",
     "update_prestation_text": "Update details of prestation",
     "delete": "Delete service",
-    "delete_text": "Are you sure you want to delete this service?"
+    "delete_text": "Are you sure you want to delete this service?",
+    "select_service": "Select service",
+    "remise": "Remise"
   },
   "home-page": {
     "see-our-services": "See our services",
@@ -112,6 +125,10 @@
     "message": "Message"
   },
   "calendar": {
+    "organizer": "organizer",
+    "guest": "guest",
+    "guests": "Guests",
+    "content": "Content",
     "today": "Today",
     "month": "Month",
     "week": "Week",
@@ -125,6 +142,33 @@
   "pack_detail": {
     "update": "Update pack",
     "update_text": "Update details of pack",
-    "add_pack": "Add pack"
+    "add_pack": "Add pack",
+    "delete": "Delete pack",
+    "delete_text": "Are you sure you want to delete this pack?"
+  },
+  "mission_detail": {
+    "select_mission": "Select mission",
+    "modify_event": "Modify event",
+    "schedule_mission": "Schedule a mission"
+  },
+  "mission": {
+    "list": "List of missions",
+    "start": "Start",
+    "end": "End",
+    "client": "Client",
+    "dateDebut": "Start date",
+    "marque": "Brand",
+    "modele": "Model",
+    "serial_number": "Serial number",
+    "description": "Description",
+    "services": "Services",
+    "services_list": "Services list"
+  },
+  "note": {
+    "add": "Add note",
+    "add_text": "Share your valuable feedback on MECANET to help us improve our services. Your feedback is essential to our continued innovation and best meeting your needs. Thank you in advance for your contribution!",
+    "update": "Update note",
+    "update_text": "Update your review",
+    "note": "Note"
   }
 }

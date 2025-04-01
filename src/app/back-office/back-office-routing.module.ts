@@ -64,6 +64,17 @@ export const backOfficeRoutes: Routes = [
         },
       },
       {
+        path: 'note',
+        loadChildren: () =>
+          import('./note/note.module').then((m) => m.NoteModule),
+        canActivate: [AccessGuard],
+        data: {
+          role: [Role.client],
+          label: 'note',
+          icon: 'note',
+        },
+      },
+      {
         path: 'planning',
         loadChildren: () =>
           import('./planning/planning.module').then((m) => m.PlanningModule),
@@ -72,6 +83,17 @@ export const backOfficeRoutes: Routes = [
           role: [Role.manager, Role.mechanic],
           label: 'planning',
           icon: 'calendar',
+        },
+      },
+      {
+        path: 'mission',
+        loadChildren: () =>
+          import('./mission/mission.module').then((m) => m.MissionModule),
+        canActivate: [AccessGuard],
+        data: {
+          role: [Role.manager],
+          label: 'mission',
+          icon: 'file',
         },
       },
       {

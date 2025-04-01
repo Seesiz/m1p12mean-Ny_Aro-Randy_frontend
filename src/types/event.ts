@@ -1,6 +1,8 @@
+import { IPlaning, IRendez_vous } from './output';
+
 type EventObject = {
   id?: string;
-  calendarId?: string;
+  calendarId?: 'MISSION' | 'RENDEZ_VOUS';
   title?: string;
   body?: string;
   isAllday?: boolean;
@@ -23,6 +25,8 @@ type EventObject = {
   dragBackgroundColor?: string;
   borderColor?: string;
   raw?: any;
+  rendezVous?: IRendez_vous;
+  planing?: IPlaning;
 };
 
 export { type EventObject };

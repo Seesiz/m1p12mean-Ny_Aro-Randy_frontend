@@ -1,0 +1,47 @@
+<section class="p-2 h-full flex flex-col">
+  <div class="flex justify-end shrink-0">
+    <hlm-dialog>
+      <button brnDialogTrigger hlmBtn>
+        {{ "note.add" | translate }}
+      </button>
+      <app-update (loadNote)="loadNote()"></app-update>
+    </hlm-dialog>
+  </div>
+  <div class="flex flex-col gap-4 items-center justify-center flex-1 w-full">
+    <div
+      hlmCard
+      class="p-8 mb:w-11/12 w-5/12 shadow-xl rounded-2xl border-muted"
+      [@fadeInOut]="animationState"
+    >
+      <div>
+        <p>"{{ testimonials[currentIndex].description }}"</p>
+      </div>
+      <div class="flex gap-4 items-center">
+        <hlm-avatar>
+          <img
+            src="https://picsum.photos/200/300?random={{ currentIndex }}"
+            alt="user rating logo"
+            hlmAvatarImage
+          />
+          <span class="text-white bg-destructive uppercase" hlmAvatarFallback>{{
+            testimonials[currentIndex].fullName[0] +
+              testimonials[currentIndex].fullName[1]
+          }}</span>
+        </hlm-avatar>
+
+        <div>
+          <h4>{{ testimonials[currentIndex].fullName }}</h4>
+          <app-rating [rating]="testimonials[currentIndex].note"></app-rating>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex gap-2 items-center absolute bottom-4">
+      <div
+        *ngFor="let testimonial of testimonials; let i = index"
+        class="indicator rounded-full w-2 h-2 bg-muted"
+        [class.active]="i === currentIndex"
+      ></div>
+    </div>
+  </div>
+</section>

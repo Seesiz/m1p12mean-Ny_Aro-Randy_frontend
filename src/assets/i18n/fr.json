@@ -4,7 +4,9 @@
     "users": "Utilisateurs",
     "rendez-vous": "Rendez-vous",
     "planning": "Planning",
-    "config": "Configuration"
+    "config": "Configuration",
+    "mission": "Mission",
+    "note": "Votre avis"
   },
   "common": {
     "my-account": "Mon compte",
@@ -31,11 +33,20 @@
     "edit": "Modifier",
     "delete": "Supprimer",
     "pack": "Pack",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "no-result": "Aucun résultat trouvé",
+    "full_name": "Nom complet",
+    "description": "Description",
+    "save": "Sauvegarder",
+    "create-mission": "Créer une Mission",
+    "show_detail": "Voir le détail",
+    "access_denied": "Accès refusé",
+    "access_denied_message": "Vous n'avez pas les permissions nécessaires pour accéder à cette page"
   },
   "user_detail": {
     "list": "Liste des utilisateurs",
-    "edit_profile": "Editer le profil",
+    "select_user": "Sélectionner un utilisateur",
+    "edit_profile": "Mettre à jour le profil",
     "add_user": "Ajouter un utilisateur",
     "lastname": "Nom",
     "firstname": "Prénom",
@@ -44,7 +55,7 @@
     "role": "Rôle",
     "create_user": "Créer un utilisateur",
     "edit_info": "Modifier les informations",
-    "make_changes": "Faire des modifications sur votre profil. Cliquez sur sauvegarder quand vous avez fini."
+    "make_changes": "Mettre à jour les informations du profil. Cliquez sur sauvegarder quand vous avez fini."
   },
   "rdv_detail": {
     "modal_info": "Information du rendez-vous",
@@ -65,13 +76,15 @@
     "description": "Description",
     "price": "Prix",
     "add_prestation": "Ajouter une prestation",
-    "add_prestation_text": "Ajouter les services à votre liste",
+    "add_prestation_text": "Soyez créatif et flexible dans l'ajout de prestations pour fidéliser votre clientèle et booster vos ventes.",
     "duree": "Durée",
     "status": "Status",
     "update_prestation": "Modifier la prestation",
     "update_prestation_text": "Mettre à jour les détails d'une prestation",
     "delete": "Supprimer le service",
-    "delete_text": "Êtes-vous sûr de vouloir supprimer ce service?"
+    "delete_text": "Êtes-vous sûr de vouloir supprimer ce service?",
+    "select_service": "Sélectionner un service",
+    "remise": "Remise"
   },
   "home-page": {
     "see-our-services": "Voir nos services",
@@ -112,6 +125,10 @@
     "message": "Message"
   },
   "calendar": {
+    "organizer": "organisateur",
+    "guest": "invité",
+    "guests": "Invités",
+    "content": "Contenu",
     "today": "Aujourd'hui",
     "month": "Mois",
     "week": "Semaine",
@@ -119,12 +136,39 @@
     "why-choose-us-description": "Chez MECANET, nous priorisons votre satisfaction avec des services de qualité, une expertise reconnue et une transparence totale."
   },
   "dateFormats": {
-    "fullDateTime": "Le d-MM-yyyy à HH:mm",
+    "fullDateTime": "'Le' d-MM-yyyy à HH:mm",
     "fullDateWithLetters": "EEEE d MMMM yyyy à HH:mm"
   },
   "pack_detail": {
     "update": "Mettre à jour le pack",
-    "update_text": "Mettre à jour les détails du pack",
-    "add_pack": "Ajouter un pack"
+    "update_text": "Actualiser le packaging en y apportant des changements significatifs et en mettant à jour tous les détails du pack pour le rendre plus attrayant et moderne.",
+    "add_pack": "Ajouter un pack",
+    "delete": "Supprimer le pack",
+    "delete_text": "Êtes-vous sûr de vouloir supprimer ce pack ?"
+  },
+  "mission_detail": {
+    "select_mission": "Sélectionner une mission",
+    "modify_event": "Modifier l'événement",
+    "schedule_mission": "Planifier une mission"
+  },
+  "mission": {
+    "list": "Liste des missions",
+    "start": "Début",
+    "end": "Fin",
+    "client": "Client",
+    "dateDebut": "Date de début",
+    "marque": "Marque",
+    "modele": "Modèle",
+    "serial_number": "Matriculation",
+    "description": "Description",
+    "services": "Services",
+    "services_list": "Liste des services"
+  },
+  "note": {
+    "add": "Ajouter une note",
+    "add_text": "Partagez vos précieuses opinions sur MECANET pour nous aider à perfectionner nos prestations. Vos retours d'expérience sont essentiels pour continuer à innover et répondre au mieux à vos besoins. Merci d'avance pour votre contribution !",
+    "update": "Mettre à jour la note",
+    "update_text": "Mettez à jour votre avis",
+    "note": "Note"
   }
 }

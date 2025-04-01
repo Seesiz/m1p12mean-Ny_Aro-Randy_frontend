@@ -30,9 +30,9 @@ import { RatingComponent } from './components/rating/rating.component';
     PrestationComponent,
     ContactComponent,
     ContactFormComponent,
-    RatingComponent,
   ],
   imports: [
+    RatingComponent,
     CommonModule,
     FrontOfficeRoutingModule,
     TranslateModule,

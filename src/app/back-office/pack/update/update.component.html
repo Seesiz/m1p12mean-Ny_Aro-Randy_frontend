@@ -1,5 +1,5 @@
 <hlm-dialog-content class="sm:max-w-[425px]" *brnDialogContent="let ctx">
-  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit(); ctx.close()">
     <hlm-dialog-header>
       <h3 hlmDialogTitle>
         {{ "pack_detail.update" | translate }}
@@ -22,34 +22,83 @@
         />
       </div>
       <div class="items-center grid grid-cols-4 gap-4">
-        <label hlmLabel for="price" class="text-right">{{
-          "prestation_detail.price" | translate
+        <label hlmLabel for="remise" class="text-right">{{
+          "remise" | translate
         }}</label>
         <input
           hlmInput
-          id="price"
-          formControlName="price"
+          id="remise"
+          formControlName="remise"
           class="col-span-3"
           type="number"
-          [value]="selectedPack?.price"
+          (input)="calculatePrix()"
         />
       </div>
-      <div class="items-center grid grid-cols-4 gap-4">
-        <ng-container
-          *ngFor="let prestation of prestations; trackBy: trackPrestationById"
+
+      <div><b>Total :</b> {{ prixTotal() }}</div>
+      <brn-popover
+        [state]="state()"
+        (stateChanged)="stateChanged($event)"
+        sideOffset="5"
+        class="w-full"
+      >
+        <button
+          class="w-full justify-between"
+          id="edit-profile"
+          variant="outline"
+          brnPopoverTrigger
+          type="button"
+          hlmBtn
         >
-          <label hlmLabel class="text-right">{{ prestation.label }}</label>
-          <div class="col-span-3">
+          {{ "prestation_detail.select_service" | translate }}
+          <ng-icon hlm size="sm" name="lucideChevronsUpDown" />
+        </button>
+        <hlm-command
+          *brnPopoverContent="let ctx"
+          hlmPopoverContent
+          class="p-0 w-full"
+        >
+          <hlm-command-search>
+            <ng-icon hlm name="lucideSearch" />
             <input
-              type="checkbox"
-              name="prestation"
-              [id]="prestation._id"
-              [value]="prestation._id"
-              (change)="onPrestationChange($event, prestation._id)"
-              [checked]="isPrestationSelected(prestation._id)"
+              placeholder="{{ 'common.search' | translate }}"
+              hlm-command-search-input
             />
+          </hlm-command-search>
+          <div *brnCommandEmpty hlmCommandEmpty>
+            {{ "common.no-result" | translate }}
           </div>
-        </ng-container>
+          <hlm-command-list>
+            <hlm-command-group>
+              <button
+                *ngFor="let prestation of selectablePrestations()"
+                hlm-command-item
+                [value]="prestation._id"
+                (selected)="commandSelected(prestation)"
+              >
+                {{ prestation.label }}
+              </button>
+            </hlm-command-group>
+          </hlm-command-list>
+        </hlm-command>
+      </brn-popover>
+      <div class="bg-background flex flex-wrap gap-2">
+        <div
+          *ngFor="let prestation of currentPrestations()"
+          hlmBadge
+          class="flex text-sm items-center gap-2 w-fit"
+        >
+          {{ prestation.label }}
+          <button
+            hlmBtn
+            variant="ghost"
+            type="button"
+            class="p-0 hover:bg-transparent"
+            (click)="removePrestation(prestation)"
+          >
+            <ng-icon hlm name="lucideX" size="sm" />
+          </button>
+        </div>
       </div>
     </div>
     <hlm-dialog-footer>

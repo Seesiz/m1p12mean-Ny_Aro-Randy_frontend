@@ -1,6 +1,14 @@
 import { IPack, IPrestation } from '@/types/output';
-import { Component, Input, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import {
+  Component,
+  Input,
+  signal,
+  SimpleChanges,
+  effect,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PackService } from '../../services/pack/pack.service';
 
 @Component({
@@ -12,62 +20,90 @@ import { PackService } from '../../services/pack/pack.service';
 export class UpdateComponent {
   @Input() selectedPack: IPack | null = null;
   @Input() prestations: IPrestation[] = [];
+  @Output() loadPack = new EventEmitter<void>();
+
+  currentPrestations = signal<IPrestation[]>([]);
+  state = signal<'closed' | 'open'>('closed');
+  prixTotal = signal(0);
+  selectablePrestations = signal<IPrestation[]>([]);
 
   updateForm: FormGroup;
 
   constructor(private fb: FormBuilder, private packService: PackService) {
     this.updateForm = this.fb.group({
       label: ['', Validators.required],
-      price: ['', [Validators.required, Validators.min(0)]],
-      prestations: this.fb.array([]),
+      price: [0, [Validators.required, Validators.min(0)]],
+      prestations: [[]],
+      remise: [0, Validators.required],
+    });
+
+    effect(() => {
+      this.updateForm
+        .get('prestations')
+        ?.setValue(this.currentPrestations().map((p) => p._id));
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes['prestations']) {
+      this.selectablePrestations.set(this.prestations);
+    }
     if (changes['selectedPack'] && this.selectedPack) {
       this.updateForm.patchValue({
         label: this.selectedPack.label,
         price: this.selectedPack.price,
+        remise: this.selectedPack.remise,
       });
+      this.currentPrestations.set(this.selectedPack.services);
+      if (
+        this.selectedPack &&
+        this.selectedPack.services &&
+        this.selectedPack.services.length > 0
+      ) {
+        this.selectablePrestations.set(
+          this.prestations.filter(
+            (p) => !this.selectedPack?.services.some((s) => s._id === p._id)
+          )
+        );
 
-      const prestations = this.updateForm.get('prestations') as FormArray;
-      prestations.clear();
-
-      if (this.selectedPack.services && this.selectedPack.services.length > 0) {
-        this.selectedPack.services.forEach((service) => {
-          const serviceId = typeof service === 'string' ? service : service._id;
-          prestations.push(this.fb.control(serviceId));
-        });
+        this.updateForm
+          .get('prestations')
+          ?.setValue(this.selectedPack.services.map((s) => s._id));
       }
     }
+
+    this.calculatePrix();
   }
 
-  trackPrestationById(index: number, prestation: any): string {
-    return prestation._id;
-  }
-
-  isPrestationSelected(prestationId: string): boolean {
-    if (!this.selectedPack || !this.selectedPack.services) {
-      return false;
-    }
-
-    return this.selectedPack.services.some((service) =>
-      typeof service === 'string'
-        ? service === prestationId
-        : service._id === prestationId
+  calculatePrix() {
+    const prestationSumm = this.currentPrestations().reduce(
+      (acc, p) => acc + p.price,
+      0
     );
+    const prixTotal = this.calculateWithRemise(prestationSumm);
+    this.updateForm.get('price')?.setValue(prixTotal);
+  }
+
+  calculateWithRemise(prestationSumm: number) {
+    const remiseValue = this.updateForm.get('remise')?.value || 0;
+    const remise = 100 - remiseValue;
+    const prixTotal = (prestationSumm * remise) / 100;
+    this.prixTotal.set(prixTotal);
+
+    return prixTotal;
   }
 
   onSubmit(): void {
     if (this.updateForm.valid && !this.selectedPack) {
       const newPack = {
         ...this.updateForm.value,
+        remise: this.updateForm.get('remise')?.value,
       };
-      console.log(newPack);
       this.packService
         .savePack(newPack)
         .then(() => {
           this.updateForm.reset();
+          this.loadPack.emit();
         })
         .catch((error) => {
           console.error('Error creating pack:', error);
@@ -76,6 +112,7 @@ export class UpdateComponent {
       const updatedPack = {
         _id: this.selectedPack._id,
         ...this.updateForm.value,
+        remise: this.updateForm.get('remise')?.value,
       };
 
       this.packService
@@ -83,11 +120,12 @@ export class UpdateComponent {
           updatedPack._id,
           updatedPack.label,
           updatedPack.price,
-          updatedPack.prestations
+          updatedPack.prestations,
+          updatedPack.remise
         )
         .then(
           () => {
-            //this.loadPrestations.emit();
+            this.loadPack.emit();
           },
           (error) => {
             console.error('Error updating pack:', error);
@@ -96,18 +134,24 @@ export class UpdateComponent {
     }
   }
 
-  onPrestationChange(event: any, prestationId: string): void {
-    const prestationsArray = this.updateForm.get('prestations') as FormArray;
+  stateChanged(state: 'open' | 'closed') {
+    this.state.set(state);
+  }
 
-    if (event.target.checked) {
-      prestationsArray.push(this.fb.control(prestationId));
-    } else {
-      const index = prestationsArray.controls.findIndex(
-        (control) => control.value === prestationId
-      );
-      if (index !== -1) {
-        prestationsArray.removeAt(index);
-      }
-    }
+  commandSelected(prestation: IPrestation) {
+    this.state.set('closed');
+    this.currentPrestations.update((value) => [...value, prestation]);
+    this.selectablePrestations.update((value) =>
+      value.filter((p) => p._id !== prestation._id)
+    );
+    this.calculatePrix();
+  }
+
+  removePrestation(prestation: IPrestation) {
+    this.currentPrestations.update((value) =>
+      value.filter((p) => p._id !== prestation._id)
+    );
+    this.selectablePrestations.update((value) => [...value, prestation]);
+    this.calculatePrix();
   }
 }
