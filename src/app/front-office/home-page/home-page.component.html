@@ -57,25 +57,55 @@
       </div>
     </div>
     <div class="flex-1 flex flex-row w-10/12">
-      <div class="flex-1 rounded-2xl bg-muted-foreground" #leftBlock></div>
       <div
-        class="flex-1 bg-primary rounded-2xl z-[2] shadow-2xl"
+        class="flex-1 rounded-2xl bg-muted-foreground p-6 text-white text-center"
+        #leftBlock
+      >
+        <h3 class="text-2xl font-bold mb-4">
+          {{ "home-page.about-us-history" | translate }}
+        </h3>
+        <p class="text-sm leading-relaxed">
+          {{ "home-page.about-us-history-desc" | translate }}
+        </p>
+      </div>
+      <div
+        class="flex-1 bg-primary rounded-2xl z-[2] shadow-2xl p-6 text-primary-foreground text-center"
         #middleBlock
-      ></div>
-      <div class="flex-1 rounded-2xl bg-muted-foreground" #rightBlock></div>
+      >
+        <h3 class="text-2xl font-bold mb-4">
+          {{ "home-page.about-us-values" | translate }}
+        </h3>
+        <p class="text-sm leading-relaxed">
+          {{ "home-page.about-us-values-desc" | translate }}
+        </p>
+      </div>
+      <div
+        class="flex-1 rounded-2xl bg-muted-foreground p-6 text-white text-center"
+        #rightBlock
+      >
+        <h3 class="text-2xl font-bold mb-4">
+          {{ "home-page.about-us-mission" | translate }}
+        </h3>
+        <p class="text-sm leading-relaxed">
+          {{ "home-page.about-us-mission-desc" | translate }}
+        </p>
+      </div>
     </div>
   </div>
   <div class="w-full relative h-[300vh]" #whyChooseUsSection>
     <div
-      class="w-full h-screen flex items-center justify-center relative"
+      class="w-full h-screen flex flex-col items-center justify-center relative"
       #whyChooseUsTrack
     >
       <h3
-        class="text-8xl text-center uppercase text-primary z-10"
+        class="text-8xl text-center uppercase text-primary z-10 w-11/12"
         #whyChooseUsText
       >
         {{ "home-page.why-choose-us" | translate }}
       </h3>
+      <span class="text-primary w-8/12 text-center">{{
+        "home-page.why-choose-us-description" | translate
+      }}</span>
       <ng-container *ngFor="let ratedUser of ratedUsers; index as i">
         <ng-container
           *ngTemplateOutlet="
@@ -86,7 +116,85 @@
       </ng-container>
     </div>
   </div>
-  <div class="w-full h-screen">parce que c'est beau</div>
+  <div class="w-full h-[calc(100vh-6rem)] p-8 md:flex hidden flex-col gap-5">
+    <h3
+      class="text-3xl font-bold uppercase text-primary flex items-center gap-4"
+    >
+      {{ "home-page.our-services" | translate }}
+      <hr class="bg-primary h-1 flex-1 md:block hidden" />
+    </h3>
+    <div class="flex flex-row gap-2 bento flex-1">
+      <div class="w-3/12 flex flex-col gap-2">
+        <div
+          class="box flex-1 p-4 flex flex-col justify-between items-center w-full"
+        >
+          <div>
+            <h4 class="text-xls font-bold mb-2">
+              {{ "home-page.service-quality" | translate }}
+            </h4>
+            <p class="text-xs">
+              {{ "home-page.service-quality-desc" | translate }}
+            </p>
+          </div>
+          <hr class="h-2 w-1/2 bg-muted rounded-4xl" />
+        </div>
+        <div class="h-3/12 box p-4 !bg-primary text-primary-foreground">
+          <h4 class="text-xls font-bold mb-2">
+            {{ "home-page.expertise" | translate }}
+          </h4>
+          <p class="text-xs">{{ "home-page.expertise-desc" | translate }}</p>
+        </div>
+      </div>
+      <div class="flex-1 flex flex-col gap-2">
+        <div class="h-4/12 box p-4 flex justify-between w-full">
+          <div>
+            <h4 class="text-xls font-bold mb-2">
+              {{ "home-page.innovation" | translate }}
+            </h4>
+            <p class="text-xs">{{ "home-page.innovation-desc" | translate }}</p>
+          </div>
+          <div>
+            <img
+              src="/assets/img/engrenages.gif"
+              alt="logo MECANET"
+              class="w-14"
+            />
+          </div>
+        </div>
+        <div class="flex-1 flex flex-row gap-2">
+          <div class="box w-3/12 p-4">
+            <h4 class="text-xls font-bold mb-2">
+              {{ "home-page.support" | translate }}
+            </h4>
+            <p class="text-xs">{{ "home-page.support-desc" | translate }}</p>
+          </div>
+          <div class="box flex-1 p-4 with-background text-white">
+            <h4 class="text-xls font-bold mb-2">
+              {{ "home-page.solutions" | translate }}
+            </h4>
+            <p class="text-xs">{{ "home-page.solutions-desc" | translate }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="h-[6rem] slider flex items-center">
+    <div class="slide-track flex items-center gap-[23px]">
+      <span>Logo</span>
+    </div>
+  </div>
+  <div
+    class="w-full min-h-[calc(100vh-5rem)] p-6 flex flex-col justify-start items-center gap-4"
+  >
+    <div id="title" class="flex items-center flex-col gap-4">
+      <h1 class="text-5xl">
+        {{ "contact.title" | translate }}
+      </h1>
+      <hr class="h-1 bg-primary bar" />
+    </div>
+    <span class="text-sm">{{ "contact.description" | translate }}</span>
+    <app-contact-form class="w-full flex justify-center" />
+  </div>
 </section>
 
 <ng-template #templateRef let-ratedUser="ratedUser" let-index="index">

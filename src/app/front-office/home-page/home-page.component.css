@@ -91,6 +91,32 @@
   backdrop-filter: blur(10px);
 }
 
+.bento .box {
+  border-radius: var(--radius-2xl);
+  background-color: var(--color-card);
+}
+
+.bento .box.with-background {
+  background: url("/assets/img/red-steel-tool-box-garage.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#title .bar {
+  width: 50%;
+  animation: barAnimation 1s ease-in-out;
+}
+
+@keyframes barAnimation {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 50%;
+  }
+}
+
 @keyframes show-hero {
   from {
     opacity: 0;
