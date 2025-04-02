@@ -1,20 +1,27 @@
 import { Injectable } from '@angular/core';
 import { IPlaning } from '@/types/output';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse, AxiosInstance } from 'axios';
 import { environment } from '@/environments/environments';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlaningService {
-  constructor() {}
+  private readonly axios: AxiosInstance;
+
+  constructor() {
+    this.axios = axios.create({
+      baseURL: environment.apiUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+  }
 
   async save(planing: Omit<IPlaning, '_id'>): Promise<IPlaning> {
     try {
-      const response: AxiosResponse<IPlaning> = await axios.post(
-        `${environment.apiUrl}/planings`,
-        planing
-      );
+      const response: AxiosResponse<IPlaning> = await this.axios.post('/planings', planing);
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
@@ -25,9 +32,7 @@ export class PlaningService {
 
   async getAll(): Promise<IPlaning[]> {
     try {
-      const response: AxiosResponse<IPlaning[]> = await axios.get(
-        `${environment.apiUrl}/planings`
-      );
+      const response: AxiosResponse<IPlaning[]> = await this.axios.get('/planings');
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
@@ -41,10 +46,7 @@ export class PlaningService {
     planing: Omit<IPlaning, '_id'>
   ): Promise<IPlaning> {
     try {
-      const response: AxiosResponse<IPlaning> = await axios.put(
-        `${environment.apiUrl}/planings/${id}`,
-        planing
-      );
+      const response: AxiosResponse<IPlaning> = await this.axios.put(`/planings/${id}`, planing);
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
