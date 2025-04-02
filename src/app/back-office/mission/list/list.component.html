@@ -12,8 +12,8 @@
       }}</hlm-th>
       <hlm-th class="justify-end">Action</hlm-th>
     </hlm-trow>
-    @for (mission of missions; track mission._id) {
-    <hlm-trow class="group">
+    @for (mission of missions(); track mission._id) {
+    <hlm-trow class="group" *ngIf="!loading()">
       <hlm-td truncate class="font-medium w-60">{{
         mission.client.lastname + " " + mission.client.firstname
       }}</hlm-td>
@@ -36,5 +36,8 @@
       </hlm-td>
     </hlm-trow>
     }
+    <div class="flex items-center justify-center p-20" *ngIf="loading()">
+      <ng-icon hlm size="lg" name="lucideLoaderCircle" class="animate-spin" />
+    </div>
   </hlm-table>
 </section>

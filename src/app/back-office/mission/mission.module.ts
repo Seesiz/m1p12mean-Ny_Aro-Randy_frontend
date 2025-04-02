@@ -6,7 +6,7 @@ import { MissionRoutingModule } from './mission-routing.module';
 import { ListComponent } from './list/list.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { lucideEye, lucidePlus } from '@ng-icons/lucide';
+import { lucideEye, lucideLoaderCircle, lucidePlus } from '@ng-icons/lucide';
 import { provideIcons } from '@ng-icons/core';
 import { SuiviComponent } from './suivi/suivi.component';
 
@@ -23,6 +23,7 @@ import { SuiviComponent } from './suivi/suivi.component';
     provideIcons({
       lucideEye,
       lucidePlus,
+      lucideLoaderCircle,
     }),
   ],
 })

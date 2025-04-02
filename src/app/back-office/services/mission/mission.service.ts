@@ -21,7 +21,9 @@ export class MissionService {
 
   async getAll(): Promise<IMission[]> {
     try {
-      const response: AxiosResponse<IMission[]> = await this.axios.get('/missions');
+      const response: AxiosResponse<IMission[]> = await this.axios.get(
+        '/missions'
+      );
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
@@ -32,7 +34,9 @@ export class MissionService {
 
   async getMission(id: string): Promise<IMission> {
     try {
-      const response: AxiosResponse<IMission> = await this.axios.get(`/missions/${id}`);
+      const response: AxiosResponse<IMission> = await this.axios.get(
+        `/missions/${id}`
+      );
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
@@ -43,7 +47,24 @@ export class MissionService {
 
   async add(mission: Omit<IMission, '_id'>): Promise<IMission> {
     try {
-      const response: AxiosResponse<IMission> = await this.axios.post('/missions', mission);
+      const response: AxiosResponse<IMission> = await this.axios.post(
+        '/missions',
+        mission
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
+
+  async update(mission: IMission): Promise<IMission> {
+    try {
+      const response: AxiosResponse<IMission> = await this.axios.put(
+        `/missions/${mission._id}`,
+        mission
+      );
       return response.data;
     } catch (error) {
       const err = error as AxiosError;

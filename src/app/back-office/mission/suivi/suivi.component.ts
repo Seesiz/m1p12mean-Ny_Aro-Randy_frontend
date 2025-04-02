@@ -12,10 +12,10 @@ import {
   selector: 'app-suivi',
   standalone: false,
   templateUrl: './suivi.component.html',
-  styleUrl: './suivi.component.css',
+  styleUrls: ['./suivi.component.css'],
 })
 export class SuiviComponent {
-  missions = signal<IMission | null>(null);
+  mission = signal<IMission | null>(null);
   pending = signal<IMission['services']>([]);
   inProgress = signal<IMission['services']>([]);
   done = signal<IMission['services']>([]);
@@ -32,7 +32,7 @@ export class SuiviComponent {
 
   initMission(id: string) {
     this.missionService.getMission(id).then((mission) => {
-      this.missions.set(mission);
+      this.mission.set(mission);
       this.pending.set(
         mission.services?.filter((s) => s.status === 'pending') || []
       );
@@ -58,18 +58,29 @@ export class SuiviComponent {
         event.currentIndex
       );
 
-      // Update the status based on the container
-      const item = event.container.data[event.currentIndex];
-      if (event.container.id === 'pendingList') {
-        item.status = 'pending';
-      } else if (event.container.id === 'progressList') {
-        item.status = 'in_progress';
-      } else if (event.container.id === 'doneList') {
-        item.status = 'done';
-      }
-
-      // TODO: Update the backend with the new status
-      // this.missionService.updateMissionService(item);
+      this.save();
     }
+  }
+
+  save() {
+    const currentMission = this.mission();
+    const pendingServices = this.pending();
+    const inProgressServices = this.inProgress();
+    const doneServices = this.done();
+
+    if (!currentMission) return;
+
+    const updatedMission: IMission = {
+      ...currentMission,
+      services: [
+        ...pendingServices.map((s) => ({ ...s, status: 'pending' })),
+        ...inProgressServices.map((s) => ({ ...s, status: 'in_progress' })),
+        ...doneServices.map((s) => ({ ...s, status: 'done' })),
+      ],
+    };
+
+    this.missionService.update(updatedMission).then((mission) => {
+      this.mission.set(mission);
+    });
   }
 }
