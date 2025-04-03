@@ -99,7 +99,7 @@ export const backOfficeRoutes: Routes = [
           import('./mission/mission.module').then((m) => m.MissionModule),
         canActivate: [AccessGuard],
         data: {
-          role: [Role.manager],
+          role: [Role.manager, Role.client, Role.mecanic],
           label: 'mission',
           icon: 'file',
         },

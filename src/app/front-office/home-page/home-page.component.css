@@ -108,6 +108,15 @@
   animation: barAnimation 1s ease-in-out;
 }
 
+.slider {
+  mask: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
+  -webkit-mask: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
+}
+
+.slide-track {
+  animation: slider 20s linear infinite;
+}
+
 @keyframes barAnimation {
   0% {
     width: 0;
@@ -148,5 +157,14 @@
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes slider {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
   }
 }
