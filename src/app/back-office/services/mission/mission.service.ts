@@ -19,10 +19,31 @@ export class MissionService {
     });
   }
 
-  async getAll(): Promise<IMission[]> {
+  async getAll() {
     try {
       const response: AxiosResponse<IMission[]> = await this.axios.get(
         '/missions'
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
+
+  async getAllPaginate(
+    page?: number,
+    search?: string,
+    userId?: string
+  ): Promise<{ data: IMission[]; page: number; totalPages: number }> {
+    try {
+      const response: AxiosResponse<{
+        data: IMission[];
+        page: number;
+        totalPages: number;
+      }> = await this.axios.get(
+        `/missions?page=${page}&search=${search}&userId=${userId}`
       );
       return response.data;
     } catch (error) {

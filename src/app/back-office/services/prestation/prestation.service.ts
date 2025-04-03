@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { IPrestation } from '@/types/output';
 import axios, { AxiosError, AxiosResponse, AxiosInstance } from 'axios';
 import { environment } from '@/environments/environments';
+import { PaginatedResponse } from '@/types/output';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,21 @@ export class PrestationService {
   async getAllPrestations(): Promise<IPrestation[]> {
     try {
       const response: AxiosResponse<IPrestation[]> = await this.axios.get('/services');
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
+
+  async getAllPrestationsPaginate(
+    page = 1,
+    search = ''
+  ): Promise<PaginatedResponse<IPrestation>> {
+    try {
+      const response: AxiosResponse<PaginatedResponse<IPrestation>> =
+        await this.axios.get(`/services?page=${page}&search=${search}`);
       return response.data;
     } catch (error) {
       const err = error as AxiosError;

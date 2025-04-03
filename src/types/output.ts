@@ -76,6 +76,12 @@ type IPlaning = {
   services: IPrestation[];
   mission: IMission;
 };
+type PaginatedResponse<T> = {
+  data: T[];
+  page: number;
+  totalPages: number;
+};
+
 export type {
   IUser,
   IRole,
@@ -85,4 +91,5 @@ export type {
   IMission,
   INote,
   IPlaning,
+  PaginatedResponse,
 };

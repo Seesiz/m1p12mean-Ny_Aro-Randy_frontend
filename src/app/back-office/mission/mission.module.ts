@@ -9,6 +9,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { lucideEye, lucideLoaderCircle, lucidePlus } from '@ng-icons/lucide';
 import { provideIcons } from '@ng-icons/core';
 import { SuiviComponent } from './suivi/suivi.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ListComponent, SuiviComponent],
@@ -17,6 +18,8 @@ import { SuiviComponent } from './suivi/suivi.component';
     MissionRoutingModule,
     TranslateModule,
     DragDropModule,
+    FormsModule,
+    ReactiveFormsModule,
     ...UI_MODULE_IMPORTS,
   ],
   providers: [

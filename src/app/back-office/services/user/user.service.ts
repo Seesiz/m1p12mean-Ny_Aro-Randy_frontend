@@ -7,6 +7,12 @@ interface UserResponse {
   user: IUser;
 }
 
+interface PaginatedResponse {
+  data: IUser[];
+  page: number;
+  totalPages: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -25,7 +31,9 @@ export class UserService {
 
   async getUserById(id: string): Promise<IUser> {
     try {
-      const response: AxiosResponse<IUser> = await this.axios.get(`/users/${id}`);
+      const response: AxiosResponse<IUser> = await this.axios.get(
+        `/users/${id}`
+      );
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
@@ -36,7 +44,26 @@ export class UserService {
 
   async getAllUsers(type: string): Promise<IUser[]> {
     try {
-      const response: AxiosResponse<IUser[]> = await this.axios.get(`/users?role=${type}`);
+      const response: AxiosResponse<IUser[]> = await this.axios.get(
+        `/users?role=${type}`
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
+
+  async getAllUsersPaginate(
+    type: string,
+    page = 1,
+    search = ''
+  ): Promise<PaginatedResponse> {
+    try {
+      const response: AxiosResponse<PaginatedResponse> = await this.axios.get(
+        `/users?role=${type}&page=${page}&search=${search}`
+      );
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
@@ -53,13 +80,16 @@ export class UserService {
     roles: string[]
   ): Promise<UserResponse> {
     try {
-      const response: AxiosResponse<UserResponse> = await this.axios.post('/users', {
-        lastname,
-        firstname,
-        email,
-        pass,
-        roles,
-      });
+      const response: AxiosResponse<UserResponse> = await this.axios.post(
+        '/users',
+        {
+          lastname,
+          firstname,
+          email,
+          pass,
+          roles,
+        }
+      );
 
       return response.data;
     } catch (error) {
@@ -78,14 +108,17 @@ export class UserService {
     roles: string[]
   ): Promise<UserResponse> {
     try {
-      const response: AxiosResponse<UserResponse> = await this.axios.put(`/users/${_id}`, {
-        _id,
-        lastname,
-        firstname,
-        email,
-        pass,
-        roles,
-      });
+      const response: AxiosResponse<UserResponse> = await this.axios.put(
+        `/users/${_id}`,
+        {
+          _id,
+          lastname,
+          firstname,
+          email,
+          pass,
+          roles,
+        }
+      );
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
