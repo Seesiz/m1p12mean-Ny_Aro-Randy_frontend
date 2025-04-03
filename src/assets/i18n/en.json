@@ -180,7 +180,8 @@
     "serial_number": "Serial number",
     "description": "Description",
     "services": "Services",
-    "services_list": "Services list"
+    "services_list": "Services list",
+    "size_total": "All selling"
   },
   "note": {
     "add": "Add note",

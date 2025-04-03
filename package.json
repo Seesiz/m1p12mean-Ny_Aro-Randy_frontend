@@ -19,6 +19,7 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@canvasjs/angular-charts": "^1.2.0",
     "@ng-icons/core": "^29.10.0",
     "@ng-icons/lucide": ">=29.0.0",
     "@ngx-translate/core": "^16.0.4",

@@ -180,7 +180,8 @@
     "serial_number": "Matriculation",
     "description": "Description",
     "services": "Services",
-    "services_list": "Liste des services"
+    "services_list": "Liste des services",
+    "size_total": "Nombre total de vente"
   },
   "note": {
     "add": "Ajouter une note",

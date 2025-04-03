@@ -72,4 +72,17 @@ export class MissionService {
       throw new Error("Échec de l'authentification");
     }
   }
+
+  async getStatistiqueByYear(year: number): Promise<any> {
+    try {
+      const response: AxiosResponse<any> = await this.axios.get(
+        `/missions/number/${year}`
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
 }
