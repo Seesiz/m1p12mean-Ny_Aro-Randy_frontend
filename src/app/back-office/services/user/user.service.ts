@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse, AxiosInstance } from 'axios';
 import { IUser } from '@/types/output';
 import { environment } from '@/environments/environments';
 
@@ -7,16 +7,32 @@ interface UserResponse {
   user: IUser;
 }
 
+interface PaginatedResponse {
+  data: IUser[];
+  page: number;
+  totalPages: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor() {}
+  private readonly axios: AxiosInstance;
+
+  constructor() {
+    this.axios = axios.create({
+      baseURL: environment.apiUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+  }
 
   async getUserById(id: string): Promise<IUser> {
     try {
-      const response: AxiosResponse<IUser> = await axios.get(
-        `${environment.apiUrl}/users/${id}`
+      const response: AxiosResponse<IUser> = await this.axios.get(
+        `/users/${id}`
       );
       return response.data;
     } catch (error) {
@@ -28,8 +44,25 @@ export class UserService {
 
   async getAllUsers(type: string): Promise<IUser[]> {
     try {
-      const response: AxiosResponse<IUser[]> = await axios.get(
-        `${environment.apiUrl}/users?role=${type}`
+      const response: AxiosResponse<IUser[]> = await this.axios.get(
+        `/users?role=${type}`
+      );
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
+
+  async getAllUsersPaginate(
+    type: string,
+    page = 1,
+    search = ''
+  ): Promise<PaginatedResponse> {
+    try {
+      const response: AxiosResponse<PaginatedResponse> = await this.axios.get(
+        `/users?role=${type}&page=${page}&search=${search}`
       );
       return response.data;
     } catch (error) {
@@ -47,8 +80,8 @@ export class UserService {
     roles: string[]
   ): Promise<UserResponse> {
     try {
-      const response: AxiosResponse<UserResponse> = await axios.post(
-        `${environment.apiUrl}/users`,
+      const response: AxiosResponse<UserResponse> = await this.axios.post(
+        '/users',
         {
           lastname,
           firstname,
@@ -75,8 +108,8 @@ export class UserService {
     roles: string[]
   ): Promise<UserResponse> {
     try {
-      const response: AxiosResponse<UserResponse> = await axios.put(
-        `${environment.apiUrl}/users/${_id}`,
+      const response: AxiosResponse<UserResponse> = await this.axios.put(
+        `/users/${_id}`,
         {
           _id,
           lastname,

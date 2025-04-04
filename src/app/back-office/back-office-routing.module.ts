@@ -27,7 +27,7 @@ export const backOfficeRoutes: Routes = [
         path: 'statistique',
         canActivate: [AccessGuard],
         data: {
-          role: [Role.client, Role.manager, Role.mechanic],
+          role: [Role.client, Role.manager, Role.mecanic],
           label: 'statistics',
           icon: 'chart-bar',
         },
@@ -37,6 +37,14 @@ export const backOfficeRoutes: Routes = [
             component: StatistiqueClientComponent,
             data: {
               role: Role.client,
+            },
+            canMatch: [SwitchGuard],
+          },
+          {
+            path: '',
+            component: StatistiqueManagerComponent,
+            data: {
+              role: Role.mecanic,
             },
             canMatch: [SwitchGuard],
           },
@@ -80,7 +88,7 @@ export const backOfficeRoutes: Routes = [
           import('./planning/planning.module').then((m) => m.PlanningModule),
         canActivate: [AccessGuard],
         data: {
-          role: [Role.manager, Role.mechanic],
+          role: [Role.manager, Role.mecanic],
           label: 'planning',
           icon: 'calendar',
         },
@@ -91,7 +99,7 @@ export const backOfficeRoutes: Routes = [
           import('./mission/mission.module').then((m) => m.MissionModule),
         canActivate: [AccessGuard],
         data: {
-          role: [Role.manager],
+          role: [Role.manager, Role.client, Role.mecanic],
           label: 'mission',
           icon: 'file',
         },

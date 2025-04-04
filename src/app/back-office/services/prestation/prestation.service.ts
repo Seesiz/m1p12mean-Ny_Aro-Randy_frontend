@@ -1,19 +1,43 @@
 import { Injectable } from '@angular/core';
 import { IPrestation } from '@/types/output';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse, AxiosInstance } from 'axios';
 import { environment } from '@/environments/environments';
+import { PaginatedResponse } from '@/types/output';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PrestationService {
-  constructor() {}
+  private readonly axios: AxiosInstance;
+
+  constructor() {
+    this.axios = axios.create({
+      baseURL: environment.apiUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+  }
 
   async getAllPrestations(): Promise<IPrestation[]> {
     try {
-      const response: AxiosResponse<IPrestation[]> = await axios.get(
-        `${environment.apiUrl}/services`
-      );
+      const response: AxiosResponse<IPrestation[]> = await this.axios.get('/services');
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
+
+  async getAllPrestationsPaginate(
+    page = 1,
+    search = ''
+  ): Promise<PaginatedResponse<IPrestation>> {
+    try {
+      const response: AxiosResponse<PaginatedResponse<IPrestation>> =
+        await this.axios.get(`/services?page=${page}&search=${search}`);
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
@@ -24,10 +48,7 @@ export class PrestationService {
 
   async savePrestation(prestation: IPrestation): Promise<IPrestation> {
     try {
-      const response: AxiosResponse<IPrestation> = await axios.post(
-        `${environment.apiUrl}/services`,
-        prestation
-      );
+      const response: AxiosResponse<IPrestation> = await this.axios.post('/services', prestation);
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
@@ -38,10 +59,7 @@ export class PrestationService {
 
   async updatePrestation(prestation: IPrestation): Promise<IPrestation> {
     try {
-      const response: AxiosResponse<IPrestation> = await axios.put(
-        `${environment.apiUrl}/services/${prestation._id}`,
-        prestation
-      );
+      const response: AxiosResponse<IPrestation> = await this.axios.put(`/services/${prestation._id}`, prestation);
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
@@ -52,9 +70,7 @@ export class PrestationService {
 
   async getPrestation(_id: string): Promise<IPrestation> {
     try {
-      const response: AxiosResponse<IPrestation> = await axios.get(
-        `${environment.apiUrl}/services/${_id}`
-      );
+      const response: AxiosResponse<IPrestation> = await this.axios.get(`/services/${_id}`);
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
@@ -65,9 +81,7 @@ export class PrestationService {
 
   async deletePrestation(_id: string): Promise<IPrestation> {
     try {
-      const response: AxiosResponse<IPrestation> = await axios.delete(
-        `${environment.apiUrl}/services/${_id}`
-      );
+      const response: AxiosResponse<IPrestation> = await this.axios.delete(`/services/${_id}`);
       return response.data;
     } catch (error) {
       const err = error as AxiosError;

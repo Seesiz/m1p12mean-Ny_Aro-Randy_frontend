@@ -20,7 +20,6 @@ import { FormPopupComponent } from './components/tui-calendar/form-popup/form-po
   declarations: [
     BackOfficeComponent,
     StatistiqueClientComponent,
-    StatistiqueManagerComponent,
     HeaderComponent,
     AccessDeniedComponent,
     LoginComponent,
