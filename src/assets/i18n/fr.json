@@ -181,7 +181,20 @@
     "description": "Description",
     "services": "Services",
     "services_list": "Liste des services",
-    "size_total": "Nombre total de vente"
+    "size_total": "Nombre total de vente",
+    "tracking": "Suivi de la mission",
+    "list_pending": "Liste des tâches en attente",
+    "list_progress": "Liste des tâches en cours",
+    "list_done": "Liste des tâches terminées",
+    "list_archived": "Liste des tâches archivées",
+    "status": {
+      "pending": "En attente ⏳",
+      "in_progress": "En cours 🚀",
+      "done": "Terminé 🎉",
+      "archive": "Archiver",
+      "restore": "Restaurer"
+    },
+    "add_task": "Ajouter"
   },
   "note": {
     "add": "Ajouter une note",

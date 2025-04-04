@@ -181,7 +181,20 @@
     "description": "Description",
     "services": "Services",
     "services_list": "Services list",
-    "size_total": "All selling"
+    "size_total": "All selling",
+    "tracking": "Mission Tracking",
+    "list_pending": "Pending Tasks List",
+    "list_progress": "In Progress Tasks List",
+    "list_done": "Completed Tasks List",
+    "list_archived": "Archived Tasks List",
+    "status": {
+      "pending": "Pending ⏳",
+      "in_progress": "In Progress 🚀",
+      "done": "Completed 🎉",
+      "archive": "Archive",
+      "restore": "Restore"
+    },
+    "add_task": "Add"
   },
   "note": {
     "add": "Add note",

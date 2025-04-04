@@ -1,15 +1,20 @@
 <section class="p-2 w-full h-full flex flex-col gap-1 transition-all">
-  <header>
+  <header class="flex items-center justify-between px-4 py-2">
     <h2 class="text-2xl font-bold">
-      Suivi de la mission :
-      {{
-        mission()?.infoMission?.marque +
-          " " +
-          mission()?.infoMission?.model +
-          " " +
-          mission()?.infoMission?.serialNumber
-      }}
+      {{ "mission.tracking" | translate }} :
+      <span *ngIf="mission()">
+        {{
+          mission()?.infoMission?.marque +
+            " " +
+            mission()?.infoMission?.model +
+            " " +
+            mission()?.infoMission?.serialNumber
+        }}
+      </span>
     </h2>
+    <button hlmButton [brnMenuTriggerFor]="archive" variant="ghost">
+      <ng-icon hlm name="lucideArchive" hlmMenuIcon size="sm"></ng-icon>
+    </button>
   </header>
   <main
     class="flex md:flex-row flex-col bg-background flex-1 rounded-2xl overflow-hidden p-2 gap-4"
@@ -19,8 +24,13 @@
       class="pending w-full rounded-xl max-h-full h-fit flex flex-col overflow-hidden"
       hlmCard
     >
-      <div class="shrink-0 p-4 bg-destructive text-white font-bold">
-        En attente ⏳
+      <div
+        class="shrink-0 p-4 bg-destructive text-white font-bold flex items-center justify-between"
+      >
+        {{ "mission.status.pending" | translate }}
+        <span class="text-white">
+          {{ calculateServicePercentage("pending") | percent : "1.0-1" }}
+        </span>
       </div>
       <div
         class="taches bg-background rounded-xl flex-1 m-2 overflow-y-auto flex flex-col gap-1 p-1"
@@ -32,18 +42,23 @@
       >
         <div
           hlmCard
-          class="text-primary shadow-none p-4 cursor-grab active:cursor-grabbing focus:cursor-grabbing service"
+          class="text-primary shadow-none flex items-center justify-between p-4 cursor-grab active:cursor-grabbing focus:cursor-grabbing service"
           *ngFor="let task of pending()"
           cdkDrag
         >
           <div class="placeholder" *cdkDragPlaceholder></div>
           {{ task.label }}
+          <button
+            (click)="selectedService.set(task); selectedList.set('pending')"
+            [brnMenuTriggerFor]="menu"
+          >
+            <ng-icon hlm name="lucideEllipsis" size="sm"></ng-icon>
+          </button>
         </div>
       </div>
-      <button hlmBtn variant="ghost" class="mx-2">
-        <ng-icon name="lucidePlus" hlm size="sm"></ng-icon>
-        Ajouter
-      </button>
+      <ng-container
+        *ngTemplateOutlet="addTaskDialog; context: { $implicit: 'pending' }"
+      ></ng-container>
       <hlm-caption>{{ "mission.list_pending" | translate }}</hlm-caption>
     </div>
     <!-- Progress -->
@@ -51,7 +66,14 @@
       class="pending w-full rounded-xl max-h-full h-fit flex flex-col overflow-hidden"
       hlmCard
     >
-      <div class="shrink-0 p-4 text-primary font-bold">En cours 🚀</div>
+      <div
+        class="shrink-0 p-4 text-primary font-bold flex items-center justify-between"
+      >
+        {{ "mission.status.in_progress" | translate }}
+        <span class="text-primary">
+          {{ calculateServicePercentage("in_progress") | percent : "1.0-1" }}
+        </span>
+      </div>
       <div
         class="taches bg-background rounded-xl flex-1 m-2 overflow-y-auto flex flex-col gap-1 p-1"
         cdkDropList
@@ -62,27 +84,38 @@
       >
         <div
           hlmCard
-          class="text-primary shadow-none p-4 cursor-grab active:cursor-grabbing focus:cursor-grabbing service"
+          class="text-primary shadow-none flex items-center justify-between p-4 cursor-grab active:cursor-grabbing focus:cursor-grabbing service"
           *ngFor="let task of inProgress()"
           cdkDrag
         >
           <div class="placeholder" *cdkDragPlaceholder></div>
           {{ task.label }}
+          <button
+            [brnMenuTriggerFor]="menu"
+            (click)="selectedService.set(task); selectedList.set('in_progress')"
+          >
+            <ng-icon hlm name="lucideEllipsis" size="sm"></ng-icon>
+          </button>
         </div>
       </div>
-      <button hlmBtn variant="ghost" class="mx-2">
-        <ng-icon name="lucidePlus" hlm size="sm"></ng-icon>
-        Ajouter
-      </button>
+      <ng-container
+        *ngTemplateOutlet="addTaskDialog; context: { $implicit: 'in_progress' }"
+      ></ng-container>
       <hlm-caption>{{ "mission.list_progress" | translate }}</hlm-caption>
     </div>
     <!-- Done -->
     <div
+      id="confetti"
       class="pending w-full rounded-xl max-h-full h-fit flex flex-col overflow-hidden"
       hlmCard
     >
-      <div class="shrink-0 p-4 bg-green-300 text-primary font-bold">
-        Terminé 🎉
+      <div
+        class="shrink-0 p-4 bg-green-300 text-primary font-bold flex items-center justify-between"
+      >
+        {{ "mission.status.done" | translate }}
+        <span class="text-primary">
+          {{ calculateServicePercentage("done") | percent : "1.0-1" }}
+        </span>
       </div>
       <div
         class="taches bg-background rounded-xl flex-1 m-2 overflow-y-auto flex flex-col gap-1 p-1"
@@ -94,19 +127,153 @@
       >
         <div
           hlmCard
-          class="text-primary shadow-none p-4 cursor-grab active:cursor-grabbing focus:cursor-grabbing service"
+          class="text-primary shadow-none flex items-center justify-between p-4 cursor-grab active:cursor-grabbing focus:cursor-grabbing service"
           *ngFor="let task of done()"
           cdkDrag
         >
           <div class="placeholder text-primary" *cdkDragPlaceholder></div>
           {{ task.label }}
+          <button
+            [brnMenuTriggerFor]="menu"
+            (click)="selectedService.set(task); selectedList.set('done')"
+          >
+            <ng-icon hlm name="lucideEllipsis" size="sm"></ng-icon>
+          </button>
         </div>
       </div>
-      <button hlmBtn variant="ghost" class="mx-2">
-        <ng-icon name="lucidePlus" hlm size="sm"></ng-icon>
-        Ajouter
-      </button>
+      <ng-container
+        *ngTemplateOutlet="addTaskDialog; context: { $implicit: 'done' }"
+      ></ng-container>
       <hlm-caption>{{ "mission.list_done" | translate }}</hlm-caption>
     </div>
   </main>
 </section>
+
+<ng-template #addTaskDialog let-dialogType>
+  <hlm-dialog class="w-full px-2">
+    <button
+      brnDialogTrigger
+      hlmBtn
+      variant="ghost"
+      class="w-full"
+      (click)="type.set(dialogType)"
+    >
+      <ng-icon name="lucidePlus" hlm size="sm"></ng-icon>
+      {{ "mission.add_task" | translate }}
+    </button>
+    <hlm-dialog-content
+      class="md:!w-[400px] !w-full"
+      *brnDialogContent="let ctx"
+    >
+      <hlm-dialog-header>
+        <h3 brnDialogTitle hlm class="font-bold">
+          {{ "prestation_detail.add_prestation" | translate }}
+        </h3>
+      </hlm-dialog-header>
+      <brn-popover
+        [state]="state()"
+        (stateChanged)="stateChanged($event)"
+        sideOffset="5"
+        class="w-full"
+      >
+        <button
+          class="w-full justify-between"
+          id="edit-prestation"
+          variant="outline"
+          brnPopoverTrigger
+          hlmBtn
+        >
+          {{
+            selectedPrestation()
+              ? selectedPrestation()?.label
+              : ("prestation_detail.select_service" | translate)
+          }}
+          <ng-icon hlm size="sm" name="lucideChevronsUpDown" />
+        </button>
+        <hlm-command
+          *brnPopoverContent="let ctx"
+          hlmPopoverContent
+          class="p-0 w-full"
+        >
+          <hlm-command-search>
+            <ng-icon hlm name="lucideSearch" />
+            <input
+              [placeholder]="'common.search' | translate"
+              hlm-command-search-input
+            />
+          </hlm-command-search>
+          <div *brnCommandEmpty hlmCommandEmpty>
+            {{ "common.no-result" | translate }}
+          </div>
+          <hlm-command-list>
+            <hlm-command-group>
+              <button
+                *ngFor="let prestation of prestations()"
+                hlm-command-item
+                [value]="prestation.label"
+                (selected)="onPrestationSelect(prestation)"
+              >
+                {{ prestation.label }}
+              </button>
+            </hlm-command-group>
+          </hlm-command-list>
+        </hlm-command>
+      </brn-popover>
+
+      <hlm-dialog-footer>
+        <button
+          hlmBtn
+          variant="outline"
+          (click)="ctx.close(); selectedPrestation.set(null)"
+        >
+          {{ "common.cancel" | translate }}
+        </button>
+        <button
+          hlmBtn
+          type="submit"
+          (click)="
+            addService(selectedPrestation()!, type());
+            selectedPrestation.set(null);
+            ctx.close()
+          "
+          [disabled]="!selectedPrestation()"
+        >
+          {{ "common.save" | translate }}
+        </button>
+      </hlm-dialog-footer>
+    </hlm-dialog-content>
+  </hlm-dialog>
+</ng-template>
+
+<ng-template #menu>
+  <hlm-menu>
+    <hlm-menu-group>
+      <button hlmMenuItem (click)="archiveSelected()">
+        <ng-icon hlm name="lucideArchive" hlmMenuIcon size="sm"></ng-icon>
+        {{ "mission.status.archive" | translate }}
+      </button>
+    </hlm-menu-group>
+  </hlm-menu>
+</ng-template>
+
+<ng-template #archive>
+  <hlm-menu>
+    <hlm-menu-label>{{ "mission.list_archived" | translate }}</hlm-menu-label>
+    <hlm-menu-separator />
+    <hlm-menu-group>
+      <button
+        hlmMenuItem
+        *ngFor="let service of archives()"
+        (click)="restore(service)"
+      >
+        <ng-icon
+          hlm
+          name="lucideArchiveRestore"
+          hlmMenuIcon
+          size="sm"
+        ></ng-icon>
+        {{ service.label }}
+      </button>
+    </hlm-menu-group>
+  </hlm-menu>
+</ng-template>

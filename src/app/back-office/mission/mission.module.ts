@@ -6,10 +6,30 @@ import { MissionRoutingModule } from './mission-routing.module';
 import { ListComponent } from './list/list.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { lucideEye, lucideLoaderCircle, lucidePlus } from '@ng-icons/lucide';
+import {
+  lucideEye,
+  lucideLoaderCircle,
+  lucidePlus,
+  lucideChevronsUpDown,
+  lucideCheck,
+  lucideSearch,
+  lucideEllipsis,
+  lucideArchive,
+  lucideArchiveRestore,
+} from '@ng-icons/lucide';
 import { provideIcons } from '@ng-icons/core';
 import { SuiviComponent } from './suivi/suivi.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { BrnCommandImports } from '@spartan-ng/brain/command';
+import { HlmCommandImports } from '@spartan-ng/ui-command-helm';
+import { HlmIconDirective } from '@spartan-ng/ui-icon-helm';
+import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import {
+  BrnPopoverComponent,
+  BrnPopoverContentDirective,
+  BrnPopoverTriggerDirective,
+} from '@spartan-ng/brain/popover';
+import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
 
 @NgModule({
   declarations: [ListComponent, SuiviComponent],
@@ -18,8 +38,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MissionRoutingModule,
     TranslateModule,
     DragDropModule,
-    FormsModule,
     ReactiveFormsModule,
+    [BrnCommandImports],
+    [HlmCommandImports],
+    HlmIconDirective,
+    HlmButtonDirective,
+    BrnPopoverComponent,
+    BrnPopoverTriggerDirective,
+    HlmPopoverContentDirective,
+    BrnPopoverContentDirective,
+    FormsModule,
     ...UI_MODULE_IMPORTS,
   ],
   providers: [
@@ -27,6 +55,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       lucideEye,
       lucidePlus,
       lucideLoaderCircle,
+      lucideChevronsUpDown,
+      lucideCheck,
+      lucideSearch,
+      lucideEllipsis,
+      lucideArchive,
+      lucideArchiveRestore,
     }),
   ],
 })

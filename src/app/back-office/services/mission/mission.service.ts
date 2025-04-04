@@ -83,7 +83,7 @@ export class MissionService {
   async update(mission: IMission): Promise<IMission> {
     try {
       const response: AxiosResponse<IMission> = await this.axios.put(
-        `/missions/${mission._id}`,
+        `/missions/update/${mission._id}`,
         mission
       );
       return response.data;
