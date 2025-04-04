@@ -12,9 +12,14 @@
         }}
       </span>
     </h2>
-    <button hlmButton [brnMenuTriggerFor]="archive" variant="ghost">
-      <ng-icon hlm name="lucideArchive" hlmMenuIcon size="sm"></ng-icon>
-    </button>
+    <div class="flex items-center gap-2">
+      <button hlmButton variant="ghost" (click)="exportPdf()">
+        <ng-icon hlm name="lucideFileText" hlmMenuIcon size="sm"></ng-icon>
+      </button>
+      <button hlmButton [brnMenuTriggerFor]="archive" variant="ghost">
+        <ng-icon hlm name="lucideArchive" hlmMenuIcon size="sm"></ng-icon>
+      </button>
+    </div>
   </header>
   <main
     class="flex md:flex-row flex-col bg-background flex-1 rounded-2xl overflow-hidden p-2 gap-4"
@@ -277,3 +282,117 @@
     </hlm-menu-group>
   </hlm-menu>
 </ng-template>
+
+<div class="fixed left-[-100%] select-none">
+  <div
+    #facture
+    id="facture"
+    class="w-full p-16"
+    style="background-color: rgb(255, 255, 255)"
+  >
+    <div class="max-w-5xl mx-auto">
+      <header class="flex flex-col gap-5">
+        <div class="text-center mb-8">
+          <h1 class="text-4xl font-bold mb-2">MECANET</h1>
+          <p class="text-xl mb-4" style="color: rgb(75, 85, 99)">
+            Votre garage de confiance
+          </p>
+          <div class="text-2xl font-bold">FACTURE N°{{ mission()?._id }}</div>
+        </div>
+        <div
+          class="flex flex-col gap-4 p-6 rounded-lg mb-8"
+          style="background-color: rgb(249, 250, 251)"
+        >
+          <div class="grid grid-cols-[150px_1fr] gap-2 items-center">
+            <span style="color: rgb(75, 85, 99)">Nom & prénom :</span>
+            <span class="font-semibold">
+              {{
+                mission()?.client?.firstname + " " + mission()?.client?.lastname
+              }}
+            </span>
+          </div>
+          <div class="grid grid-cols-[150px_1fr] gap-2 items-center">
+            <span style="color: rgb(75, 85, 99)">Date de début :</span>
+            <span class="font-semibold">
+              {{
+                mission()?.dateDebut
+                  | localizedDate
+                    : ("dateFormats.fullDateWithLetters" | translate)
+              }}
+            </span>
+          </div>
+          <div class="grid grid-cols-[150px_1fr] gap-2 items-center">
+            <span style="color: rgb(75, 85, 99)">Voiture :</span>
+            <span class="font-semibold">
+              {{
+                mission()?.infoMission?.marque +
+                  " " +
+                  mission()?.infoMission?.model
+              }}
+            </span>
+          </div>
+          <div class="grid grid-cols-[150px_1fr] gap-2 items-center">
+            <span style="color: rgb(75, 85, 99)">Numéro :</span>
+            <span class="font-semibold">
+              {{ mission()?.infoMission?.serialNumber }}
+            </span>
+          </div>
+        </div>
+      </header>
+      <main>
+        <table class="w-full border-collapse mt-8">
+          <thead>
+            <tr class="border-b-2 border-gray-800">
+              <th
+                class="w-1/3 py-4 px-6 text-left"
+                style="background-color: rgb(243, 244, 246)"
+              >
+                {{ "prestation_detail.label" | translate }}
+              </th>
+              <th
+                class="w-1/3 py-4 px-6 text-left"
+                style="background-color: rgb(243, 244, 246)"
+              >
+                {{ "prestation_detail.description" | translate }}
+              </th>
+              <th
+                class="w-1/3 py-4 px-6 text-right"
+                style="background-color: rgb(243, 244, 246)"
+              >
+                {{ "prestation_detail.price" | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (service of done(); track service._id) {
+            <tr
+              class="border-b"
+              style="
+                border-color: rgb(229, 231, 235);
+                background-color: rgb(255, 255, 255);
+              "
+              onmouseover="this.style.backgroundColor='rgb(249, 250, 251)'"
+              onmouseout="this.style.backgroundColor='rgb(255, 255, 255)'"
+            >
+              <td class="py-4 px-6">{{ service.label }}</td>
+              <td class="py-4 px-6" style="color: rgb(75, 85, 99)">
+                {{ service.description }}
+              </td>
+              <td class="py-4 px-6 text-right font-medium">
+                {{ service.price | number : "1.0-2" }} Ar
+              </td>
+            </tr>
+            }
+            <tr class="border-t-2 border-gray-800 font-bold">
+              <td class="py-4 px-6">Total</td>
+              <td></td>
+              <td class="py-4 px-6 text-right">
+                {{ calculateTotal() | number : "1.0-2" }} Ar
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+    </div>
+  </div>
+</div>

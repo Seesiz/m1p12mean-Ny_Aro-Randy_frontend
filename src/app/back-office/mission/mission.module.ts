@@ -16,6 +16,7 @@ import {
   lucideEllipsis,
   lucideArchive,
   lucideArchiveRestore,
+  lucideFileText,
 } from '@ng-icons/lucide';
 import { provideIcons } from '@ng-icons/core';
 import { SuiviComponent } from './suivi/suivi.component';
@@ -30,6 +31,7 @@ import {
   BrnPopoverTriggerDirective,
 } from '@spartan-ng/brain/popover';
 import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
+import { LocalizedDatePipe } from '@/pipe/localized-date.pipe';
 
 @NgModule({
   declarations: [ListComponent, SuiviComponent],
@@ -48,6 +50,7 @@ import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
     HlmPopoverContentDirective,
     BrnPopoverContentDirective,
     FormsModule,
+    LocalizedDatePipe,
     ...UI_MODULE_IMPORTS,
   ],
   providers: [
@@ -60,6 +63,7 @@ import { HlmPopoverContentDirective } from '@spartan-ng/ui-popover-helm';
       lucideSearch,
       lucideEllipsis,
       lucideArchive,
+      lucideFileText,
       lucideArchiveRestore,
     }),
   ],

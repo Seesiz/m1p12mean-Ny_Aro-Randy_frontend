@@ -33,6 +33,8 @@
     "clsx": "^2.1.1",
     "embla-carousel-angular": "18.0.0",
     "gsap": "^3.12.7",
+    "html2canvas-pro": "^1.5.8",
+    "jspdf": "^3.0.1",
     "m1p12mean-ny-aro-randy-frontend": "file:",
     "ngx-scrollbar": ">=16.0.0",
     "ngx-sonner": "^2.0.0",

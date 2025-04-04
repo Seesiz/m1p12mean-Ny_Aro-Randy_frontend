@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ViewChild, ElementRef } from '@angular/core';
 import { MissionService } from '../../services/mission/mission.service';
 import { ActivatedRoute } from '@angular/router';
 import { IMission, IPrestation } from '@/types/output';
@@ -9,6 +9,8 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import confetti from 'canvas-confetti';
+import html2canvas from 'html2canvas-pro';
+import { jsPDF } from 'jspdf';
 @Component({
   selector: 'app-suivi',
   standalone: false,
@@ -23,6 +25,8 @@ export class SuiviComponent {
   archives = signal<IMission['services']>([]);
 
   confettiDone: boolean = false;
+
+  @ViewChild('facture') facture!: ElementRef;
 
   selectedList = signal<'pending' | 'in_progress' | 'done' | null>(null);
   selectedService = signal<
@@ -198,6 +202,10 @@ export class SuiviComponent {
     return average;
   }
 
+  calculateTotal(): number {
+    return this.done().reduce((total, service) => total + service.price, 0);
+  }
+
   archiveSelected() {
     const service = this.selectedService();
     const list = this.selectedList();
@@ -224,6 +232,42 @@ export class SuiviComponent {
       { ...service, status: 'cancelled' },
     ]);
     this.save();
+  }
+
+  async exportPdf() {
+    try {
+      const element = document.getElementById('facture');
+      if (!element) {
+        throw new Error('Facture element not found');
+      }
+
+      const canvas = await html2canvas(element, {
+        scale: 1,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+      });
+
+      const imgData = canvas.toDataURL('image/jpeg', 1.0);
+
+      const pdf = new jsPDF('p', 'mm', 'a4');
+
+      const pageWidth = 210;
+      const pageHeight = 297;
+
+      const margin = 0;
+      const contentWidth = pageWidth - 2 * margin;
+
+      const imgWidth = contentWidth;
+      const imgHeight = (canvas.height * contentWidth) / canvas.width;
+
+      const x = margin;
+
+      pdf.addImage(imgData, 'JPEG', x, 0, imgWidth, imgHeight);
+
+      pdf.save(`facture-${this.mission()?._id}.pdf`);
+    } catch (error) {
+      console.error('Error exporting PDF:', error);
+    }
   }
 
   restore(service: Omit<IPrestation & { status: string }, 'type'>) {
