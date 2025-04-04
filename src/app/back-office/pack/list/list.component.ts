@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IPack, IPrestation, IUser } from '@/types/output';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { IPack, IPrestation, IUser, PaginatedResponse } from '@/types/output';
 import { PackService } from '@/app/back-office/services/pack/pack.service';
 import { FormControl } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
@@ -13,16 +13,14 @@ import { PrestationService } from '../../services/prestation/prestation.service'
   styleUrl: './list.component.css',
 })
 export class ListComponent {
-  packs: IPack[] = [];
-  filteredPacks: IPack[] = [];
+  packs = signal<IPack[]>([]);
   searchControl = new FormControl('');
-  loading: boolean = false;
+  loading = signal(false);
   selectedPack: IPack | null = null;
   prestations: IPrestation[] = [];
 
-  currentPage = 1;
-  itemsPerPage = 10;
-  totalItems = 0;
+  currentPage = signal(1);
+  totalPage = signal(1);
   private destroy$ = new Subject<void>();
   userConnected: IUser | null = null;
 
@@ -38,21 +36,25 @@ export class ListComponent {
 
     this.searchControl.valueChanges
       .pipe(takeUntil(this.destroy$), debounceTime(300), distinctUntilChanged())
-      .subscribe((searchTerm) => {
-        this.filterPacks(searchTerm || '');
+      .subscribe(() => {
+        this.currentPage.set(1);
+        this.loadData();
       });
   }
 
   loadData() {
-    this.loading = true;
+    this.loading.set(true);
     this.packService
-      .getAll()
-      .then((packs) => {
-        this.packs = packs;
-        this.filterPacks(this.searchControl.value || '');
+      .getAllPacksPaginate(
+        this.currentPage(),
+        this.searchControl.value || ''
+      )
+      .then((response: PaginatedResponse<IPack>) => {
+        this.packs.set(response.data);
+        this.totalPage.set(response.totalPages);
       })
       .finally(() => {
-        this.loading = false;
+        this.loading.set(false);
       });
     this.prestationService
       .getAllPrestations()
@@ -60,7 +62,7 @@ export class ListComponent {
         this.prestations = prestations;
       })
       .finally(() => {
-        this.loading = false;
+        this.loading.set(false);
       });
   }
 
@@ -69,7 +71,7 @@ export class ListComponent {
   }
 
   deletePack(id: string): void {
-    this.loading = true;
+    this.loading.set(true);
     this.packService
       .delete(id)
       .then(() => {
@@ -79,14 +81,13 @@ export class ListComponent {
         console.error('Error deleting pack:', error);
       })
       .finally(() => {
-        this.loading = false;
+        this.loading.set(false);
       });
   }
 
-  filterPacks(searchTerm: string) {
-    this.filteredPacks = this.packs.filter((pack) =>
-      pack.label.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+  onPageChange(page: number) {
+    this.currentPage.set(page);
+    this.loadData();
   }
 
   ngOnDestroy(): void {

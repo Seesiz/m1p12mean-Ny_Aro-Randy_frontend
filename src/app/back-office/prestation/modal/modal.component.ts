@@ -20,8 +20,8 @@ export class ModalComponent {
     this.addForm = this.fb.group({
       label: ['', Validators.required],
       description: ['', Validators.required],
-      price: [0, [Validators.required]],
-      duree: [0, [Validators.required]],
+      price: [0, [Validators.required, Validators.min(0)]],
+      duree: [0, [Validators.required, Validators.min(0)]],
     });
   }
 

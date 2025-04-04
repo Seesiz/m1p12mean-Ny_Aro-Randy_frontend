@@ -17,6 +17,7 @@
     "password": "Mot de passe",
     "enter_login": "Veuillez entrez votre identifiant et votre mot de passe",
     "connection": "Connexion",
+    "contact": "Contact",
     "client": "Client",
     "manager": "Manager",
     "mechanic": "Mécanicien",
@@ -93,7 +94,24 @@
     "why-choose-us": "Pourquoi nous choisir ?",
     "why-choose-us-description": "Chez MECANET, nous priorisons votre satisfaction avec des services de qualité, une expertise reconnue et une transparence totale.",
     "about-us": "A propos de nous",
-    "about-us-description": "Nous sommes une équipe passionnée dédiée à la création de solutions innovantes qui font une différence. Notre mission est de livrer des produits et des services de qualité qui empowèrent nos utilisateurs et favorisent un changement positif dans le monde."
+    "about-us-history": "Notre Histoire",
+    "about-us-history-desc": "Depuis 2010, MECANET s'est construit une réputation d'excellence dans le domaine de la réparation automobile. Notre voyage a commencé avec une vision simple : offrir des services de qualité supérieure à des prix équitables.",
+    "about-us-values": "Nos Valeurs",
+    "about-us-values-desc": "L'intégrité, la transparence et l'excellence technique sont au cœur de notre philosophie. Nous croyons en l'établissement de relations durables avec nos clients basées sur la confiance et le respect mutuel.",
+    "about-us-mission": "Notre Mission",
+    "about-us-mission-desc": "Notre mission est de fournir des services automobiles exceptionnels qui dépassent les attentes, en utilisant les dernières technologies et en maintenant les plus hauts standards de qualité.",
+    "about-us-description": "Nous sommes une équipe passionnée dédiée à la création de solutions innovantes qui font une différence. Notre mission est de livrer des produits et des services de qualité qui empowèrent nos utilisateurs et favorisent un changement positif dans le monde.",
+    "our-services": "Nos Services",
+    "service-quality": "Qualité de Service",
+    "service-quality-desc": "Nous nous engageons à fournir des services automobiles de la plus haute qualité, en utilisant des équipements modernes et des pièces de première qualité.",
+    "expertise": "Expertise Technique",
+    "expertise-desc": "Notre équipe de mécaniciens qualifiés possède une vaste expérience dans la réparation de tous types de véhicules.",
+    "innovation": "Innovation",
+    "innovation-desc": "Nous restons à la pointe de la technologie automobile pour vous offrir les meilleures solutions de réparation et d'entretien.",
+    "support": "Support Client",
+    "support-desc": "Notre équipe est disponible pour répondre à vos questions et vous accompagner tout au long de votre expérience avec nous.",
+    "solutions": "Solutions Personnalisées",
+    "solutions-desc": "Nous adaptons nos services à vos besoins spécifiques pour garantir votre satisfaction totale."
   },
   "header": {
     "home": "Accueil",
@@ -115,7 +133,7 @@
   },
   "contact": {
     "title": "Contactez-nous",
-    "description": "Veuillez entrer les informations nécessaires pour la prise de rendez-vous"
+    "description": "Veuillez entrer les informations nécessaires pour prendre rendez-vous"
   },
   "contact-form": {
     "name": "Nom & prénom",
@@ -162,7 +180,21 @@
     "serial_number": "Matriculation",
     "description": "Description",
     "services": "Services",
-    "services_list": "Liste des services"
+    "services_list": "Liste des services",
+    "size_total": "Nombre total de vente",
+    "tracking": "Suivi de la mission",
+    "list_pending": "Liste des tâches en attente",
+    "list_progress": "Liste des tâches en cours",
+    "list_done": "Liste des tâches terminées",
+    "list_archived": "Liste des tâches archivées",
+    "status": {
+      "pending": "En attente ⏳",
+      "in_progress": "En cours 🚀",
+      "done": "Terminé 🎉",
+      "archive": "Archiver",
+      "restore": "Restaurer"
+    },
+    "add_task": "Ajouter"
   },
   "note": {
     "add": "Ajouter une note",

@@ -1,6 +1,12 @@
 <section class="p-2">
   <div class="flex justify-between">
-    <input class="w-80" hlmInput placeholder="Search" type="search" />
+    <input
+      class="w-80"
+      hlmInput
+      [formControl]="searchControl"
+      [placeholder]="'common.search' | translate"
+      type="search"
+    />
     <hlm-dialog>
       <button brnDialogTrigger hlmBtn>
         {{ "prestation_detail.add_prestation" | translate }}
@@ -61,6 +67,26 @@
     }
     <div class="flex items-center justify-center p-20" *ngIf="loading()">
       <ng-icon hlm size="lg" name="lucideLoaderCircle" class="animate-spin" />
+    </div>
+    <div class="flex space-x-1 justify-end m-2">
+      <button
+        size="sm"
+        variant="outline"
+        hlmBtn
+        [disabled]="currentPage() === 1"
+        (click)="onPageChange(currentPage() - 1)"
+      >
+        {{ "common.previous" | translate }}
+      </button>
+      <button
+        size="sm"
+        variant="outline"
+        hlmBtn
+        [disabled]="currentPage() === totalPage()"
+        (click)="onPageChange(currentPage() + 1)"
+      >
+        {{ "common.next" | translate }}
+      </button>
     </div>
   </hlm-table>
 </section>

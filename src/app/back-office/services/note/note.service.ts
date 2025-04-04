@@ -1,19 +1,27 @@
 import { Injectable } from '@angular/core';
 import { INote } from '@/types/output';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse, AxiosInstance } from 'axios';
 import { environment } from '@/environments/environments';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NoteService {
-  constructor() {}
+  private readonly axios: AxiosInstance;
+
+  constructor() {
+    this.axios = axios.create({
+      baseURL: environment.apiUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+  }
 
   async getAll(): Promise<INote[]> {
     try {
-      const response: AxiosResponse<INote[]> = await axios.get(
-        `${environment.apiUrl}/notes`
-      );
+      const response: AxiosResponse<INote[]> = await this.axios.get('/notes');
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
@@ -24,10 +32,7 @@ export class NoteService {
 
   async add(note: INote): Promise<INote> {
     try {
-      const response: AxiosResponse<INote> = await axios.post(
-        `${environment.apiUrl}/notes`,
-        note
-      );
+      const response: AxiosResponse<INote> = await this.axios.post('/notes', note);
       return response.data;
     } catch (error) {
       const err = error as AxiosError;

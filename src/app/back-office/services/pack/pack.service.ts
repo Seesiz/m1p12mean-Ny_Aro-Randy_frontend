@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
 import { IPack } from '@/types/output';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse, AxiosInstance } from 'axios';
 import { environment } from '@/environments/environments';
+import { PaginatedResponse } from '@/types/output';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PackService {
-  constructor() {}
+  private readonly axios: AxiosInstance;
+
+  constructor() {
+    this.axios = axios.create({
+      baseURL: environment.apiUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+  }
 
   async savePack(pack: IPack): Promise<IPack> {
     try {
-      const response: AxiosResponse<IPack> = await axios.post(
-        `${environment.apiUrl}/packs`,
-        pack
-      );
+      const response: AxiosResponse<IPack> = await this.axios.post('/packs', pack);
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
@@ -25,9 +33,22 @@ export class PackService {
 
   async getAll(): Promise<IPack[]> {
     try {
-      const response: AxiosResponse<IPack[]> = await axios.get(
-        `${environment.apiUrl}/packs`
-      );
+      const response: AxiosResponse<IPack[]> = await this.axios.get('/packs');
+      return response.data;
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error('Erreur de connexion:', err.message);
+      throw new Error("Échec de l'authentification");
+    }
+  }
+
+  async getAllPacksPaginate(
+    page = 1,
+    search = ''
+  ): Promise<PaginatedResponse<IPack>> {
+    try {
+      const response: AxiosResponse<PaginatedResponse<IPack>> =
+        await this.axios.get(`/packs?page=${page}&search=${search}`);
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
@@ -38,7 +59,7 @@ export class PackService {
 
   async delete(id: string): Promise<void> {
     try {
-      await axios.delete(`${environment.apiUrl}/packs/${id}`);
+      await this.axios.delete(`/packs/${id}`);
     } catch (error) {
       const err = error as AxiosError;
       console.error('Erreur de connexion:', err.message);
@@ -61,10 +82,7 @@ export class PackService {
         remise: remise,
       };
 
-      const response: AxiosResponse<IPack> = await axios.put(
-        `${environment.apiUrl}/packs/${id}`,
-        data
-      );
+      const response: AxiosResponse<IPack> = await this.axios.put(`/packs/${id}`, data);
       return response.data;
     } catch (error) {
       const err = error as AxiosError;

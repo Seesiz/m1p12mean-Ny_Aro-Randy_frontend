@@ -1,6 +1,12 @@
 <section class="p-2">
   <div class="flex justify-between">
-    <input class="w-80" hlmInput placeholder="Search" type="search" />
+    <input
+      class="w-80"
+      hlmInput
+      [formControl]="searchControl"
+      [placeholder]="'common.search' | translate"
+      type="search"
+    />
     <hlm-dialog>
       <button brnDialogTrigger hlmBtn>
         {{ "pack_detail.add_pack" | translate }}
@@ -23,8 +29,8 @@
       }}</hlm-th>
       <hlm-th class="justify-end">Action</hlm-th>
     </hlm-trow>
-    @for (pack of packs; track pack._id) {
-    <hlm-trow class="group" *ngIf="!loading">
+    @for (pack of packs(); track pack._id) {
+    <hlm-trow class="group" *ngIf="!loading()">
       <hlm-td class="font-medium w-52">{{ pack.label }}</hlm-td>
       <hlm-td class="flex-1">{{ pack.price | number : "1.0-2" }}</hlm-td>
       <hlm-td class="flex-1">{{ pack.remise | number : "1.0-2" }}</hlm-td>
@@ -65,8 +71,28 @@
       </hlm-td>
     </hlm-trow>
     }
-    <div class="flex items-center justify-center p-20" *ngIf="loading">
+    <div class="flex items-center justify-center p-20" *ngIf="loading()">
       <ng-icon hlm size="lg" name="lucideLoaderCircle" class="animate-spin" />
+    </div>
+    <div class="flex space-x-1 justify-end m-2">
+      <button
+        size="sm"
+        variant="outline"
+        hlmBtn
+        [disabled]="currentPage() === 1"
+        (click)="onPageChange(currentPage() - 1)"
+      >
+        {{ "common.previous" | translate }}
+      </button>
+      <button
+        size="sm"
+        variant="outline"
+        hlmBtn
+        [disabled]="currentPage() === totalPage()"
+        (click)="onPageChange(currentPage() + 1)"
+      >
+        {{ "common.next" | translate }}
+      </button>
     </div>
   </hlm-table>
 </section>

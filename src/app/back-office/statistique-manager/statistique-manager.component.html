@@ -1,1 +1,20 @@
-<p>statistique-manager works!</p>
+<form class="flex flex-col gap-1 pt-4.5 pl-2 pr-2">
+  <div class="flex justify-between">
+    <div>{{ "mission.size_total" | translate }} : {{ sizeTotal }}</div>
+    <select
+      name="year"
+      [(ngModel)]="currentYear"
+      (ngModelChange)="onYearChange()"
+    >
+      <option *ngFor="let year of yearOptions" [value]="year">
+        {{ year }}
+      </option>
+    </select>
+  </div>
+  <div class="chart-container">
+    <canvasjs-chart
+      [options]="chartOptions"
+      (chartInstance)="getChartInstance($event)"
+    ></canvasjs-chart>
+  </div>
+</form>

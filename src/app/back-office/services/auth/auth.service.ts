@@ -1,6 +1,6 @@
 import { environment } from '@/environments/environments';
 import { Injectable } from '@angular/core';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse, AxiosInstance } from 'axios';
 import { IUser } from '@/types/output';
 
 interface LoginResponse {
@@ -12,7 +12,17 @@ interface LoginResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor() {}
+  private readonly axios: AxiosInstance;
+
+  constructor() {
+    this.axios = axios.create({
+      baseURL: environment.apiUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+  }
 
   async login(
     email: string,
@@ -20,8 +30,8 @@ export class AuthService {
     role: string
   ): Promise<LoginResponse> {
     try {
-      const response: AxiosResponse<LoginResponse> = await axios.post(
-        `${environment.apiUrl}/auth/login`,
+      const response: AxiosResponse<LoginResponse> = await this.axios.post(
+        `/auth/login`,
         {
           email,
           pass,
@@ -50,10 +60,9 @@ export class AuthService {
 
   async getConnectedByToken(token: string) {
     try {
-      const response: AxiosResponse<IUser> = await axios.get(
-        `${environment.apiUrl}/auth/me`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const response: AxiosResponse<IUser> = await this.axios.get(`/auth/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
