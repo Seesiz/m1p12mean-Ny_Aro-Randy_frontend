@@ -10,7 +10,6 @@ gsap.registerPlugin(ScrollTrigger);
   styleUrl: './home-page.component.css',
 })
 export class HomePageComponent {
-  @ViewChild('heroText', { static: true }) heroText!: ElementRef;
   @ViewChild('aboutUsSection', { static: true }) aboutUsSection!: ElementRef;
   @ViewChild('aboutUsText', { static: true }) aboutUsText!: ElementRef;
   @ViewChild('leftBlock', { static: true }) leftBlock!: ElementRef;
@@ -26,26 +25,6 @@ export class HomePageComponent {
   ratedUsers: RatedUser[] = ratedUsers;
 
   ngAfterViewInit() {
-    //Text animation
-    const letters = this.heroText.nativeElement.querySelectorAll('span');
-    letters.forEach((letter: any, index: number) => {
-      gsap.fromTo(
-        letter,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          delay: index * 0.1,
-          duration: 1,
-          ease: 'power4.inOut',
-        }
-      );
-    });
-    //Line
-    gsap.fromTo(
-      '#animated-line',
-      { width: '0' },
-      { width: '33%', duration: 2 }
-    );
     // Animation "About Us"
     const tl = gsap.timeline({
       scrollTrigger: {
